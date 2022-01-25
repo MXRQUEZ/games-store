@@ -1,7 +1,7 @@
 import "./styles/main.css";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
-import HelloPage from "@/components/HelloPage";
+import HelloPage from "./components/HelloPage";
 
 interface AppProps {
   nothing: boolean;
