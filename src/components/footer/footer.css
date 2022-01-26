@@ -3,7 +3,7 @@
   background-color: black;
   text-align: center;
   justify-content: space-between;
-  padding-top: 3em;
+  padding-top: 20px;
   margin-top: auto;
   position: relative;
   bottom: 0;
@@ -12,4 +12,15 @@
 
 img {
   margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+hr {
+  margin: 0 3em;
+}
+
+a:hover {
+  text-decoration: none;
+  background-color: black;
+  color: black;
 }
