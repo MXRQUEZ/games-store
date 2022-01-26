@@ -1,0 +1,23 @@
+.navbar {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background: #090a0a;
+}
+
+.navbar__links {
+  margin-left: auto;
+  padding: 10px;
+}
+
+.active {
+  background-color: #1a1818;
+  border-bottom: 3px solid blueviolet;
+}
+
+h1 {
+  padding-left: 15px;
+  padding-bottom: 10px;
+  color: white;
+}
