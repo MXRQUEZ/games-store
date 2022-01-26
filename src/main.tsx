@@ -1,7 +1,9 @@
 import "./styles/main.css";
+import "./components/header/header.css";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
-import HelloPage from "./components/HelloPage";
+import Header from "./components/header/header";
+import Footer from "@/components/footer/footer";
 
 interface AppProps {
   nothing: boolean;
@@ -16,7 +18,8 @@ class AppContainer extends Component<AppProps, AppState> {
   render() {
     return (
       <StrictMode>
-        <HelloPage />
+        <Header title="Games $tore" />
+        <Footer />
       </StrictMode>
     );
   }
