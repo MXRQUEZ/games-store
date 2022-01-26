@@ -74,17 +74,6 @@ p {
   margin: 0.5em 0 2.5em;
 }
 
-a {
-  text-decoration: none;
-  padding: 13px 7px;
-  color: white;
-}
-
-a:hover {
-  background-color: #1a1818;
-  border-bottom: 3px solid blueviolet;
-}
-
 blockquote {
   padding: 0.1em 1.3em;
   background: #fafafa;
