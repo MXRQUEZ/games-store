@@ -10,16 +10,16 @@ const Footer = () => (
     <hr />
     <p>&copy;{new Date().getFullYear()} Games Store | All rights reserved | Terms Of Service | Privacy</p>
     <a className="footer" target="_blank" rel="noopener noreferrer" href={sponsorLinks.activision}>
-      <img className="footer-image" src={activisionLogo} alt={activisionLogo} width="100" height="50" />
+      <img src={activisionLogo} alt={activisionLogo} width="100" height="50" />
     </a>
     <a className="footer" target="_blank" rel="noopener noreferrer" href={sponsorLinks.rockstar}>
-      <img className="footer-image" src={rockstarLogo} alt={rockstarLogo} width="50" height="50" />
+      <img src={rockstarLogo} alt={rockstarLogo} width="50" height="50" />
     </a>
     <a className="footer" target="_blank" rel="noopener noreferrer" href={sponsorLinks.ubisoft}>
-      <img className="footer-image" src={ubisoftLogo} alt={ubisoftLogo} width="50" height="50" />
+      <img src={ubisoftLogo} alt={ubisoftLogo} width="50" height="50" />
     </a>
     <a className="footer" target="_blank" rel="noopener noreferrer" href={sponsorLinks.cdProject}>
-      <img className="footer-image" src={cdProjLogo} alt={cdProjLogo} width="100" height="50" />
+      <img src={cdProjLogo} alt={cdProjLogo} width="100" height="50" />
     </a>
   </footer>
 );

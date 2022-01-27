@@ -9,12 +9,12 @@
   width: 100%;
 }
 
+a.footer {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
 a.footer:hover {
   text-decoration: none;
   background-color: black;
-}
-
-img.footer-image {
-  margin-left: 30px;
-  margin-bottom: 15px;
 }
