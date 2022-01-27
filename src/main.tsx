@@ -1,5 +1,5 @@
 import "./styles/main.css";
-import "./components/header/header.css";
+import "./components/header/header.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import Header from "./components/header/header";

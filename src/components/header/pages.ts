@@ -1,4 +1,8 @@
-const pageLinks = {
+interface IPages {
+  [page: string]: string;
+}
+
+const pages: IPages = {
   home: "/",
   products: "/products",
   about: "/about",
@@ -6,4 +10,4 @@ const pageLinks = {
   signUp: "/sign-up",
 };
 
-export default pageLinks;
+export default pages;

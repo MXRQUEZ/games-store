@@ -1,7 +1,7 @@
 import React from "react";
-import "./header.css";
+import "./header.scss";
 import { NavLink } from "react-router-dom";
-import pageLinks from "@/components/header/pageLinks";
+import pages from "@/components/header/pages";
 
 interface NavbarProps {
   title: string;
@@ -9,23 +9,13 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ title }) => (
   <nav className="navbar">
-    <h1 className="header">{title}</h1>
+    <h1 className="navbar__title">{title}</h1>
     <div className="navbar__links">
-      <NavLink className="header" to={pageLinks.home}>
-        Home
-      </NavLink>
-      <NavLink className="header" to={pageLinks.products}>
-        Products
-      </NavLink>
-      <NavLink className="header" to={pageLinks.about}>
-        About
-      </NavLink>
-      <NavLink className="header" to={pageLinks.signIn}>
-        Sign In
-      </NavLink>
-      <NavLink className="header" to={pageLinks.signUp}>
-        Sign Up
-      </NavLink>
+      <NavLink to={pages.home}>Home</NavLink>
+      <NavLink to={pages.products}>Products</NavLink>
+      <NavLink to={pages.about}>About</NavLink>
+      <NavLink to={pages.signIn}>Sign In</NavLink>
+      <NavLink to={pages.signUp}>Sign Up</NavLink>
     </div>
   </nav>
 );
