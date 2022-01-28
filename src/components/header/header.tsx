@@ -1,10 +1,7 @@
-import React from "react";
 import Navbar from "./navbar";
 
-interface HeaderProps {
-  title: string;
-}
+const storeName = "Games $tore";
 
-const Header: React.FC<HeaderProps> = ({ title }) => <Navbar title={title} />;
+const Header = () => <Navbar title={storeName} />;
 
 export default Header;
