@@ -1,22 +1,16 @@
-import React from "react";
+import { FC } from "react";
 import "./header.scss";
-import { NavLink } from "react-router-dom";
 import pages from "@/components/header/pages";
+import NavLinks from "@/components/header/navLinks";
 
 interface NavbarProps {
   title: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ title }) => (
+const Navbar: FC<NavbarProps> = ({ title }) => (
   <nav className="navbar">
-    <h1 className="navbar__title">{title}</h1>
-    <div className="navbar__links">
-      <NavLink to={pages.home}>Home</NavLink>
-      <NavLink to={pages.products}>Products</NavLink>
-      <NavLink to={pages.about}>About</NavLink>
-      <NavLink to={pages.signIn}>Sign In</NavLink>
-      <NavLink to={pages.signUp}>Sign Up</NavLink>
-    </div>
+    <h1 className="nav-title">{title}</h1>
+    <NavLinks pages={pages} />
   </nav>
 );
 

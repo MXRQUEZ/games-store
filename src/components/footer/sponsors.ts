@@ -4,35 +4,35 @@ import ubisoftLogo from "images/ubisoft-1.png";
 import cdProjLogo from "images/cd-project-red-1.png";
 import ISponsor from "@/components/footer/iSponsor";
 
-interface ISponsors {
-  [company: string]: ISponsor;
-}
-
-const sponsors: ISponsors = {
-  activision: {
+const sponsors: ISponsor[] = [
+  {
+    name: "Activision",
     url: "https://www.activision.com/",
     logo: activisionLogo,
     description: "Activision Blizzard logo",
-    class: "logo__large",
+    class: "wide",
   },
-  cdProject: {
-    url: "https://en.cdprojektred.com/",
-    logo: cdProjLogo,
-    description: "CD Project Red logo",
-    class: "logo__large",
-  },
-  rockstar: {
+  {
+    name: "Rockstar Games",
     url: "https://www.rockstargames.com/",
     logo: rockstarLogo,
     description: "Rockstar Games logo",
-    class: "logo",
+    class: "small",
   },
-  ubisoft: {
+  {
+    name: "Ubisoft",
     url: "https://www.ubisoft.com/",
     logo: ubisoftLogo,
     description: "Ubisoft logo",
-    class: "logo",
+    class: "small",
   },
-};
+  {
+    name: "CD Project Red",
+    url: "https://en.cdprojektred.com/",
+    logo: cdProjLogo,
+    description: "CD Project Red logo",
+    class: "wide",
+  },
+];
 
 export default sponsors;

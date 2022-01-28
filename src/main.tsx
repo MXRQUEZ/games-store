@@ -3,9 +3,8 @@ import "./components/header/header.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "@/components/card/layout";
+import Layout from "@/components/layout/layout";
 import Home from "@/components/pages/home";
-import pages from "@/components/header/pages";
 import Products from "@/components/products/products";
 import About from "@/components/pages/about";
 import SignIn from "@/components/users/signIn";
@@ -28,11 +27,11 @@ class AppContainer extends Component<AppProps, AppState> {
           <Layout>
             <Routes>
               <Route path="*" element={<Home />} />
-              <Route path={pages.home} element={<Home />} />
-              <Route path={pages.products} element={<Products />} />
-              <Route path={pages.about} element={<About />} />
-              <Route path={pages.signIn} element={<SignIn />} />
-              <Route path={pages.signUp} element={<SignUp />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
             </Routes>
           </Layout>
         </BrowserRouter>
