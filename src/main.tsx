@@ -13,26 +13,48 @@ import SignUp from "@/components/users/signUp";
 interface AppProps {
   nothing: boolean;
 }
-interface AppState {
-  title: string;
+interface IAppErrorState {
+  hasError: boolean;
 }
 
-class AppContainer extends Component<AppProps, AppState> {
+class AppContainer extends Component<AppProps, IAppErrorState> {
   ["constructor"]: typeof AppContainer;
+
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.state.hasError);
+  }
+
+  componentDidCatch() {
+    this.setState({
+      hasError: true,
+    });
+  }
 
   render() {
     return (
       <StrictMode>
         <BrowserRouter>
           <Layout>
-            <Routes>
-              <Route path="*" element={<Home />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUp />} />
-            </Routes>
+            {this.state.hasError ? (
+              <Home />
+            ) : (
+              <Routes>
+                <Route path="*" element={<Home />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+              </Routes>
+            )}
           </Layout>
         </BrowserRouter>
       </StrictMode>
