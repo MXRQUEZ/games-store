@@ -1,34 +1,39 @@
+@import "./src/styles/variables";
+
 .navbar {
-  height: 50px;
-  width: 100vw;
+  margin: 0 auto;
+  max-width: $width;
   display: flex;
-  align-items: center;
-  background: #090a0a;
 
   & .nav-title {
-    padding-left: 15px;
-    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-top: auto;
     color: white;
   }
 
   & .nav-links {
+    padding-top: 8px;
     margin-left: auto;
-    padding: 10px;
 
-    & .nav-links.link {
+    & .nav-links_link {
+      font-size: 20px;
+      letter-spacing: 0.5px;
       text-decoration: none;
       padding: 13px 7px;
       color: white;
     }
 
-    & .nav-links.link:hover {
-      background-color: #1a1818;
+    & .nav-links_link:hover,
+    & .active {
+      background-color: rgba(255, 255, 255, 0.1);
       border-bottom: 3px solid blueviolet;
     }
   }
 }
 
-.active {
-  background-color: #1a1818;
-  border-bottom: 3px solid blueviolet;
+.header {
+  width: 100vw;
+  max-height: 50px;
+  background-color: #191919;
+  border-bottom: 0.5px solid gray;
 }

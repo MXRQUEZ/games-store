@@ -1,0 +1,29 @@
+@import "./src/styles/variables";
+
+.block {
+  padding: 0 40px;
+  margin-bottom: 20px;
+  backdrop-filter: brightness(65%);
+  border-radius: 30px;
+  width: $width;
+
+  & .title {
+    padding-top: 20px;
+    font-family: bold Raleway, sans-serif;
+    letter-spacing: 1px;
+    padding-left: 15px;
+  }
+}
+
+.images__wrapper {
+  margin-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: grid;
+  // stylelint-disable-next-line plugin/no-unsupported-browser-features
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px;
+}

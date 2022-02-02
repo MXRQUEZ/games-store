@@ -1,8 +1,8 @@
-import activisionLogo from "images/activision-1.png";
-import rockstarLogo from "images/rockstar-1.png";
-import ubisoftLogo from "images/ubisoft-1.png";
-import cdProjLogo from "images/cd-project-red-1.png";
-import ISponsor from "@/components/footer/iSponsor";
+import activisionLogo from "images/activision.png";
+import rockstarLogo from "images/rockstar.png";
+import ubisoftLogo from "images/ubisoft.png";
+import cdProjLogo from "images/cd-projekt-red.png";
+import ISponsor from "@/types/iSponsor";
 
 const sponsors: ISponsor[] = [
   {
@@ -10,28 +10,28 @@ const sponsors: ISponsor[] = [
     url: "https://www.activision.com/",
     logo: activisionLogo,
     description: "Activision Blizzard logo",
-    class: "wide",
+    class: "logo__wide",
   },
   {
     name: "Rockstar Games",
     url: "https://www.rockstargames.com/",
     logo: rockstarLogo,
     description: "Rockstar Games logo",
-    class: "small",
+    class: "logo__small",
   },
   {
     name: "Ubisoft",
     url: "https://www.ubisoft.com/",
     logo: ubisoftLogo,
     description: "Ubisoft logo",
-    class: "small",
+    class: "logo__small",
   },
   {
-    name: "CD Project Red",
+    name: "CD Projekt Red",
     url: "https://en.cdprojektred.com/",
     logo: cdProjLogo,
-    description: "CD Project Red logo",
-    class: "wide",
+    description: "CD Projekt Red logo",
+    class: "logo__wide",
   },
 ];
 

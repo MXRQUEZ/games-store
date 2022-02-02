@@ -1,33 +1,31 @@
 .footer {
   color: darkgray;
-  background-color: black;
+  background-color: #191919;
   text-align: center;
   padding-top: 20px;
   margin-top: auto;
   position: relative;
   bottom: 0;
   width: 100%;
+  border-top: 0.5px solid gray;
 
   & .sponsor-icons {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     & .logo {
       margin-left: 20px;
 
-      & .logo.small {
+      &__small {
         width: 50px;
+        object-fit: cover;
         height: 50px;
       }
 
-      & .logo.wide {
+      &__wide {
         width: 100px;
+        object-fit: cover;
         height: 50px;
       }
-    }
-
-    & .logo:hover {
-      text-decoration: none;
-      background-color: black;
     }
   }
 }

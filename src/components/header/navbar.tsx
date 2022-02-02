@@ -1,16 +1,16 @@
 import { FC } from "react";
 import "./header.scss";
-import pages from "@/components/header/pages";
-import NavLinks from "@/components/header/navLinks";
+import routes from "@/constants/routes";
+import NavRoutes from "@/components/header/navRoutes";
 
-interface NavbarProps {
+interface INavbarProps {
   title: string;
 }
 
-const Navbar: FC<NavbarProps> = ({ title }) => (
+const Navbar: FC<INavbarProps> = ({ title }) => (
   <nav className="navbar">
     <h1 className="nav-title">{title}</h1>
-    <NavLinks pages={pages} />
+    <NavRoutes routes={routes} />
   </nav>
 );
 

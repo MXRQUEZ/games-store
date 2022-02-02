@@ -1,0 +1,61 @@
+.games__card {
+  border-radius: 20px;
+  min-width: 0;
+
+  & .games__card__inner {
+    box-shadow: 0 0 10px 3px blueviolet;
+    border-bottom: 3px solid blueviolet;
+    cursor: pointer;
+    position: relative;
+    color: white;
+    background-color: #121212;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    transition: 1s all ease;
+
+    & .games__card__front {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      backface-visibility: hidden;
+
+      &_image {
+        height: 350px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      &_title {
+        font-family: Impact, Charcoal, sans-serif;
+        font-size: 25px;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: initial;
+        justify-content: space-between;
+      }
+    }
+
+    & .games__card__back {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      font-size: 20px;
+      top: 0;
+      left: 0;
+      padding: 20px;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+  }
+
+  &:hover {
+    .games__card__inner {
+      transform: rotateY(180deg);
+    }
+  }
+}

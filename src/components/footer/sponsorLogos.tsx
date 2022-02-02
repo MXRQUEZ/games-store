@@ -1,6 +1,6 @@
 import { FC } from "react";
 import SponsorLogo from "@/components/footer/sponsorLogo";
-import ISponsor from "@/components/footer/iSponsor";
+import ISponsor from "@/types/iSponsor";
 
 interface ISponsorLogos {
   sponsorsList: ISponsor[];

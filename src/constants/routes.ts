@@ -1,6 +1,6 @@
-import IPage from "@/components/header/iPage";
+import IRoute from "@/types/iRoute";
 
-const pages: IPage[] = [
+const routes: IRoute[] = [
   {
     name: "Home",
     url: "/",
@@ -23,4 +23,4 @@ const pages: IPage[] = [
   },
 ];
 
-export default pages;
+export default routes;
