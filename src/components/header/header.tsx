@@ -1,9 +1,10 @@
 import Navbar from "./navbar";
+import classes from "./header.module.scss";
 
 const storeName = "Games $tore";
 
 const Header = () => (
-  <header className="header">
+  <header className={classes.header}>
     <Navbar title={storeName} />
   </header>
 );

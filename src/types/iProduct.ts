@@ -1,6 +1,7 @@
 interface IProduct {
   name: string;
   id: string | number;
+  ageCriteria: string;
   price: string | number;
   rating: number;
   description: string;

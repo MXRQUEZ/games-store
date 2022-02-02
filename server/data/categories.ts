@@ -6,7 +6,7 @@ import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
 import ICategory from "@/types/iCategory";
 
 interface ICategories {
-  [key: string]: ICategory;
+  [category: string]: ICategory;
 }
 
 const categories: ICategories = {
@@ -25,10 +25,10 @@ const categories: ICategories = {
   },
 
   xbox: {
-    name: "XBOX",
+    name: "XBox One",
     id: mockServerHelper.getUniqueIdInt(),
     img: xbox,
-    description: "xbox",
+    description: "xbox one",
   },
 };
 

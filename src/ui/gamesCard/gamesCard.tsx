@@ -1,6 +1,7 @@
 import { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
+import Button from "@/ui/button/button";
 
 interface IGamesCardProps {
   product: IProduct;
@@ -17,7 +18,13 @@ const GamesCard: FC<IGamesCardProps> = ({ product }) => (
         </div>
       </div>
       <div className={classes.games__card__back}>
-        <p>{product.description}</p>
+        <div className={classes.games__card__back__top}>
+          <p>{product.description}</p>
+        </div>
+        <div className={classes.games__card__back__bottom}>
+          <p>{product.ageCriteria}</p>
+          <Button>Add to card</Button>
+        </div>
       </div>
     </div>
   </div>

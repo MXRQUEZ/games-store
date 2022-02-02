@@ -9,10 +9,10 @@
   width: 100%;
   border-top: 0.5px solid gray;
 
-  & .sponsor-icons {
-    margin-bottom: 10px;
+  & .sponsors {
+    margin: 5px 0;
 
-    & .logo {
+    &_logo {
       margin-left: 20px;
 
       &__small {
@@ -28,4 +28,8 @@
       }
     }
   }
+}
+
+.copyrights__container {
+  margin-bottom: 30px;
 }

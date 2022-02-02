@@ -1,5 +1,5 @@
 import "./styles/main.css";
-import "./components/header/header.scss";
+import "./components/header/header.module.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

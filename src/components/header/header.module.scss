@@ -1,0 +1,50 @@
+@import "./src/styles/variables";
+
+.header {
+  width: 100vw;
+  max-height: 50px;
+  background-color: #191919;
+  border-bottom: 0.5px solid gray;
+
+  & .navbar {
+    margin: 0 auto;
+    max-width: $width;
+    display: flex;
+
+    & .store__logo {
+      width: 100px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    & .store__title {
+      padding-left: 10px;
+      margin-top: auto;
+      color: white;
+    }
+
+    & .nav__routes {
+      padding-top: 8px;
+      margin-left: auto;
+
+      &_link {
+        font-size: 20px;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        padding: 13px 7px;
+        color: white;
+      }
+
+      &_link:hover,
+      & .link__active {
+        font-size: 20px;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        padding: 13px 7px;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-bottom: 3px solid blueviolet;
+      }
+    }
+  }
+}

@@ -1,16 +1,18 @@
 import { FC } from "react";
-import "./header.scss";
+import classes from "./header.module.scss";
 import routes from "@/constants/routes";
-import NavRoutes from "@/components/header/navRoutes";
+import NavRouting from "@/components/header/navRouting";
+import logo from "@/assets/images/GameStore_Logo.png";
 
 interface INavbarProps {
   title: string;
 }
 
 const Navbar: FC<INavbarProps> = ({ title }) => (
-  <nav className="navbar">
-    <h1 className="nav-title">{title}</h1>
-    <NavRoutes routes={routes} />
+  <nav className={classes.navbar}>
+    <img className={classes.store__logo} src={logo} alt="logo" />
+    <h1 className={classes.store__title}>{title}</h1>
+    <NavRouting routes={routes} />
   </nav>
 );
 
