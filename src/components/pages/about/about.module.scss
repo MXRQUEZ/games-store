@@ -1,0 +1,56 @@
+#about {
+  min-height: 300px;
+}
+
+.about {
+  font-family: Raleway, sans-serif;
+  font-size: 25px;
+  margin: 30px;
+  word-break: normal;
+}
+
+.contacts {
+  font-family: Raleway, sans-serif;
+  padding: 40px;
+  text-align: right;
+
+  &__author {
+    display: flex;
+    font-size: 25px;
+    padding-top: 20px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 30px;
+    padding-top: 20px;
+  }
+
+  & .link {
+    font-size: 20px;
+    text-decoration: none;
+    color: blueviolet;
+    position: relative;
+    margin: 10px;
+    padding: 2px;
+  }
+
+  & .link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background-color: blueviolet;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover::before {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+}

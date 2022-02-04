@@ -8,6 +8,23 @@ const routes: IRoute[] = [
   {
     name: "Products",
     url: "/products",
+    sub: [
+      {
+        url: "/products/pc",
+        id: "products-pc",
+        name: "PC",
+      },
+      {
+        url: "/products/xbox",
+        id: "products-xbox",
+        name: "XBox One",
+      },
+      {
+        url: "/products/playstation",
+        id: "products-playstation",
+        name: "PlayStation 5",
+      },
+    ],
   },
   {
     name: "About",

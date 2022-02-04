@@ -5,7 +5,7 @@ interface IProduct {
   price: string | number;
   rating: number;
   description: string;
-  categoryId: string | number;
+  categoriesId: number[];
   img: string;
   date: Date;
 }

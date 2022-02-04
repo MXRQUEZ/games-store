@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
     },
     performance: {
       assetFilter: function assetFilter(assetFilename) {
-        return !/(\.map$)|(fonts)|(images)/.test(assetFilename); // ignore these files from perfomance-hints
+        return !/(\.map$)|(fonts)|(otherImages)/.test(assetFilename); // ignore these files from perfomance-hints
       },
     },
     optimization: {

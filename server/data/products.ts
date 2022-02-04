@@ -9,9 +9,9 @@ const products: IProduct[] = [
     name: "Horizon Zero Dawn",
     rating: 9,
     ageCriteria: "12+",
-    categoryId: categories.playstation.id,
+    categoriesId: [categories.pc.id, categories.playstation.id],
     description:
-      "Horizon Zero Dawn is action role-playing game. The player uses ranged weapons, a spear, and stealth to combat mechanical creatures and other enemy forces. A skill tree provides the player with new abilities and bonuses. The player can explore the open world to discover locations and take on side quests",
+      "Horizon Zero Dawn is action role-playing game. The player uses ranged weapons, a spear, and stealth to combat mechanical creatures and other enemy forces, explore the open world to discover locations and take on side quests. A skill tree provides the player with new abilities and bonuses.",
     price: "19.99$",
     img: "https://upload.wikimedia.org/wikipedia/ru/9/93/Horizon_Zero_Dawn.jpg",
     date: new Date("15.06.2015"),
@@ -21,7 +21,7 @@ const products: IProduct[] = [
     name: "CS:GO",
     rating: 7,
     ageCriteria: "12+",
-    categoryId: categories.playstation.id,
+    categoriesId: [categories.pc.id, categories.playstation.id, categories.xbox.id],
     description:
       "The game pits two teams, Terrorists and Counter-Terrorists, against each other in different objective-based game modes. The game has matchmaking support that allows players to play on dedicated Valve servers.",
     price: "10$",
@@ -31,11 +31,11 @@ const products: IProduct[] = [
   {
     id: mockServerHelper.getUniqueIdInt(),
     name: "Brawl Stars",
-    rating: 10,
+    rating: 4,
     ageCriteria: "3+",
-    categoryId: categories.playstation.id,
+    categoriesId: [categories.playstation.id],
     description:
-      "Brawl Stars is a multiplayer online battle arena and third-person hero shooter video game developed and published by the Finnish video game company Supercell. It was released worldwide on December 12, 2018 on iOS and Android. The game features various game modes, each with a different objective.",
+      "Brawl Stars is a multiplayer online battle arena and third-person hero shooter video game developed and published by the Finnish video game company Supercell. The game features various game modes, each with a different objective.",
     price: "5$",
     img: "https://res.cloudinary.com/dvweto8rq/image/upload/WebAPI/Logo/Brawl_Stars_jwhuv1.jpg",
     date: new Date("12.12.2018"),
@@ -45,7 +45,7 @@ const products: IProduct[] = [
     name: "Half-Life: Alyx",
     rating: 8,
     ageCriteria: "16+",
-    categoryId: categories.pc.id,
+    categoriesId: [categories.pc.id],
     description:
       "Half-Life: Alyx is a first-person shooter game developed and published by Valve. Like previous Half-Life games, Alyx incorporates combat, puzzles, exploration and survival horror.",
     price: "27,99$",
@@ -57,7 +57,7 @@ const products: IProduct[] = [
     name: "TES V Skyrim",
     rating: 9,
     ageCriteria: "18+",
-    categoryId: categories.pc.id,
+    categoriesId: [categories.pc.id, categories.playstation.id],
     description:
       "The game is set 200 years after the events of Oblivion, and takes place in Skyrim. Its main story focuses on the Dragonborn, a dragon who is prophesied to destroy the world. The player completes quests and develops the character by improving skills in the open-world.",
     price: "24,99$",
@@ -69,7 +69,7 @@ const products: IProduct[] = [
     name: "Clash Royale",
     rating: 9,
     ageCriteria: "3+",
-    categoryId: categories.xbox.id,
+    categoriesId: [categories.xbox.id],
     description:
       'Clash Royale is a tower rush video game which pits players in games featuring two or four players (1v1 or 2v2) in which the objective is to destroy the most opposing towers, with the destruction of the "King\'s Tower" being an instantaneous win.',
     price: "5$",
@@ -79,9 +79,9 @@ const products: IProduct[] = [
   {
     id: mockServerHelper.getUniqueIdInt(),
     name: "Beat Saber",
-    rating: 4,
+    rating: 10,
     ageCriteria: "12+",
-    categoryId: categories.playstation.id,
+    categoriesId: [categories.playstation.id, categories.xbox.id],
     description:
       "Beat Saber includes combining breathtaking neon visuals, energizing music, hand-crafted levels. With one saber in each hand slash the beats as they fly towards you, matching their direction and color to rack up points and keep the music moving!",
     price: "29,99$",
@@ -93,7 +93,7 @@ const products: IProduct[] = [
     name: "Terraria",
     rating: 9,
     ageCriteria: "6+",
-    categoryId: categories.pc.id,
+    categoriesId: [categories.pc.id, categories.playstation.id, categories.xbox.id],
     description:
       "Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes. The game has a 2D sprite tile-based graphical style reminiscent of the 16-bit sprites.",
     price: "4,49$",
@@ -105,7 +105,7 @@ const products: IProduct[] = [
     name: "Genshin Impact",
     rating: 10,
     ageCriteria: "12+",
-    categoryId: categories.pc.id,
+    categoriesId: [categories.pc.id, categories.xbox.id],
     description:
       "Genshin Impact is an open-world action role-playing game that allows the player to control one of four interchangeable characters in a party. Switching between characters can be done quickly during combat, allowing the player to use several different combinations of skills and attacks.",
     price: "11,99$",
@@ -117,7 +117,7 @@ const products: IProduct[] = [
     name: "Counter-Strike 1.6",
     rating: 9,
     ageCriteria: "12+",
-    categoryId: categories.playstation.id,
+    categoriesId: [categories.pc.id],
     description:
       "Counter-Strike (CS) is a series of multiplayer first-person shooter video games in which teams of terrorists battle to perpetrate an act of terror (bombing, hostage-taking, assassination) while counter-terrorists try to prevent it (bomb defusal, hostage rescue, escort mission).",
     price: "2,49$",
@@ -129,9 +129,9 @@ const products: IProduct[] = [
     name: "Snake",
     ageCriteria: "0+",
     rating: 6,
-    categoryId: categories.xbox.id,
+    categoriesId: [categories.xbox.id],
     description:
-      "Snake is a video game genre where the player maneuvers a growing line that becomes a primary obstacle to itself. After a variant was preloaded on Nokia mobile phones in 1998, there was a resurgence of interest in snake games as it found a larger audience. There are several hundred snake games for iOS alone.",
+      "Snake is a video game genre where the player maneuvers a growing line that becomes a primary obstacle to itself. After a variant was preloaded on Nokia mobile phones in 1998, there was a resurgence of interest in snake games as it found a larger audience.",
     price: "0,99$",
     img: "http://bm.img.com.ua/berlin/storage/1100x999999/f/44/adb761bb396c685729cf0b56c434844f.png",
     date: new Date("15.01.1997"),

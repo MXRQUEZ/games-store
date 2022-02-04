@@ -90,6 +90,6 @@ blockquote {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #2b333b;
+  background-color: gray;
   border-radius: 10px;
 }

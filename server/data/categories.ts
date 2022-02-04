@@ -26,7 +26,7 @@ const categories: ICategories = {
 
   xbox: {
     name: "XBox One",
-    id: mockServerHelper.getUniqueIdInt(),
+    id: mockServerHelper.getUniqueIdInt() + 5,
     img: xbox,
     description: "xbox one",
   },
