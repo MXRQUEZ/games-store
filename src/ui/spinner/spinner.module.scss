@@ -1,6 +1,6 @@
 $color: #8a2be2;
 
-@keyframes whirlyLoader {
+@keyframes spinner {
   0% {
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -12,7 +12,7 @@ $color: #8a2be2;
   }
 }
 /* :not(:required) hides this rule from IE9 and below */
-.whirlyLoader:not(:required) {
+.spinner:not(:required) {
   overflow: hidden;
   position: relative;
   text-indent: -9999px;
@@ -30,8 +30,8 @@ $color: #8a2be2;
     $color 10.01448px 24.78672px 0 5.26667px, $color 10.90054px 24.48302px 0 5.2px,
     $color 11.77757px 24.1476px 0 5.13333px, $color 12.64443px 23.78072px 0 5.06667px, $color 13.5px 23.38269px 0 5px,
     $color 14.34315px 22.95384px 0 4.93333px, $color 15.17277px 22.49455px 0 4.86667px,
-    $color 15.98776px 22.00526px 0 4.8px, #8a2be2 16.78704px 21.48643px 0 4.73333px,
-    #8a2be2 17.56953px 20.93855px 0 4.66667px, #8a2be2 18.33418px 20.36217px 0 4.6px,
+    $color 15.98776px 22.00526px 0 4.8px, $color 16.78704px 21.48643px 0 4.73333px,
+    $color 17.56953px 20.93855px 0 4.66667px, $color 18.33418px 20.36217px 0 4.6px,
     $color 19.07995px 19.75787px 0 4.53333px, $color 19.80582px 19.12626px 0 4.46667px,
     $color 20.5108px 18.468px 0 4.4px, $color 21.1939px 17.78379px 0 4.33333px, $color 21.85416px 17.07434px 0 4.26667px,
     $color 22.49067px 16.34043px 0 4.2px, $color 23.10251px 15.58284px 0 4.13333px,
@@ -116,8 +116,8 @@ $color: #8a2be2;
     $color 10.90054px 24.48302px 0 5.2px, $color 11.77757px 24.1476px 0 5.13333px,
     $color 12.64443px 23.78072px 0 5.06667px, $color 13.5px 23.38269px 0 5px, $color 14.34315px 22.95384px 0 4.93333px,
     $color 15.17277px 22.49455px 0 4.86667px, $color 15.98776px 22.00526px 0 4.8px,
-    #8a2be2 16.78704px 21.48643px 0 4.73333px, #8a2be2 17.56953px 20.93855px 0 4.66667px,
-    #8a2be2 18.33418px 20.36217px 0 4.6px, $color 19.07995px 19.75787px 0 4.53333px,
+    $color 16.78704px 21.48643px 0 4.73333px, $color 17.56953px 20.93855px 0 4.66667px,
+    $color 18.33418px 20.36217px 0 4.6px, $color 19.07995px 19.75787px 0 4.53333px,
     $color 19.80582px 19.12626px 0 4.46667px, $color 20.5108px 18.468px 0 4.4px, $color 21.1939px 17.78379px 0 4.33333px,
     $color 21.85416px 17.07434px 0 4.26667px, $color 22.49067px 16.34043px 0 4.2px,
     $color 23.10251px 15.58284px 0 4.13333px, $color 23.68881px 14.80241px 0 4.06667px, $color 24.24871px 14px 0 4px,
@@ -200,8 +200,8 @@ $color: #8a2be2;
     $color 10.01448px 24.78672px 0 5.26667px, $color 10.90054px 24.48302px 0 5.2px,
     $color 11.77757px 24.1476px 0 5.13333px, $color 12.64443px 23.78072px 0 5.06667px, $color 13.5px 23.38269px 0 5px,
     $color 14.34315px 22.95384px 0 4.93333px, $color 15.17277px 22.49455px 0 4.86667px,
-    $color 15.98776px 22.00526px 0 4.8px, #8a2be2 16.78704px 21.48643px 0 4.73333px,
-    #8a2be2 17.56953px 20.93855px 0 4.66667px, #8a2be2 18.33418px 20.36217px 0 4.6px,
+    $color 15.98776px 22.00526px 0 4.8px, $color 16.78704px 21.48643px 0 4.73333px,
+    $color 17.56953px 20.93855px 0 4.66667px, $color 18.33418px 20.36217px 0 4.6px,
     $color 19.07995px 19.75787px 0 4.53333px, $color 19.80582px 19.12626px 0 4.46667px,
     $color 20.5108px 18.468px 0 4.4px, $color 21.1939px 17.78379px 0 4.33333px, $color 21.85416px 17.07434px 0 4.26667px,
     $color 22.49067px 16.34043px 0 4.2px, $color 23.10251px 15.58284px 0 4.13333px,
@@ -278,8 +278,8 @@ $color: #8a2be2;
     $color -6.54075px 37.09443px 0 -5.66667px, $color -5.25147px 37.36612px 0 -5.73333px,
     $color -3.95118px 37.59293px 0 -5.8px, $color -2.64145px 37.77443px 0 -5.86667px,
     $color -1.32385px 37.91023px 0 -5.93333px;
-  -moz-animation: whirlyLoader 1.25s infinite linear;
-  -webkit-animation: whirlyLoader 1.25s infinite linear;
-  animation: whirlyLoader 1.25s infinite linear;
+  -moz-animation: spinner 1.25s infinite linear;
+  -webkit-animation: spinner 1.25s infinite linear;
+  animation: spinner 1.25s infinite linear;
   transform-origin: 50% 50%;
 }
