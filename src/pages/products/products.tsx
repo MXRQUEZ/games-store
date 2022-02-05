@@ -41,18 +41,18 @@ const Products: FC = () => {
     })();
   }, [category]);
 
-  const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
+  const searchResult: JSX.Element[] = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {
     searchResult.push(<h1 className={classes.text}>Nothing Found</h1>);
   }
 
   return (
-    <div className="products__page">
+    <>
       <Searchbar onSearch={onSearch} loader={setSpinner} />
       <Container id={classes.games} title="Games" isCard>
         {spinner ? <Spinner /> : searchResult}
       </Container>
-    </div>
+    </>
   );
 };
 

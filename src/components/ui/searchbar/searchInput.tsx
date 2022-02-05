@@ -10,10 +10,10 @@ interface ISearchInputProps {
 }
 
 const SearchInput: FC<ISearchInputProps> = ({ onChange, loader }) => {
-  const debouncedOnChange: inputChangeEvent = debounce(onChange, 1000);
+  const debounceOnChange: inputChangeEvent = debounce(onChange, 1000);
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     loader(true);
-    debouncedOnChange(event);
+    debounceOnChange(event);
   };
 
   return (

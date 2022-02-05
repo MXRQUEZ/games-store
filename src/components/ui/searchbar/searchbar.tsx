@@ -14,13 +14,12 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, loader, isHomePage }) => {
     let response: IProduct[];
     if (event.target.value) {
       response = await getProducts({ filter: event.target.value });
-    } else {
-      response = isHomePage ? await getHomeProducts() : await getProducts();
+      onSearch(response);
+      return;
     }
 
-    if (onSearch) {
-      onSearch(response);
-    }
+    response = isHomePage ? await getHomeProducts() : await getProducts();
+    onSearch(response);
   };
 
   return <SearchInput onChange={onChange} loader={loader} />;

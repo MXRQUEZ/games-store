@@ -37,7 +37,10 @@ export default webpackMockServer.add((app: Application) => {
       const { filter: searchString } = _req.query;
 
       productsList = productsList.filter((product) =>
-        product.name.toLowerCase().includes((searchString as string).trim().toLowerCase())
+        product.name
+          .toLowerCase()
+          .replace(/[^\w]/gi, "")
+          .includes((searchString as string).trim().replace(/[^\w]/gi, "").toLowerCase())
       );
     }
 
