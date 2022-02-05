@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import classes from "./products.module.scss";
-import GamesCard from "@/ui/gamesCard/gamesCard";
-import Container from "@/ui/container/container";
+import GamesCard from "@/components/gamesCard/gamesCard";
+import Container from "@/components/ui/container/container";
 import IProduct from "@/types/iProduct";
 import { getProducts, getProductsByCategoryName } from "@/shared/utils/apiRequests";
-import Searchbar from "@/ui/searchbar/searchbar";
-import Spinner from "@/ui/spinner/spinner";
-import { categories } from "../../../../server/data/categories";
+import Searchbar from "@/components/ui/searchbar/searchbar";
+import Spinner from "@/components/ui/spinner/spinner";
+import { categories } from "../../../server/data/categories";
 
 type ProductsUrlParams = {
   category?: string;
@@ -23,25 +23,42 @@ const Products: FC = () => {
     setProducts(response);
     setSpinner(false);
   };
+
   useEffect(() => {
     if (category && !((category as string) in categories)) {
       router("/products");
-    } else {
-      (async () => {
-        if (category) {
-          setProducts(await getProductsByCategoryName(category));
-        } else {
-          setProducts(await getProducts());
-        }
-      })();
+      return;
     }
+    (async () => {
+      if (category) {
+        setProducts(await getProductsByCategoryName({ category }));
+        return;
+      }
+
+      setProducts(await getProducts());
+    })();
   }, [category]);
+
+  if (spinner) {
+    return (
+      <div className="products__page">
+        <Searchbar onSearch={onSearch} loader={setSpinner} />
+        <Container id={classes.games} title="Games" isCard>
+          <Spinner />
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="products__page">
       <Searchbar onSearch={onSearch} loader={setSpinner} />
       <Container id={classes.games} title="Games" isCard>
-        {spinner ? <Spinner /> : products.map((product) => <GamesCard product={product} key={product.id} />)}
+        {!products.length ? (
+          <h1 className={classes.text}>Nothing Found</h1>
+        ) : (
+          products.map((product) => <GamesCard product={product} key={product.id} />)
+        )}
       </Container>
     </div>
   );

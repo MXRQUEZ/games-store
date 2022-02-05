@@ -1,8 +1,8 @@
 import { FC } from "react";
-import classes from "@/ui/gamesCard/gamesCard.module.scss";
-import ProductRating from "@/ui/gamesCard/productRating";
+import classes from "@/components/gamesCard/gamesCard.module.scss";
+import ProductRating from "@/components/gamesCard/productRating";
 import IProduct from "@/types/iProduct";
-import ProductCategory from "@/ui/gamesCard/productCategory";
+import ProductCategory from "@/components/gamesCard/productCategory";
 
 interface IGamesCardFrontProps {
   product: IProduct;

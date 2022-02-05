@@ -3,16 +3,16 @@ import star from "@/assets/images/star.png";
 import halfStar from "@/assets/images/half-star.png";
 import emptyStar from "@/assets/images/empty-star.png";
 
-interface IOtherImages {
-  [image: string]: IOtherImage;
+interface IImages {
+  [image: string]: IImage;
 }
 
-interface IOtherImage {
+interface IImage {
   path: string;
   description: string;
 }
 
-const otherImages: IOtherImages = {
+const images: IImages = {
   // header
   storeLogo: {
     path: storeLogo,
@@ -33,4 +33,4 @@ const otherImages: IOtherImages = {
   },
 };
 
-export default otherImages;
+export default images;

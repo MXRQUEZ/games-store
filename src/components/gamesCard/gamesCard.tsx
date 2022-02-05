@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
-import GamesCardFront from "@/ui/gamesCard/gamesCardFront";
+import GamesCardFront from "@/components/gamesCard/gamesCardFront";
 import GamesCardBack from "./gamesCardBack";
 
 interface IGamesCardProps {

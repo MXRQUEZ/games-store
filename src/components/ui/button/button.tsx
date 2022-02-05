@@ -1,5 +1,5 @@
 import { FC } from "react";
-import classes from "@/ui/button/button.module.scss";
+import classes from "@/components/ui/button/button.module.scss";
 
 const Button: FC = ({ children }) => (
   <div className={classes.button__container}>

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import classes from "@/ui/gamesCard/gamesCard.module.scss";
+import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
-import Button from "@/ui/button/button";
+import Button from "@/components/ui/button/button";
 import { buy } from "@/constants/other";
 
 interface IGamesCardBackProps {

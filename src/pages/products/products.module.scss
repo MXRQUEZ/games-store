@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+#games {
+  min-height: 200px;
+  width: $width;
+}
+
+.text {
+  font-family: Raleway, sans-serif;
+  position: absolute;
+  display: flex;
+  justify-self: center;
+}

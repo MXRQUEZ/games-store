@@ -1,9 +1,8 @@
 const api = {
-  products: "/api/products", // params (?filter=TEXT)
-  productsRecent: "/api/products/recent", // params (?amount=NUMBER)
-  productsByCategoryName: "/api/products/category", // query param (/category-name)
+  products: "/api/products",
+  productsByCategoryName: "/api/products/category",
   categories: "/api/categories",
-  categoryByName: "/api/category", // query param (/category-name),
+  categoryByName: "/api/category",
 };
 
 export default api;

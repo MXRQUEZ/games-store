@@ -1,11 +1,8 @@
-@import "./src/styles/variables";
-
 .container {
   padding: 0 40px;
   margin-bottom: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 30px;
-  width: $width;
 
   &__title {
     padding-top: 20px;

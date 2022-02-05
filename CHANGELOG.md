@@ -69,5 +69,5 @@
 - add postcss-normalize
 - add sass support
 - add css-optimizing for production build
-- add loaders for otherImages
+- add loaders for images
 - add css-classNames minification in production build

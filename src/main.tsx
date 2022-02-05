@@ -4,9 +4,9 @@ import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "@/components/layout/layout";
-import Home from "@/components/pages/home/home";
-import Products from "@/components/pages/products/products";
-import About from "@/components/pages/about/about";
+import Home from "@/pages/home/home";
+import Products from "@/pages/products/products";
+import About from "@/pages/about/about";
 import SignIn from "@/components/users/signIn";
 import SignUp from "@/components/users/signUp";
 

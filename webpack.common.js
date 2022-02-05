@@ -99,31 +99,31 @@ module.exports = function (env, argv) {
             // optional: "eslint-loader" //provides lint-errors into wepback output
           ],
         },
-        // rule for otherImages
+        // rule for images
         {
-          test: /\.(png|jpe?g|gif|webp)(\?.*)?$/, // optional: optimizing otherImages via pngo etc.
+          test: /\.(png|jpe?g|gif|webp)(\?.*)?$/, // optional: optimizing images via pngo etc.
           type: "asset",
           generator: {
-            filename: "otherImages/[name][ext][query]", // [hash][ext][query]",
+            filename: "images/[name][ext][query]", // [hash][ext][query]",
           },
           parser: {
-            // it converts otherImages that have size less 'limit' option into inline base64-css-format
+            // it converts images that have size less 'limit' option into inline base64-css-format
             dataUrlCondition: {
               maxSize: filesThreshold, // if file-size more then limit, file-loader copies one into outputPath
             },
           },
         },
-        // rule for svg-otherImages
+        // rule for svg-images
         {
           test: /\.(svg)(\?.*)?$/, // for reducing file-size: OptimizeCSSAssetsPlugin > cssnano > SVGO, that congigured in webpack.prod.js
           exclude: /(fonts\\.+\.svg)(\?.*)?/,
           type: "asset",
           generator: {
-            filename: "otherImages/[name][ext][query]", // [hash][ext][query]",
+            filename: "images/[name][ext][query]", // [hash][ext][query]",
             dataUrl: (content) => svgToMiniDataURI(content.toString()),
           },
           parser: {
-            // it converts otherImages that have size less 'limit' option into inline base64-css-format
+            // it converts images that have size less 'limit' option into inline base64-css-format
             dataUrlCondition: {
               maxSize: filesThreshold, // if file-size more then limit, file-loader copies one into outputPath
             },
@@ -137,7 +137,7 @@ module.exports = function (env, argv) {
             filename: "fonts/[name][ext][query]", // [hash][ext][query]",
           },
           parser: {
-            // it converts otherImages that have size less 'limit' option into inline base64-css-format
+            // it converts images that have size less 'limit' option into inline base64-css-format
             dataUrlCondition: {
               maxSize: filesThreshold, // if file-size more then limit, file-loader copies one into outputPath
             },
@@ -152,7 +152,7 @@ module.exports = function (env, argv) {
             dataUrl: (content) => svgToMiniDataURI(content.toString()),
           },
           parser: {
-            // it converts otherImages that have size less 'limit' option into inline base64-css-format
+            // it converts images that have size less 'limit' option into inline base64-css-format
             dataUrlCondition: {
               maxSize: filesThreshold, // if file-size more then limit, file-loader copies one into outputPath
             },
@@ -248,7 +248,7 @@ module.exports = function (env, argv) {
         filename: isDevMode ? "[name].css" : "[name].[contenthash].css",
         chunkFilename: isDevMode ? "[id].css" : "[id].[contenthash].css",
       }),
-      // it copies files like otherImages, fonts etc. from 'public' path to 'destPath' (since not every file will be injected into css and js)
+      // it copies files like images, fonts etc. from 'public' path to 'destPath' (since not every file will be injected into css and js)
       new CopyWebpackPlugin({
         patterns: [
           {

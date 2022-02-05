@@ -1,20 +1,20 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
-import otherImages from "@/constants/otherImages";
+import images from "@/constants/images";
 
 interface IProductRatingProps {
   product: IProduct;
 }
 
 const ProductRating: FC<IProductRatingProps> = ({ product }) => {
-  const ratingStars: JSX.Element[] = [];
+  const ratingStars: React.ClassicElement<HTMLImageElement>[] = [];
   for (let i = 0; i < product.rating; i += 2) {
     ratingStars.push(
       <img
-        key={`${product.name}${otherImages.ratingStar.description}${i}`}
-        src={otherImages.ratingStar.path}
-        alt={otherImages.ratingStar.description}
+        key={`${product.name}${images.ratingStar.description}${i}`}
+        src={images.ratingStar.path}
+        alt={images.ratingStar.description}
       />
     );
   }
@@ -23,9 +23,9 @@ const ProductRating: FC<IProductRatingProps> = ({ product }) => {
     ratingStars.pop();
     ratingStars.push(
       <img
-        key={`${product.name}${otherImages.ratingHalfStar.description}`}
-        src={otherImages.ratingHalfStar.path}
-        alt={otherImages.ratingHalfStar.description}
+        key={`${product.name}${images.ratingHalfStar.description}`}
+        src={images.ratingHalfStar.path}
+        alt={images.ratingHalfStar.description}
       />
     );
   }
@@ -35,9 +35,9 @@ const ProductRating: FC<IProductRatingProps> = ({ product }) => {
     ++i;
     ratingStars.push(
       <img
-        key={`${product.name}${otherImages.ratingEmptyStar.description}${i}`}
-        src={otherImages.ratingEmptyStar.path}
-        alt={otherImages.ratingEmptyStar.description}
+        key={`${product.name}${images.ratingEmptyStar.description}${i}`}
+        src={images.ratingEmptyStar.path}
+        alt={images.ratingEmptyStar.description}
       />
     );
   }

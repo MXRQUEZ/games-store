@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
 import { categories } from "../../../server/data/categories";
@@ -8,7 +8,7 @@ interface IProductCategoryProps {
 }
 
 const ProductCategory: FC<IProductCategoryProps> = ({ product }) => {
-  const productCategories: JSX.Element[] = [];
+  const productCategories: React.ClassicElement<HTMLImageElement>[] = [];
   product.categoriesId.forEach((category) => {
     if (category === categories.pc.id) {
       productCategories.push(

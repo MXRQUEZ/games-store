@@ -1,11 +1,11 @@
-import Container from "@/ui/container/container";
-import classes from "@/components/pages/about/about.module.scss";
+import Container from "@/components/ui/container/container";
+import classes from "@/pages/about/about.module.scss";
 import { about, gitHubLink, gitHubRepoLink, gmail } from "@/constants/other";
 
 const About = () => (
   <Container id={classes.about} title="About us">
     <div className={classes.about}>
-      <p>{about}</p>
+      <text>{about}</text>
     </div>
     <div className={classes.contacts}>
       <hr />
