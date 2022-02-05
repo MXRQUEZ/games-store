@@ -1,6 +1,3 @@
-import xbox from "images/XBOX.png";
-import playStation from "images/Playstation.png";
-import desktop from "images/desktop-pc.png";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
 import ICategory from "@/types/iCategory";
@@ -9,26 +6,29 @@ interface ICategories {
   [category: string]: ICategory;
 }
 
-const categories: ICategories = {
+export const categories: ICategories = {
   pc: {
-    name: "PC",
     id: mockServerHelper.getUniqueIdInt(),
-    img: desktop,
+    name: "PC",
+    path: "pc",
+    img: "https://media.discordapp.net/attachments/812670607950741554/939311033485500456/desktop-pc.png",
     description: "pc",
   },
 
   playstation: {
-    name: "PlayStation 5",
     id: mockServerHelper.getUniqueIdInt(),
-    img: playStation,
+    name: "PlayStation 5",
+    path: "playstation",
+    img: "https://media.discordapp.net/attachments/812670607950741554/939311041685360681/Playstation.png",
     description: "playstation 5",
   },
 
   xbox: {
+    id: mockServerHelper.getUniqueIdInt(),
     name: "XBox One",
-    id: mockServerHelper.getUniqueIdInt() + 5,
-    img: xbox,
-    description: "xbox one",
+    path: "xbox",
+    img: "https://cdn.discordapp.com/attachments/812670607950741554/939311023951843348/XBOX.png",
+    description: "xbox",
   },
 };
 

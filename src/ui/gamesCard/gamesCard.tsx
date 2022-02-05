@@ -9,8 +9,8 @@ interface IGamesCardProps {
 }
 
 const GamesCard: FC<IGamesCardProps> = ({ product }) => (
-  <div className={classes.games__card}>
-    <div className={classes.games__card__inner}>
+  <div className={classes.games__card__container}>
+    <div className={classes.games__card}>
       <GamesCardFront product={product} />
       <GamesCardBack product={product} />
     </div>

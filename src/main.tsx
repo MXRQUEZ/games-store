@@ -49,7 +49,9 @@ class AppContainer extends Component<AppProps, IAppErrorState> {
               <Routes>
                 <Route path="*" element={<Home />} />
                 <Route path="/" element={<Home />} />
-                <Route path="/products/" element={<Products />} />
+                <Route path="/products" element={<Products />}>
+                  <Route path=":category" element={<Products />} />
+                </Route>
                 <Route path="/about" element={<About />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />

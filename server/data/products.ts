@@ -1,9 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
 import IProduct from "@/types/iProduct";
-import categories from "./categories";
+// eslint-disable-next-line import/named
+import { categories } from "./categories";
 
-const products: IProduct[] = [
+export const products: IProduct[] = [
   {
     id: mockServerHelper.getUniqueIdInt(),
     name: "Horizon Zero Dawn",

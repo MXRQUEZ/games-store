@@ -1,7 +1,7 @@
 import storeLogo from "@/assets/images/GameStore_Logo.png";
 import star from "@/assets/images/star.png";
 import halfStar from "@/assets/images/half-star.png";
-import arrow from "@/assets/images/drop_down-white.png";
+import emptyStar from "@/assets/images/empty-star.png";
 
 interface IOtherImages {
   [image: string]: IOtherImage;
@@ -18,10 +18,6 @@ const otherImages: IOtherImages = {
     path: storeLogo,
     description: "game store logo",
   },
-  arrow: {
-    path: arrow,
-    description: "drop-down menu",
-  },
   // games card
   ratingStar: {
     path: star,
@@ -30,6 +26,10 @@ const otherImages: IOtherImages = {
   ratingHalfStar: {
     path: halfStar,
     description: "rating half-star",
+  },
+  ratingEmptyStar: {
+    path: emptyStar,
+    description: "one empty rating star",
   },
 };
 

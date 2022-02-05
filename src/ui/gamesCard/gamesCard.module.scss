@@ -1,9 +1,9 @@
-.games__card {
+.games__card__container {
   padding: 20px;
   border-radius: 20px;
   min-width: 0;
 
-  & .games__card__inner {
+  & .games__card {
     box-shadow: 0 0 10px 3px blueviolet;
     border-bottom: 3px solid blueviolet;
     cursor: pointer;
@@ -14,7 +14,7 @@
     transform-style: preserve-3d;
     transition: 1s all ease;
 
-    & .games__card__front {
+    &__front {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -64,7 +64,7 @@
       }
     }
 
-    & .games__card__back {
+    &__back {
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -96,22 +96,8 @@
   }
 
   &:hover {
-    .games__card__inner {
+    .games__card {
       transform: rotateY(180deg);
     }
   }
-}
-
-.games__card__container {
-  margin-top: 40px;
-  max-width: 1200px;
-  padding-left: 20px;
-  padding-right: 20px;
-  display: grid;
-  // stylelint-disable-next-line plugin/no-unsupported-browser-features
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 50px;
 }

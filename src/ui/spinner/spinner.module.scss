@@ -14,15 +14,19 @@ $color: #8a2be2;
 /* :not(:required) hides this rule from IE9 and below */
 .spinner:not(:required) {
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  margin-top: 50px;
   text-indent: -9999px;
-  display: inline-block;
+  display: flex;
+  justify-self: center;
+  align-items: center;
   width: 8px;
   height: 8px;
   background: transparent;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
+
   -moz-box-shadow: $color 0 26px 0 6px, $color 0.90971px 26.05079px 0 5.93333px, $color 1.82297px 26.06967px 0 5.86667px,
     $color 2.73865px 26.05647px 0 5.8px, $color 3.65561px 26.01104px 0 5.73333px,
     $color 4.57274px 25.93327px 0 5.66667px, $color 5.48887px 25.8231px 0 5.6px, $color 6.40287px 25.68049px 0 5.53333px,
@@ -108,6 +112,7 @@ $color: #8a2be2;
     $color -6.54075px 37.09443px 0 -5.66667px, $color -5.25147px 37.36612px 0 -5.73333px,
     $color -3.95118px 37.59293px 0 -5.8px, $color -2.64145px 37.77443px 0 -5.86667px,
     $color -1.32385px 37.91023px 0 -5.93333px;
+
   -webkit-box-shadow: $color 0 26px 0 6px, $color 0.90971px 26.05079px 0 5.93333px,
     $color 1.82297px 26.06967px 0 5.86667px, $color 2.73865px 26.05647px 0 5.8px,
     $color 3.65561px 26.01104px 0 5.73333px, $color 4.57274px 25.93327px 0 5.66667px, $color 5.48887px 25.8231px 0 5.6px,
@@ -193,6 +198,7 @@ $color: #8a2be2;
     $color -7.81748px 36.77835px 0 -5.6px, $color -6.54075px 37.09443px 0 -5.66667px,
     $color -5.25147px 37.36612px 0 -5.73333px, $color -3.95118px 37.59293px 0 -5.8px,
     $color -2.64145px 37.77443px 0 -5.86667px, $color -1.32385px 37.91023px 0 -5.93333px;
+
   box-shadow: $color 0 26px 0 6px, $color 0.90971px 26.05079px 0 5.93333px, $color 1.82297px 26.06967px 0 5.86667px,
     $color 2.73865px 26.05647px 0 5.8px, $color 3.65561px 26.01104px 0 5.73333px,
     $color 4.57274px 25.93327px 0 5.66667px, $color 5.48887px 25.8231px 0 5.6px, $color 6.40287px 25.68049px 0 5.53333px,
@@ -278,6 +284,7 @@ $color: #8a2be2;
     $color -6.54075px 37.09443px 0 -5.66667px, $color -5.25147px 37.36612px 0 -5.73333px,
     $color -3.95118px 37.59293px 0 -5.8px, $color -2.64145px 37.77443px 0 -5.86667px,
     $color -1.32385px 37.91023px 0 -5.93333px;
+
   -moz-animation: spinner 1.25s infinite linear;
   -webkit-animation: spinner 1.25s infinite linear;
   animation: spinner 1.25s infinite linear;

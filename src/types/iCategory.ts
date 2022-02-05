@@ -1,6 +1,7 @@
 interface ICategory {
-  name: string;
   id: number;
+  name: string;
+  path: string;
   img: string;
   description: string;
 }
