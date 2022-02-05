@@ -30,35 +30,27 @@ const Products: FC = () => {
       return;
     }
     (async () => {
+      setSpinner(true);
       if (category) {
         setProducts(await getProductsByCategoryName({ category }));
         return;
       }
 
       setProducts(await getProducts());
+      setSpinner(false);
     })();
   }, [category]);
 
-  if (spinner) {
-    return (
-      <div className="products__page">
-        <Searchbar onSearch={onSearch} loader={setSpinner} />
-        <Container id={classes.games} title="Games" isCard>
-          <Spinner />
-        </Container>
-      </div>
-    );
+  const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
+  if (!searchResult.length) {
+    searchResult.push(<h1 className={classes.text}>Nothing Found</h1>);
   }
 
   return (
     <div className="products__page">
       <Searchbar onSearch={onSearch} loader={setSpinner} />
       <Container id={classes.games} title="Games" isCard>
-        {!products.length ? (
-          <h1 className={classes.text}>Nothing Found</h1>
-        ) : (
-          products.map((product) => <GamesCard product={product} key={product.id} />)
-        )}
+        {spinner ? <Spinner /> : searchResult}
       </Container>
     </div>
   );

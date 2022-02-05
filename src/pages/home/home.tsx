@@ -27,25 +27,16 @@ const Home: FC = () => {
 
   useEffect(() => {
     (async () => {
+      setSpinner(true);
       setCategories(await getCategories());
       setProducts(await getHomeProducts());
+      setSpinner(false);
     })();
   }, []);
 
-  if (spinner) {
-    return (
-      <>
-        <Searchbar onSearch={onSearch} loader={setSpinner} isHomePage />
-        <Container id={classes.categories} title="Categories" isCard>
-          {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />
-          ))}
-        </Container>
-        <Container id={classes.newGames} title="New Games" isCard>
-          <Spinner />
-        </Container>
-      </>
-    );
+  const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
+  if (!searchResult.length) {
+    searchResult.push(<h1 className={classes.text}>Nothing Found</h1>);
   }
 
   return (
@@ -57,11 +48,7 @@ const Home: FC = () => {
         ))}
       </Container>
       <Container id={classes.newGames} title="New Games" isCard>
-        {!products.length ? (
-          <h1 className={classes.text}>Nothing Found</h1>
-        ) : (
-          products.map((product) => <GamesCard product={product} key={product.id} />)
-        )}
+        {spinner ? <Spinner /> : searchResult}
       </Container>
     </>
   );
