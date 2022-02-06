@@ -13,9 +13,11 @@
 }
 
 body {
-  background-image: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1614443048_44-p-temnii-fon-v-khoroshem-kachestve-53.jpg");
-  background-position: center;
-  background-size: contain;
+  background: url("https://psv4.userapi.com/c235131/u474384247/docs/d23/740b141f606d/tyan.gif?extra=2Qjrk1RQN9XGvFRgz_IhqW7rhe9dQbf3xzPSvyMFn4oVgLeWRoT8ArY6kRoFBAeTvODJwmw2yoolWnusRoOLPGqv_w7-3oi2LEgm4S1i3ZFB5PYsek8Dh3--reSM8q4Slhri9FefW3-lR9jlSWHXjfErDw")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   font-size: 130%;
   font-family: calluna, Calluna, Georgia, sans-serif;
   font-weight: 300;

@@ -12,7 +12,7 @@ const Navbar: FC<INavbarProps> = ({ routes }) => (
   <ul className={classes.nav__routes}>
     {routes.map((route) =>
       route.sub ? (
-        <DropMenu route={route} />
+        <DropMenu key={route.url} route={route} />
       ) : (
         <li key={route.url}>
           <NavLink

@@ -36,7 +36,11 @@ const Home: FC = () => {
 
   const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {
-    searchResult.push(<h1 className={classes.text}>Nothing Found</h1>);
+    searchResult.push(
+      <h1 key={`${classes.text}${searchResult.length}`} className={classes.text}>
+        Nothing Found
+      </h1>
+    );
   }
 
   return (

@@ -8,7 +8,7 @@ interface IDropMenuProps {
 }
 
 const DropMenu: FC<IDropMenuProps> = ({ route }) => (
-  <li key={route.url} className={classes.drop_menu}>
+  <li className={classes.drop_menu}>
     <NavLink
       to={route.url}
       className={({ isActive }) =>
