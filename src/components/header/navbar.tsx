@@ -16,7 +16,9 @@ const Navbar: FC<INavbarProps> = ({ routes }) => (
       ) : (
         <li key={route.url}>
           <NavLink
-            className={({ isActive }) => (isActive ? classes.link__active : classes.nav__routes_link)}
+            className={({ isActive }) =>
+              isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
+            }
             to={route.url}
           >
             {route.name}

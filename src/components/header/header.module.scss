@@ -36,11 +36,7 @@
 
       &_link:hover,
       & .link__active {
-        font-size: 20px;
-        letter-spacing: 0.5px;
-        text-decoration: none;
         padding: 13px 7px 15px 7px;
-        color: white;
         background-color: rgba(255, 255, 255, 0.1);
         border-bottom: 3px solid blueviolet;
       }
@@ -79,7 +75,6 @@
 
             &:hover,
             &__active {
-              text-decoration: none;
               color: blueviolet;
               padding-left: 10px;
               border-left: 2px solid blueviolet;

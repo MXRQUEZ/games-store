@@ -33,6 +33,7 @@ const Products: FC = () => {
       setSpinner(true);
       if (category) {
         setProducts(await getProductsByCategoryName({ category }));
+        setSpinner(false);
         return;
       }
 

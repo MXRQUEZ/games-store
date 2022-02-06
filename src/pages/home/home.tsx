@@ -41,7 +41,7 @@ const Home: FC = () => {
 
   return (
     <>
-      <Searchbar onSearch={onSearch} loader={setSpinner} isHomePage />
+      <Searchbar onSearch={onSearch} loader={setSpinner} />
       <Container id={classes.categories} title="Categories" isCard>
         {categories.map((category) => (
           <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />
