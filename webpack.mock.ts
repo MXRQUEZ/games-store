@@ -16,7 +16,9 @@ export default webpackMockServer.add((app: Application) => {
 
     if (_req.query.sortBy) {
       productsList = productsList.sort((a, b) => {
-        const sortBy = ((_req.query.sortBy as string) in a ? _req.query.sortBy : "date") as keyof IProduct;
+        const sortByDefault = "date";
+        const sortQuery = _req.query.sortBy as string;
+        const sortBy = (sortQuery in a ? sortQuery : sortByDefault) as keyof IProduct;
 
         const fieldA = a[sortBy];
         const fieldB = b[sortBy];
@@ -34,25 +36,27 @@ export default webpackMockServer.add((app: Application) => {
     }
 
     if (_req.query.filter) {
-      const { filter: searchString } = _req.query;
+      const { filter } = _req.query;
+      const searchString = filter as string;
 
       productsList = productsList.filter((product) =>
         product.name
           .toLowerCase()
           .replace(/[^\w]/gi, "")
-          .includes((searchString as string).trim().replace(/[^\w]/gi, "").toLowerCase())
+          .includes(searchString.trim().replace(/[^\w]/gi, "").toLowerCase())
       );
     }
 
     if (_req.query.category) {
-      const { category: categoryName } = _req.query;
-      const category = `${categoryName}` in categories ? categories[`${categoryName}`] : null;
+      const { category } = _req.query;
+      const categoryName = category as string;
+      const categoryFilter = categoryName in categories ? categories[categoryName] : null;
 
       if (category) {
         productsList = productsList.filter((product) => {
           // eslint-disable-next-line no-restricted-syntax
           for (const id of product.categoriesId) {
-            if (id === category.id) {
+            if (id === categoryFilter?.id) {
               return true;
             }
           }

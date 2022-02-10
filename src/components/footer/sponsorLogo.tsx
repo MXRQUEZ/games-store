@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import ISponsor from "../../types/iSponsor";
 import classes from "./footer.module.scss";
 
@@ -12,4 +12,4 @@ const SponsorLogo: FC<ISponsorLogoProps> = ({ sponsor }) => (
   </a>
 );
 
-export default SponsorLogo;
+export default React.memo(SponsorLogo);

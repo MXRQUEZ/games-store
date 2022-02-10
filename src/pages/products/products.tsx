@@ -15,12 +15,13 @@ type ProductsUrlParams = {
 
 const Products: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [spinner, setSpinner] = useState(false);
+  const [defaultProducts, setDefaultProducts] = useState<IProduct[]>([]);
+  const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
   const router = useNavigate();
 
-  const onSearch = (response: IProduct[]): void => {
-    setProducts(response);
+  const onSearch = (response: IProduct[] | null): void => {
+    setProducts(response || defaultProducts);
     setSpinner(false);
   };
 
@@ -32,12 +33,16 @@ const Products: FC = () => {
     (async () => {
       setSpinner(true);
       if (category) {
-        setProducts(await getProductsByCategoryName({ category }));
+        const categoryProducts = await getProductsByCategoryName({ category });
+        setDefaultProducts(categoryProducts);
+        setProducts(categoryProducts);
         setSpinner(false);
         return;
       }
 
-      setProducts(await getProducts());
+      const allProducts = await getProducts();
+      setDefaultProducts(allProducts);
+      setProducts(allProducts);
       setSpinner(false);
     })();
   }, [category]);

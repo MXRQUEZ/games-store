@@ -1,32 +1,34 @@
 import React, { FC } from "react";
 import IProduct from "@/types/iProduct";
-import { getHomeProducts, getProducts } from "@/shared/utils/apiRequests";
-import SearchInput from "@/components/ui/searchbar/searchInput";
+import { getProducts } from "@/shared/utils/apiRequests";
+import debounce from "@/shared/utils/helpers/debounce";
+import classes from "@/components/ui/searchbar/searchbar.module.scss";
 
 interface ISearchbarProps {
-  onSearch: (response: IProduct[]) => void;
+  onSearch: (response: IProduct[] | null) => void;
   loader: (isActive: boolean) => void;
-  isHomePage?: boolean;
 }
 
-const Searchbar: FC<ISearchbarProps> = ({ onSearch, loader, isHomePage }) => {
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    let response: IProduct[];
-    if (event.target.value) {
-      response = await getProducts({ filter: event.target.value });
-      onSearch(response);
-      return;
-    }
+type inputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-    response = isHomePage ? await getHomeProducts() : await getProducts();
-    onSearch(response);
+const Searchbar: FC<ISearchbarProps> = ({ onSearch, loader }) => {
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value;
+    onSearch(search ? await getProducts({ filter: event.target.value }) : null);
   };
 
-  return <SearchInput onChange={onChange} loader={loader} />;
-};
+  const debounceDelay = 1000;
+  const debounceOnChange: inputChangeEvent = debounce(onChange, debounceDelay);
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    loader(true);
+    debounceOnChange(event);
+  };
 
-Searchbar.defaultProps = {
-  isHomePage: false,
+  return (
+    <div className={classes.searchbar__container}>
+      <input className={classes.searchbar} type="text" onChange={onChangeHandler} placeholder="Search" />
+    </div>
+  );
 };
 
 export default React.memo(Searchbar);

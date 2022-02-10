@@ -1,10 +1,14 @@
 import { FC } from "react";
 import classes from "@/components/ui/button/button.module.scss";
 
-const Button: FC = ({ children }) => (
+interface IButtonProps {
+  text: string;
+}
+
+const Button: FC<IButtonProps> = ({ text }) => (
   <div className={classes.button__container}>
     <button type="submit" className={classes.button}>
-      {children}
+      {text}
     </button>
   </div>
 );

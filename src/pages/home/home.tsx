@@ -14,10 +14,11 @@ const Home: FC = () => {
   const router = useNavigate();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [spinner, setSpinner] = useState(false);
+  const [newProducts, setNewProducts] = useState<IProduct[]>([]);
+  const [spinner, setSpinner] = useState(true);
 
-  const onSearch = (response: IProduct[]): void => {
-    setProducts(response);
+  const onSearch = (response: IProduct[] | null): void => {
+    setProducts(response || newProducts);
     setSpinner(false);
   };
 
@@ -27,9 +28,11 @@ const Home: FC = () => {
 
   useEffect(() => {
     (async () => {
+      const homeProducts = await getHomeProducts();
       setSpinner(true);
       setCategories(await getCategories());
-      setProducts(await getHomeProducts());
+      setNewProducts(homeProducts);
+      setProducts(homeProducts);
       setSpinner(false);
     })();
   }, []);

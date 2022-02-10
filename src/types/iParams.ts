@@ -1,5 +1,5 @@
 interface IParams {
-  [key: string]: string;
+  [param: string]: string;
 }
 
 export default IParams;

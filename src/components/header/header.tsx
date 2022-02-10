@@ -1,8 +1,8 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import classes from "./header.module.scss";
 import routes from "@/constants/routes";
 import images from "@/constants/images";
-import { storeName } from "@/constants/other";
+import { storeName } from "@/constants/constants";
 import Navbar from "@/components/header/navbar";
 
 const Header: FC = () => (
@@ -15,4 +15,4 @@ const Header: FC = () => (
   </header>
 );
 
-export default Header;
+export default React.memo(Header);

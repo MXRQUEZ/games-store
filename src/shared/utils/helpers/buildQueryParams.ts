@@ -10,14 +10,3 @@ const buildQueryParams: IBuildQueryParams = (params) => {
 };
 
 export default buildQueryParams;
-
-/* interface IBuildQueryParams {
-  (params: IParams): string;
-}
-
-const buildQueryParams: IBuildQueryParams = (params) => {
-  const paramsEntries = Object.entries(params);
-  return paramsEntries.keys.length ? `?${paramsEntries.map(([key, value]) => `${key}=${value}`).join("&")}` : "";
-};
-
-export default buildQueryParams;*/

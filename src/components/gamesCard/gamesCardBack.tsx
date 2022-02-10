@@ -1,23 +1,23 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
 import Button from "@/components/ui/button/button";
-import { buy } from "@/constants/other";
+import { buy } from "@/constants/constants";
 
 interface IGamesCardBackProps {
   product: IProduct;
 }
 
 const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => (
-  <div className={classes.games__card__back}>
-    <div className={classes.games__card__back__top}>
+  <div className={classes.card__back}>
+    <div className={classes.card__back__top}>
       <p>{product.description}</p>
     </div>
-    <div className={classes.games__card__back__bottom}>
+    <div className={classes.card__back__bottom}>
       <p>{product.ageCriteria}</p>
-      <Button>{buy}</Button>
+      <Button text={buy} />
     </div>
   </div>
 );
 
-export default GamesCardBack;
+export default React.memo(GamesCardBack);

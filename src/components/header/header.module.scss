@@ -58,7 +58,7 @@
           padding-top: 10px;
         }
 
-        &__inner {
+        & .menu {
           visibility: hidden;
           opacity: 0;
           position: absolute;
@@ -68,7 +68,7 @@
           display: none;
           background-color: #191919;
 
-          &_link {
+          &__link {
             text-decoration: none;
             color: white;
             transition: 0.5s all ease;
@@ -92,7 +92,7 @@
         }
 
         &:hover > ul,
-        .drop__inner:hover {
+        .drop_menu:hover {
           visibility: visible;
           opacity: 1;
           z-index: 1;

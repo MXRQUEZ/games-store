@@ -17,15 +17,13 @@ const DropMenu: FC<IDropMenuProps> = ({ route }) => (
     >
       {route.name}
     </NavLink>
-    <ul className={classes.drop_menu__inner}>
+    <ul className={classes.menu}>
       {route.sub?.map((innerRoute) => (
-        <li className={classes.drop_menu__inner__item} key={innerRoute.id}>
+        <li className={classes.menu__item} key={innerRoute.id}>
           <NavLink
             to={innerRoute.url}
             className={({ isActive }) =>
-              isActive
-                ? `${classes.drop_menu__inner_link__active} ${classes.drop_menu__inner_link}`
-                : classes.drop_menu__inner_link
+              isActive ? `${classes.menu__link__active} ${classes.menu__link}` : classes.menu__link
             }
           >
             {innerRoute.name}

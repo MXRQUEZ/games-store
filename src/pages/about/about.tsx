@@ -1,6 +1,6 @@
 import Container from "@/components/ui/container/container";
 import classes from "@/pages/about/about.module.scss";
-import { about, gitHubLink, gitHubRepoLink, gmail } from "@/constants/other";
+import { about, gitHubLink, gitHubRepoLink, gmail } from "@/constants/constants";
 
 const About = () => (
   <Container id={classes.about} title="About us">
