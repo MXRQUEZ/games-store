@@ -1,17 +1,32 @@
 import { FC } from "react";
-import "./header.scss";
-import pages from "@/components/header/pages";
-import NavLinks from "@/components/header/navLinks";
+import { NavLink } from "react-router-dom";
+import classes from "./header.module.scss";
+import IRoute from "@/types/iRoute";
+import DropMenu from "@/components/header/dropMenu";
 
-interface NavbarProps {
-  title: string;
+interface INavbarProps {
+  routes: IRoute[];
 }
 
-const Navbar: FC<NavbarProps> = ({ title }) => (
-  <nav className="navbar">
-    <h1 className="nav-title">{title}</h1>
-    <NavLinks pages={pages} />
-  </nav>
+const Navbar: FC<INavbarProps> = ({ routes }) => (
+  <ul className={classes.nav__routes}>
+    {routes.map((route) =>
+      route.sub ? (
+        <DropMenu key={route.url} route={route} />
+      ) : (
+        <li key={route.url}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
+            }
+            to={route.url}
+          >
+            {route.name}
+          </NavLink>
+        </li>
+      )
+    )}
+  </ul>
 );
 
 export default Navbar;

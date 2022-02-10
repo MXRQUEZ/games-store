@@ -1,0 +1,40 @@
+.category__card__container {
+  padding: 10px;
+
+  .category__card {
+    min-height: 170px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #121212;
+    max-width: 350px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: 2px solid white;
+    border-bottom: 6px solid white;
+    border-radius: 20px;
+
+    &:hover {
+      border: 2px solid blueviolet;
+      box-shadow: 0 4px 4px 0 blueviolet;
+      border-bottom: 6px solid blueviolet;
+    }
+
+    &_image {
+      margin-top: 10px;
+      width: 75px;
+      height: 75px;
+      pointer-events: none;
+    }
+
+    &_name {
+      font-family: Impact, Charcoal, sans-serif;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  }
+}

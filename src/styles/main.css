@@ -13,7 +13,10 @@
 }
 
 body {
-  background-color: darkgray;
+  background: url("https://cloclo4.cloud.mail.ru/inline/tyan.gif") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   font-size: 130%;
   font-family: calluna, Calluna, Georgia, sans-serif;
   font-weight: 300;
@@ -28,7 +31,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #333;
+  color: white;
   font-family: adelle, Adelle, Georgia, sans-serif;
   font-weight: 800;
   text-rendering: optimizeLegibility;
@@ -71,7 +74,8 @@ h5 {
 }
 
 p {
-  margin: 0.5em 0 2em;
+  color: white;
+  margin: 10px 10px;
 }
 
 blockquote {
@@ -79,4 +83,14 @@ blockquote {
   background: #fafafa;
   border-left: 5px #81e26d solid;
   color: #666;
+}
+
+::-webkit-scrollbar {
+  background-color: #121212;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px;
 }

@@ -1,17 +1,18 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import classes from "./footer.module.scss";
 import SponsorLogo from "@/components/footer/sponsorLogo";
-import ISponsor from "@/components/footer/iSponsor";
+import ISponsor from "@/types/iSponsor";
 
-interface ISponsorLogos {
+interface ISponsorLogosProps {
   sponsorsList: ISponsor[];
 }
 
-const SponsorLogos: FC<ISponsorLogos> = ({ sponsorsList }) => (
-  <div className="sponsor-icons">
+const SponsorLogos: FC<ISponsorLogosProps> = ({ sponsorsList }) => (
+  <div className={classes.sponsors}>
     {sponsorsList.map((sponsor) => (
       <SponsorLogo key={sponsor.name} sponsor={sponsor} />
     ))}
   </div>
 );
 
-export default SponsorLogos;
+export default React.memo(SponsorLogos);

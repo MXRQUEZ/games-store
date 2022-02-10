@@ -1,16 +1,16 @@
-import "./footer.scss";
-import sponsors from "@/components/footer/sponsors";
+import React, { FC } from "react";
+import classes from "./footer.module.scss";
+import sponsors from "@/constants/sponsors";
 import SponsorLogos from "@/components/footer/sponsorLogos";
+import { copyrights } from "@/constants/constants";
 
-const yearNow = new Date().getFullYear();
-const copyrights = `${yearNow} Games Store | All rights reserved | Terms Of Service | Privacy`;
-
-const Footer = () => (
-  <footer className="footer">
-    <hr />
-    <p>&copy;{copyrights}</p>
+const Footer: FC = () => (
+  <footer className={classes.footer}>
+    <div className={classes.copyrights__container}>
+      <p>&copy;{copyrights}</p>
+    </div>
     <SponsorLogos sponsorsList={sponsors} />
   </footer>
 );
 
-export default Footer;
+export default React.memo(Footer);

@@ -1,0 +1,35 @@
+.footer {
+  color: darkgray;
+  background-color: #191919;
+  text-align: center;
+  padding-top: 20px;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  border-top: 0.5px solid gray;
+
+  & .sponsors {
+    margin: 5px 0;
+
+    &_logo {
+      margin-left: 20px;
+
+      &__small {
+        width: 50px;
+        object-fit: cover;
+        height: 50px;
+      }
+
+      &__wide {
+        width: 100px;
+        object-fit: cover;
+        height: 50px;
+      }
+    }
+  }
+}
+
+.copyrights__container {
+  margin-bottom: 30px;
+}

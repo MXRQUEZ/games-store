@@ -1,38 +1,61 @@
 import "./styles/main.css";
-import "./components/header/header.scss";
+import "./components/header/header.module.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "@/components/layout/layout";
-import Home from "@/components/pages/home";
-import Products from "@/components/products/products";
-import About from "@/components/pages/about";
+import Home from "@/pages/home/home";
+import Products from "@/pages/products/products";
+import About from "@/pages/about/about";
 import SignIn from "@/components/users/signIn";
 import SignUp from "@/components/users/signUp";
 
 interface AppProps {
   nothing: boolean;
 }
-interface AppState {
-  title: string;
+interface IAppErrorState {
+  hasError: boolean;
 }
 
-class AppContainer extends Component<AppProps, AppState> {
+class AppContainer extends Component<AppProps, IAppErrorState> {
   ["constructor"]: typeof AppContainer;
+
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.state.hasError);
+  }
+
+  componentDidCatch() {
+    this.setState({
+      hasError: true,
+    });
+  }
 
   render() {
     return (
       <StrictMode>
         <BrowserRouter>
           <Layout>
-            <Routes>
-              <Route path="*" element={<Home />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUp />} />
-            </Routes>
+            {this.state.hasError ? (
+              <Home />
+            ) : (
+              <Routes>
+                <Route path="*" element={<Home />} />
+                <Route path="/products" element={<Products />}>
+                  <Route path=":category" element={<Products />} />
+                </Route>
+                <Route path="/about" element={<About />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+              </Routes>
+            )}
           </Layout>
         </BrowserRouter>
       </StrictMode>

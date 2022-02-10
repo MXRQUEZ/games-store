@@ -1,0 +1,43 @@
+.searchbar {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 30px;
+  padding: 12px 24px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  color: gray;
+
+  background-image: url("https://img.icons8.com/external-others-royyan-wijaya/24/ffffff/external-found-revamp-4-others-royyan-wijaya.png");
+  background-repeat: no-repeat;
+  background-position: 95% center;
+  border-radius: 50px;
+  border: 1px solid white;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.searchbar::placeholder {
+  color: gray;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.searchbar:hover,
+.searchbar:focus {
+  padding: 12px 7px;
+  outline: 0;
+  border: 1px solid transparent;
+  border-bottom: 2px solid blueviolet;
+  border-radius: 0;
+  background-position: 99% center;
+}
+
+@media (max-width: 1000px) {
+  .searchbar {
+    width: 90vw;
+  }
+}
