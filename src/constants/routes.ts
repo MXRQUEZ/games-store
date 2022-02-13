@@ -30,14 +30,6 @@ const routes: IRoute[] = [
     name: "About",
     url: "/about",
   },
-  {
-    name: "Sign In",
-    url: "/sign-in",
-  },
-  {
-    name: "Sign Up",
-    url: "/sign-up",
-  },
 ];
 
 export default routes;

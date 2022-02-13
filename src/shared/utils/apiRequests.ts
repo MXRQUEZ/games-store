@@ -4,6 +4,7 @@ import IParams from "@/types/iParams";
 import IProduct from "@/types/iProduct";
 import api from "@/environment/api";
 import buildQueryParams from "./helpers/buildQueryParams";
+import IUser from "@/types/iUser";
 
 export const getCategories = async (): Promise<ICategory[]> => {
   const response = await axios.get(`${api.categories}`);
@@ -24,4 +25,9 @@ export const getHomeProducts = async (): Promise<IProduct[]> => {
 export const getProductsByCategoryName = async (categoryName: IParams = {}): Promise<IProduct[]> => {
   const response = await axios.get(`${api.products}${buildQueryParams(categoryName)}`);
   return response.data;
+};
+
+export const authSignIn = async (userData: IUser): Promise<boolean> => {
+  const result = await fetch(`${api.authSignIn}`, { method: "POST", body: JSON.stringify(userData) });
+  return result.json();
 };

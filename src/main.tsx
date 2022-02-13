@@ -13,11 +13,12 @@ import SignUp from "@/components/users/signUp";
 interface AppProps {
   nothing: boolean;
 }
-interface IAppErrorState {
+interface IAppState {
   hasError: boolean;
+  isAuth: boolean;
 }
 
-class AppContainer extends Component<AppProps, IAppErrorState> {
+class AppContainer extends Component<AppProps, IAppState> {
   ["constructor"]: typeof AppContainer;
 
   constructor(props: AppProps) {
@@ -25,7 +26,10 @@ class AppContainer extends Component<AppProps, IAppErrorState> {
 
     this.state = {
       hasError: false,
+      isAuth: false,
     };
+
+    this.setAuth = this.setAuth.bind(this);
   }
 
   componentDidMount() {
@@ -38,11 +42,17 @@ class AppContainer extends Component<AppProps, IAppErrorState> {
     });
   }
 
+  setAuth(authState: boolean) {
+    this.setState({
+      isAuth: authState,
+    });
+  }
+
   render() {
     return (
       <StrictMode>
         <BrowserRouter>
-          <Layout>
+          <Layout isAuth={this.state.isAuth} setAuth={this.setAuth}>
             {this.state.hasError ? (
               <Home />
             ) : (

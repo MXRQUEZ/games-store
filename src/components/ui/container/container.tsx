@@ -10,7 +10,6 @@ interface IContainerProps {
 const Container: FC<IContainerProps> = ({ children, id, title, isCard }) => (
   <div id={id} className={classes.container}>
     <h4 className={classes.container__title}>{title}</h4>
-    <hr />
     <div className={isCard ? classes.card__container : ""}>{children}</div>
   </div>
 );
