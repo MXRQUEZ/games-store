@@ -70,14 +70,6 @@ export default webpackMockServer.add((app: Application) => {
     res.json(productsList);
   });
 
-  /*  app.post("/api/user/sign-up", (_req, res) => {
-    const userData = JSON.parse(_req.body);
-
-    if (userData) {
-      res.json("success");
-    }
-  }); */
-
   app.post("/api/auth/sign-in", (_req, res) => {
     const { login, password } = JSON.parse(_req.body);
 

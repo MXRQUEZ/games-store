@@ -23,10 +23,12 @@ export const gitHubRepoLink = "https://github.com/MXRQUEZ/js-react";
 export const defaultErrorMessage = "Error!";
 export const userInvalidMessage = "Login or password is invalid";
 export const requiredFieldMessage = "This field is required!";
+
 export const loginLabel = "login";
 export const loginIconClass = "fa fa-solid fa-address-card";
 export const loginMaxLength = 20;
 export const loginLengthMessage = `Max login length is ${loginMaxLength} symbols`;
+
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";
 export const passwordMinLength = 6;

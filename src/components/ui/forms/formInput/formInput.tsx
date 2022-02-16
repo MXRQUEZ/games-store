@@ -21,7 +21,9 @@ const FormInput: FC<IFormInputProps> = ({ label, iconClass, type, register, erro
       </label>
       <i className={iconClass} aria-hidden />
     </div>
-    <div className={classes.error}>{errors[label] && <p>{errors[label]?.message || defaultErrorMessage}</p>}</div>
+    <div className={classes.error}>
+      {errors[register.name] && <p>{errors[register.name]?.message || defaultErrorMessage}</p>}
+    </div>
   </>
 );
 
