@@ -7,8 +7,8 @@ import Layout from "@/components/layout/layout";
 import Home from "@/pages/home/home";
 import Products from "@/pages/products/products";
 import About from "@/pages/about/about";
-import SignIn from "@/components/users/signIn";
-import SignUp from "@/components/users/signUp";
+import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
+import UserProfile from "@/pages/userProfile/userProfile";
 
 interface AppProps {
   nothing: boolean;
@@ -58,12 +58,17 @@ class AppContainer extends Component<AppProps, IAppState> {
             ) : (
               <Routes>
                 <Route path="*" element={<Home />} />
-                <Route path="/products" element={<Products />}>
-                  <Route path=":category" element={<Products />} />
+                <Route path="/products" element={<ProtectedRoute isAuth={this.state.isAuth} element={<Products />} />}>
+                  <Route
+                    path=":category"
+                    element={<ProtectedRoute isAuth={this.state.isAuth} element={<Products />} />}
+                  />
                 </Route>
                 <Route path="/about" element={<About />} />
-                <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
+                <Route
+                  path="/profile"
+                  element={<ProtectedRoute isAuth={this.state.isAuth} element={<UserProfile />} />}
+                />
               </Routes>
             )}
           </Layout>

@@ -28,6 +28,6 @@ export const getProductsByCategoryName = async (categoryName: IParams = {}): Pro
 };
 
 export const authSignIn = async (userData: IUser): Promise<boolean> => {
-  const result = await fetch(`${api.authSignIn}`, { method: "POST", body: JSON.stringify(userData) });
-  return result.json();
+  const response = await fetch(`${api.authSignIn}`, { method: "POST", body: JSON.stringify(userData) });
+  return response.json();
 };

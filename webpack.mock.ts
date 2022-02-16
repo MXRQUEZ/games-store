@@ -5,6 +5,8 @@ import { Application } from "express";
 import { categories } from "./server/data/categories";
 import { products } from "./server/data/products";
 import IProduct from "@/types/iProduct";
+// eslint-disable-next-line import/no-named-as-default
+import users from "./server/data/users";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/categories", (_req, res) => {
@@ -74,7 +76,7 @@ export default webpackMockServer.add((app: Application) => {
     if (userData) {
       res.json("success");
     }
-  });
+  }); */
 
   app.post("/api/auth/sign-in", (_req, res) => {
     const { login, password } = JSON.parse(_req.body);
@@ -95,5 +97,5 @@ export default webpackMockServer.add((app: Application) => {
     }
 
     res.json(false);
-  });*/
+  });
 });

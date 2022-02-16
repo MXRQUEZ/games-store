@@ -13,18 +13,25 @@ interface ILayoutProps {
 const Layout: FC<ILayoutProps> = ({ isAuth, setAuth, children }) => {
   const [isSignInActive, setSignInActive] = useState(false);
   const [isSignUpActive, setSignUpActive] = useState(false);
+  const [userName, setUserName] = useState("User Name");
 
   return (
     <>
-      <Header isAuth={isAuth} setAuth={setAuth} setSignInActive={setSignInActive} setSignUpActive={setSignUpActive} />
+      <Header
+        isAuth={isAuth}
+        userName={userName}
+        setAuth={setAuth}
+        setSignInActive={setSignInActive}
+        setSignUpActive={setSignUpActive}
+      />
       <main>
         <div>{children}</div>
       </main>
       <Modal visible={isSignInActive} setVisible={setSignInActive}>
-        <SignInForm setAuth={setAuth} setModalVisible={setSignInActive} />
+        <SignInForm setAuth={setAuth} setModalVisible={setSignInActive} setUserName={setUserName} />
       </Modal>
       <Modal visible={isSignUpActive} setVisible={setSignUpActive}>
-        <SignUpForm setAuth={setAuth} setModalVisible={setSignInActive} />
+        <SignUpForm setAuth={setAuth} setModalVisible={setSignUpActive} setUserName={setUserName} />
       </Modal>
       <Footer />
     </>

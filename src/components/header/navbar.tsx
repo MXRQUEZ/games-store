@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./header.module.scss";
 import IRoute from "@/types/iRoute";
@@ -6,13 +6,14 @@ import DropMenu from "@/components/header/dropMenu";
 
 interface INavbarProps {
   routes: IRoute[];
+  onClick: ((event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>) => void) | undefined;
 }
 
-const Navbar: FC<INavbarProps> = ({ routes }) => (
+const Navbar: FC<INavbarProps> = ({ routes, onClick }) => (
   <ul className={classes.nav__routes}>
     {routes.map((route) =>
       route.sub ? (
-        <DropMenu key={route.url} route={route} />
+        <DropMenu key={route.url} route={route} onClick={onClick} />
       ) : (
         <li key={route.url}>
           <NavLink

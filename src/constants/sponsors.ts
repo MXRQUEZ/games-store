@@ -1,7 +1,3 @@
-import activisionLogo from "images/activision.png";
-import rockstarLogo from "images/rockstar.png";
-import ubisoftLogo from "images/ubisoft.png";
-import cdProjLogo from "images/cd-projekt-red.png";
 import ISponsor from "@/types/iSponsor";
 import classes from "@/components/footer/footer.module.scss";
 
@@ -9,28 +5,28 @@ const sponsors: ISponsor[] = [
   {
     name: "Activision",
     url: "https://www.activision.com/",
-    logo: activisionLogo,
+    logo: "https://cdn.discordapp.com/attachments/631923587078422558/942658491930259476/activision.png",
     description: "Activision Blizzard logo",
     class: classes.sponsors_logo__wide,
   },
   {
     name: "Rockstar Games",
     url: "https://www.rockstargames.com/",
-    logo: rockstarLogo,
+    logo: "https://cdn.discordapp.com/attachments/631923587078422558/942658492601335838/rockstar.png",
     description: "Rockstar Games logo",
     class: classes.sponsors_logo__small,
   },
   {
     name: "Ubisoft",
     url: "https://www.ubisoft.com/",
-    logo: ubisoftLogo,
+    logo: "https://cdn.discordapp.com/attachments/631923587078422558/942658506765504512/ubisoft.png",
     description: "Ubisoft logo",
     class: classes.sponsors_logo__small,
   },
   {
     name: "CD Projekt Red",
     url: "https://en.cdprojektred.com/",
-    logo: cdProjLogo,
+    logo: "https://cdn.discordapp.com/attachments/631923587078422558/942658492244824115/cd-projekt-red.png",
     description: "CD Projekt Red logo",
     class: classes.sponsors_logo__wide,
   },

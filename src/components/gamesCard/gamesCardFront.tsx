@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import ProductRating from "@/components/gamesCard/productRating";
 import IProduct from "@/types/iProduct";
@@ -20,4 +20,4 @@ const GamesCardFront: FC<IGamesCardFrontProps> = ({ product }) => (
   </div>
 );
 
-export default React.memo(GamesCardFront);
+export default GamesCardFront;

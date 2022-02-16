@@ -1,77 +1,90 @@
 import React, { FC } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
+import FormInput from "@/components/ui/forms/formInput/formInput";
+import {
+  loginIconClass,
+  loginLabel,
+  loginLengthMessage,
+  loginMaxLength,
+  passwordIconClass,
+  passwordLabel,
+  passwordLengthMessage,
+  passwordMinLength,
+  requiredFieldMessage,
+  userInvalidMessage,
+} from "@/constants/constants";
+import { authSignIn } from "@/shared/utils/apiRequests";
+import IUser from "@/types/iUser";
 
 interface ISignInFormProps {
   setAuth: (authState: boolean) => void;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SignInForm: FC<ISignInFormProps> = ({ setAuth, setModalVisible }) => {
+const SignInForm: FC<ISignInFormProps> = ({ setAuth, setModalVisible, setUserName }) => {
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    reset,
+    setError,
   } = useForm({
     mode: "onBlur",
   });
 
-  const onSubmit = () => {
-    setAuth(true);
-    setModalVisible(false);
-  };
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const userData = data as IUser;
+    const isUserValid = await authSignIn(userData);
+    if (isUserValid) {
+      setAuth(true);
+      reset();
+      setUserName(userData.login);
+      setModalVisible(false);
+      return;
+    }
 
-  const defaultErrorMessage = "Error!";
-  const requiredFieldMessage = "This field is required!";
-  const passwordMinLength = 6;
-  const loginMaxLength = 20;
+    setError(loginLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
+
+    setError(passwordLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
+  };
 
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
       <h4 className={classes.auth}>Authorization</h4>
-      <div className={classes.input__container}>
-        <input
-          className={classes.input}
-          required
-          autoComplete="off"
-          type="text"
-          {...register("login", {
-            required: requiredFieldMessage,
-            maxLength: {
-              value: loginMaxLength,
-              message: `Max login length is ${loginMaxLength} symbols`,
-            },
-          })}
-        />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label className={classes.input__label} htmlFor={classes.input}>
-          Login
-        </label>
-      </div>
-      <div className={classes.error}>{errors?.login && <p>{errors?.login?.message || defaultErrorMessage}</p>}</div>
-      <div className={classes.input__container}>
-        <input
-          className={classes.input}
-          required
-          autoComplete="off"
-          type="password"
-          {...register("password", {
-            required: requiredFieldMessage,
-            minLength: {
-              value: passwordMinLength,
-              message: `Min password length is ${passwordMinLength} symbols`,
-            },
-          })}
-        />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label className={classes.input__label} htmlFor={classes.input}>
-          Password
-        </label>
-      </div>
-      <div className={classes.error}>
-        {errors?.password && <p>{errors?.password?.message || defaultErrorMessage}</p>}
-      </div>
+      <FormInput
+        label={loginLabel}
+        iconClass={loginIconClass}
+        register={register(loginLabel, {
+          required: requiredFieldMessage,
+          maxLength: {
+            value: loginMaxLength,
+            message: loginLengthMessage,
+          },
+        })}
+        errors={errors}
+      />
+      <FormInput
+        label={passwordLabel}
+        iconClass={passwordIconClass}
+        type="password"
+        register={register(passwordLabel, {
+          required: requiredFieldMessage,
+          minLength: {
+            value: passwordMinLength,
+            message: passwordLengthMessage,
+          },
+        })}
+        errors={errors}
+      />
       <Button disabled={!isValid} text="Sign In" />
     </form>
   );

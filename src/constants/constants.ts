@@ -18,3 +18,18 @@ export const about =
 export const gmail = "Gmail: svistunss.py@gmail.com";
 export const gitHubLink = "https://github.com/MXRQUEZ";
 export const gitHubRepoLink = "https://github.com/MXRQUEZ/js-react";
+
+// forms
+export const defaultErrorMessage = "Error!";
+export const userInvalidMessage = "Login or password is invalid";
+export const requiredFieldMessage = "This field is required!";
+export const loginLabel = "login";
+export const loginIconClass = "fa fa-solid fa-address-card";
+export const loginMaxLength = 20;
+export const loginLengthMessage = `Max login length is ${loginMaxLength} symbols`;
+export const passwordLabel = "password";
+export const passwordIconClass = "fa fa-solid fa-lock";
+export const passwordMinLength = 6;
+export const passwordLengthMessage = `Min password length is ${passwordMinLength} symbols`;
+export const passwordRepeatLabel = "repeat password";
+export const passwordRepeatMessage = "The passwords do not match";

@@ -14,15 +14,24 @@
     color: white;
   }
 
+  & i {
+    padding: 5px;
+    width: 50px;
+    border-bottom: 1px solid white;
+    text-align: center;
+  }
+
   & .input__container {
     position: relative;
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
 
     & .input {
       width: 100%;
-      padding: 10px 0;
+      padding: 10px;
       font-size: 20px;
       color: white;
-      margin-bottom: 30px;
       border: none;
       border-bottom: 1px solid white;
       outline: none;
@@ -34,7 +43,13 @@
         left: 0;
         color: blueviolet;
         letter-spacing: 0;
-        font-size: 16px;
+        font-size: 14px;
+      }
+
+      &:focus + label + i,
+      &:valid + label + i,
+      &:hover + label + i {
+        border-bottom-color: blueviolet;
       }
 
       &:focus,
@@ -47,11 +62,12 @@
     & .input__label {
       position: absolute;
       pointer-events: none;
+      text-transform: uppercase;
       letter-spacing: 0.5px;
       top: 0;
       left: 0;
       padding: 10px 0;
-      font-size: 20px;
+      font-size: 18px;
       color: gray;
       transition: 0.5s all ease;
     }
@@ -64,7 +80,7 @@
     margin-bottom: 30px;
     font-size: 16px;
 
-    p {
+    & p {
       color: #bf1650;
     }
 

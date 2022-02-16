@@ -47,6 +47,10 @@
         position: relative;
         text-decoration: none;
         text-align: center;
+
+        & i {
+          margin: 0 3px;
+        }
       }
 
       & .drop_menu {

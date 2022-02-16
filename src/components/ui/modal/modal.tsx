@@ -22,7 +22,7 @@ const Modal: FC<IModalProps> = ({ visible, setVisible, children }) => {
   }, [visible]);
 
   return ReactDom.createPortal(
-    <div aria-hidden className={visible ? classes.modal__active : classes.modal} onClick={onClose}>
+    <div aria-hidden className={visible ? `${classes.modal} ${classes.active}` : classes.modal} onClick={onClose}>
       <div aria-hidden className={classes.modal__content} onClick={onClickHandler}>
         {/* <button type="submit" className={classes.close__button} onClick={onClose}>
           &#10006;
