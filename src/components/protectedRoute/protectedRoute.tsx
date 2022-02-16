@@ -1,14 +1,15 @@
 import { FC } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 interface IProtectedRouteProps {
   isAuth: boolean;
-  element: JSX.Element;
   redirectTo?: string;
 }
 
-const ProtectedRoute: FC<IProtectedRouteProps> = ({ isAuth, element, redirectTo = "/" }) =>
-  isAuth ? element : <Navigate to={redirectTo} />;
+const ProtectedRoute: FC<IProtectedRouteProps> = ({ isAuth, redirectTo = "/" }) => {
+  const location = useLocation();
+  return isAuth ? <Outlet /> : <Navigate to={redirectTo} state={{ from: location }} />;
+};
 
 ProtectedRoute.defaultProps = {
   redirectTo: "/",

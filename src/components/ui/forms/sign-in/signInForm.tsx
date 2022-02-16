@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
@@ -25,6 +26,9 @@ interface ISignInFormProps {
 }
 
 const SignInForm: FC<ISignInFormProps> = ({ setAuth, setModalVisible, setUserName }) => {
+  const router = useNavigate();
+  const location = useLocation();
+
   const {
     register,
     formState: { errors, isValid },
@@ -38,11 +42,17 @@ const SignInForm: FC<ISignInFormProps> = ({ setAuth, setModalVisible, setUserNam
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = data as IUser;
     const isUserValid = await authSignIn(userData);
+
     if (isUserValid) {
       setAuth(true);
-      reset();
       setUserName(userData.login);
       setModalVisible(false);
+      reset();
+
+      const state = location.state as { from: Location };
+      const from = state ? state.from.pathname : "/";
+      router(from, { replace: true });
+
       return;
     }
 

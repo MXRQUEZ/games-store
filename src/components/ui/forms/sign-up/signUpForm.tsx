@@ -44,9 +44,9 @@ const SignUpForm: FC<ISignUpFormProps> = ({ setAuth, setModalVisible, setUserNam
     const userData = data as IUser;
     setAuth(true);
     setUserName(userData.login);
-    router("/profile");
-    reset();
     setModalVisible(false);
+    reset();
+    router("/profile");
   };
 
   return (
