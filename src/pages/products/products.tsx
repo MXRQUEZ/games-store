@@ -8,6 +8,7 @@ import { getProducts, getProductsByCategoryName } from "@/shared/utils/apiReques
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
 import { categories } from "../../../server/data/categories";
+import Pathname from "@/types/pathname";
 
 type ProductsUrlParams = {
   category?: string;
@@ -27,7 +28,7 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (category && !((category as string) in categories)) {
-      router("/products");
+      router(Pathname.Products);
       return;
     }
     (async () => {

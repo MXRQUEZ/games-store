@@ -12,6 +12,7 @@ import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import { signInModalOpen } from "@/store/actions/modals";
+import Pathname from "@/types/pathname";
 
 const Home: FC = () => {
   const router = useNavigate();
@@ -29,7 +30,7 @@ const Home: FC = () => {
   const isAuth = useTypedSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (location.pathname === "/:login" && !isAuth) {
+    if (location.pathname === Pathname.Login && !isAuth) {
       dispatch(signInModalOpen());
     }
   }, [isAuth]);

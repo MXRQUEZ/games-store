@@ -5,6 +5,7 @@ import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import { signInModalOpen, signUpModalOpen } from "@/store/actions/modals";
 import { signOut } from "@/store/actions/auth";
+import Pathname from "@/types/pathname";
 
 type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
@@ -36,7 +37,7 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to="/profile"
+          to={Pathname.Profile}
         >
           <i className="fa fa-solid fa-user" aria-hidden />
           {user?.login}
@@ -47,7 +48,7 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to="/profile"
+          to={Pathname.Profile}
         >
           <i className="fa fa-solid fa-cart-shopping" aria-hidden />0
         </NavLink>

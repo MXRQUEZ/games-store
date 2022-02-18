@@ -1,22 +1,21 @@
 import { Action, Dispatch } from "redux";
 import IUser from "@/types/iUser";
-import { IAuthAction } from "@/store/types/auth";
+import { AuthActionType, IAuthAction } from "@/store/types/auth";
 import { authorize } from "@/shared/utils/apiRequests";
-import { SIGN_IN, SIGN_OUT } from "@/store/constants/auth";
 
 export const signIn =
   (userData: IUser) =>
   async (dispatch: Dispatch<IAuthAction>): Promise<boolean> => {
     const isAuth = await authorize(userData);
-    isAuth && dispatch({ type: SIGN_IN, payload: userData });
+    isAuth && dispatch({ type: AuthActionType.SIGN_IN, payload: userData });
     return isAuth;
   };
 
 export const signUp = (userData: IUser): IAuthAction => ({
-  type: SIGN_IN,
+  type: AuthActionType.SIGN_IN,
   payload: userData,
 });
 
 export const signOut = (): Action => ({
-  type: SIGN_OUT,
+  type: AuthActionType.SIGN_OUT,
 });

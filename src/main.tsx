@@ -11,6 +11,7 @@ import About from "@/pages/about/about";
 import UserProfile from "@/pages/userProfile/userProfile";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 import store from "@/store";
+import Pathname from "./types/pathname";
 
 interface AppProps {
   nothing: boolean;
@@ -51,14 +52,14 @@ class AppContainer extends Component<AppProps, IAppState> {
               ) : (
                 <Routes>
                   <Route path="*" element={<Home />} />
-                  <Route path="/:login" element={<Home />} />
+                  <Route path={Pathname.Login} element={<Home />} />
                   <Route element={<ProtectedRoute />}>
-                    <Route path="/products/*" element={<Products />}>
+                    <Route path={Pathname.Products} element={<Products />}>
                       <Route path=":category" element={<Products />} />
                     </Route>
-                    <Route path="/profile" element={<UserProfile />} />
+                    <Route path={Pathname.Profile} element={<UserProfile />} />
                   </Route>
-                  <Route path="/about" element={<About />} />
+                  <Route path={Pathname.About} element={<About />} />
                 </Routes>
               )}
             </Layout>

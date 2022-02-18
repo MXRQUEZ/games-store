@@ -1,5 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from "@/store/constants/auth";
-import { IAuthAction, IAuthState } from "@/store/types/auth";
+import { AuthActionType, IAuthAction, IAuthState } from "@/store/types/auth";
 import IUser from "@/types/iUser";
 
 const isAuth = !!localStorage.getItem("user");
@@ -13,10 +12,10 @@ const authInitialState: IAuthState = {
 // eslint-disable-next-line default-param-last
 const authReducer = (state = authInitialState, action: IAuthAction): IAuthState => {
   switch (action.type) {
-    case SIGN_IN:
+    case AuthActionType.SIGN_IN:
       localStorage.setItem("user", JSON.stringify(action.payload));
       return { ...state, isAuth: true, user: action.payload };
-    case SIGN_OUT:
+    case AuthActionType.SIGN_OUT:
       localStorage.removeItem("user");
       return { ...state, isAuth: false, user: null };
 
