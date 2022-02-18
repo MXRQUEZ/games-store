@@ -5,7 +5,7 @@ import { about, gitHubLink, gitHubRepoLink, gmail } from "@/constants/constants"
 const About = () => (
   <Container id={classes.about} title="About us">
     <div className={classes.about}>
-      <text>{about}</text>
+      <p>{about}</p>
     </div>
     <div className={classes.contacts}>
       <hr />

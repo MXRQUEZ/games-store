@@ -7,17 +7,18 @@ import Layout from "@/components/layout/layout";
 import Home from "@/pages/home/home";
 import Products from "@/pages/products/products";
 import About from "@/pages/about/about";
-import SignIn from "@/components/users/signIn";
-import SignUp from "@/components/users/signUp";
+import UserProfile from "@/pages/userProfile/userProfile";
+import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 
 interface AppProps {
   nothing: boolean;
 }
-interface IAppErrorState {
+interface IAppState {
   hasError: boolean;
+  isAuth: boolean;
 }
 
-class AppContainer extends Component<AppProps, IAppErrorState> {
+class AppContainer extends Component<AppProps, IAppState> {
   ["constructor"]: typeof AppContainer;
 
   constructor(props: AppProps) {
@@ -25,7 +26,10 @@ class AppContainer extends Component<AppProps, IAppErrorState> {
 
     this.state = {
       hasError: false,
+      isAuth: false,
     };
+
+    this.setAuth = this.setAuth.bind(this);
   }
 
   componentDidMount() {
@@ -38,22 +42,29 @@ class AppContainer extends Component<AppProps, IAppErrorState> {
     });
   }
 
+  setAuth(authState: boolean) {
+    this.setState({
+      isAuth: authState,
+    });
+  }
+
   render() {
     return (
       <StrictMode>
         <BrowserRouter>
-          <Layout>
+          <Layout isAuth={this.state.isAuth} setAuth={this.setAuth}>
             {this.state.hasError ? (
               <Home />
             ) : (
               <Routes>
                 <Route path="*" element={<Home />} />
-                <Route path="/products" element={<Products />}>
-                  <Route path=":category" element={<Products />} />
+                <Route element={<ProtectedRoute isAuth={this.state.isAuth} />}>
+                  <Route path="/products/*" element={<Products />}>
+                    <Route path=":category" element={<Products />} />
+                  </Route>
+                  <Route path="/profile" element={<UserProfile />} />
                 </Route>
                 <Route path="/about" element={<About />} />
-                <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
               </Routes>
             )}
           </Layout>

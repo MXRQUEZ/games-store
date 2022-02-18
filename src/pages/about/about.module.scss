@@ -8,9 +8,12 @@
 .about {
   font-family: Raleway, sans-serif;
   font-size: 25px;
-  color: gray;
   margin: 30px;
   word-break: normal;
+
+  & p {
+    color: gray;
+  }
 }
 
 .contacts {

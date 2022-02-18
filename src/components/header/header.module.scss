@@ -5,9 +5,9 @@
   border-bottom: 0.5px solid gray;
 
   & .navbar {
-    margin: 0 auto;
     max-width: $width;
     display: flex;
+    margin: 0 auto;
 
     & .store__logo {
       width: 100px;
@@ -23,7 +23,7 @@
 
     & .nav__routes {
       margin-left: auto;
-      padding: 8px;
+      padding: 8px 0;
 
       &_link {
         font-size: 20px;
@@ -47,6 +47,10 @@
         position: relative;
         text-decoration: none;
         text-align: center;
+
+        & i {
+          margin: 0 3px;
+        }
       }
 
       & .drop_menu {

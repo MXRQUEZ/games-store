@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
 
@@ -7,7 +7,7 @@ interface IProductRatingProps {
 }
 
 const ProductRating: FC<IProductRatingProps> = ({ product }) => {
-  const starClassName = "fa fa-star fa-2x";
+  const starClassName = "fa fa-star fa-lg";
   const starsMaxAmount = 5;
   const ratingStars: JSX.Element[] = [];
 
@@ -24,4 +24,4 @@ const ProductRating: FC<IProductRatingProps> = ({ product }) => {
   return <div className={classes.card__front_rating}>{ratingStars}</div>;
 };
 
-export default React.memo(ProductRating);
+export default ProductRating;

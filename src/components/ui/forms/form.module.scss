@@ -1,0 +1,91 @@
+.form {
+  width: 400px;
+  padding: 40px;
+  justify-content: center;
+  background-color: #191919;
+  box-sizing: border-box;
+  border-radius: 15px;
+
+  .auth {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding-left: 10px;
+    border-left: 3px solid blueviolet;
+    color: white;
+  }
+
+  & i {
+    padding: 5px;
+    width: 50px;
+    border-bottom: 1px solid white;
+    text-align: center;
+  }
+
+  & .input__container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+
+    & .input {
+      width: 100%;
+      padding: 10px;
+      font-size: 20px;
+      color: white;
+      border: none;
+      border-bottom: 1px solid white;
+      outline: none;
+      background: transparent;
+
+      &:focus + label,
+      &:valid + label {
+        top: -30px;
+        left: 0;
+        color: blueviolet;
+        letter-spacing: 0;
+        font-size: 14px;
+      }
+
+      &:focus + label + i,
+      &:valid + label + i,
+      &:hover + label + i {
+        border-bottom-color: blueviolet;
+      }
+
+      &:focus,
+      &:valid,
+      &:hover {
+        border-bottom-color: blueviolet;
+      }
+    }
+
+    & .input__label {
+      position: absolute;
+      pointer-events: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 18px;
+      color: gray;
+      transition: 0.5s all ease;
+    }
+  }
+
+  & .error {
+    display: flex;
+    align-items: center;
+    height: 10px;
+    margin-bottom: 30px;
+    font-size: 16px;
+
+    & p {
+      color: #bf1650;
+    }
+
+    p:before {
+      content: "⚠ ";
+    }
+  }
+}

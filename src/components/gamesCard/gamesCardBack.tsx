@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
 import Button from "@/components/ui/button/button";
@@ -20,4 +20,4 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => (
   </div>
 );
 
-export default React.memo(GamesCardBack);
+export default GamesCardBack;
