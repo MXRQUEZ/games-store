@@ -51,6 +51,7 @@ class AppContainer extends Component<AppProps, IAppState> {
               ) : (
                 <Routes>
                   <Route path="*" element={<Home />} />
+                  <Route path="/:login" element={<Home />} />
                   <Route element={<ProtectedRoute />}>
                     <Route path="/products/*" element={<Products />}>
                       <Route path=":category" element={<Products />} />

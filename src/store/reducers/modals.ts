@@ -16,14 +16,14 @@ const modalsInitialState: IModalsState = {
 const modalsReducer = (state = modalsInitialState, action: Action): IModalsState => {
   switch (action.type) {
     case SIGN_IN_MODAL_OPEN:
-      return { isSignInActive: true, isSignUpActive: false };
+      return { ...state, isSignInActive: true, isSignUpActive: false };
     case SIGN_IN_MODAL_CLOSE:
-      return { isSignInActive: false, isSignUpActive: false };
+      return { ...state, isSignInActive: false, isSignUpActive: false };
 
     case SIGN_UP_MODAL_OPEN:
-      return { isSignInActive: false, isSignUpActive: true };
+      return { ...state, isSignInActive: false, isSignUpActive: true };
     case SIGN_UP_MODAL_CLOSE:
-      return { isSignInActive: false, isSignUpActive: false };
+      return { ...state, isSignInActive: false, isSignUpActive: false };
 
     default:
       return state;

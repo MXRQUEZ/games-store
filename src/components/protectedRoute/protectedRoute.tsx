@@ -6,14 +6,14 @@ interface IProtectedRouteProps {
   redirectTo?: string;
 }
 
-const ProtectedRoute: FC<IProtectedRouteProps> = ({ redirectTo = "/" }) => {
+const ProtectedRoute: FC<IProtectedRouteProps> = ({ redirectTo = "/:login" }) => {
   const isAuth = useTypedSelector((state) => state.auth.isAuth);
   const location = useLocation();
   return isAuth ? <Outlet /> : <Navigate to={redirectTo} state={{ from: location }} />;
 };
 
 ProtectedRoute.defaultProps = {
-  redirectTo: "/",
+  redirectTo: "/:login",
 };
 
 export default ProtectedRoute;

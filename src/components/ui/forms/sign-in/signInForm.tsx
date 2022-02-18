@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
-import { authorize } from "@/shared/utils/apiRequests";
 import IUser from "@/types/iUser";
 import {
   loginIconClass,
@@ -30,19 +29,18 @@ const SignInForm: FC = () => {
     reset,
     setError,
   } = useForm<IUser>({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const dispatch = useDispatch();
   const router = useNavigate();
   const location = useLocation();
-  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
-    const isUserValid = await authorize(userData);
 
-    if (isUserValid) {
-      dispatch(signIn(userData));
+  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
+    if (await dispatch(signIn(userData))) {
       dispatch(signInModalClose());
       reset();
+
       const state = location.state as { from: Location };
       const from = state ? state.from.pathname : "/";
       router(from, { replace: true });
