@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
 import IUser from "@/types/iUser";
-import IAuthFormProps from "@/types/iAuthFormProps";
 import {
   loginIconClass,
   loginLabel,
@@ -19,8 +19,10 @@ import {
   passwordRepeatMessage,
   requiredFieldMessage,
 } from "@/constants/constants";
+import { signUp } from "@/store/actions/auth";
+import { signUpModalClose } from "@/store/actions/modals";
 
-const SignUpForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName }) => {
+const SignUpForm: FC = () => {
   const {
     register,
     formState: { errors, isValid },
@@ -31,11 +33,11 @@ const SignUpForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName 
     mode: "onBlur",
   });
 
+  const dispatch = useDispatch();
   const router = useNavigate();
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    setAuth(true);
-    setUserName(userData.login);
-    setModalVisible(false);
+    dispatch(signUp(userData));
+    dispatch(signUpModalClose());
     reset();
     router("/profile");
   };

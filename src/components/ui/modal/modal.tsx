@@ -1,28 +1,21 @@
 import React, { FC, useEffect } from "react";
 import ReactDom from "react-dom";
-import { useNavigate } from "react-router-dom";
 import classes from "./modal.module.scss";
 
 interface IModalProps {
-  visible: boolean;
-  setVisible: (isActive: boolean) => void;
+  isVisible: boolean;
+  onClose: () => void;
 }
 
-const Modal: FC<IModalProps> = ({ visible, setVisible, children }) => {
-  const router = useNavigate();
-  const onClose = () => {
-    setVisible(false);
-    router("/");
-  };
-
+const Modal: FC<IModalProps> = ({ isVisible, onClose, children }) => {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   useEffect(() => {
-    document.body.style.overflowY = visible ? "hidden" : "unset";
-  }, [visible]);
+    document.body.style.overflowY = isVisible ? "hidden" : "unset";
+  }, [isVisible]);
 
   return ReactDom.createPortal(
-    <div aria-hidden className={visible ? `${classes.modal} ${classes.active}` : classes.modal} onClick={onClose}>
+    <div aria-hidden className={isVisible ? `${classes.modal} ${classes.active}` : classes.modal} onClick={onClose}>
       <div aria-hidden className={classes.modal__content} onClick={onClickHandler}>
         {children}
       </div>

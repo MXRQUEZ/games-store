@@ -3,19 +3,20 @@ import "./components/header/header.module.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
 import Layout from "@/components/layout/layout";
 import Home from "@/pages/home/home";
 import Products from "@/pages/products/products";
 import About from "@/pages/about/about";
 import UserProfile from "@/pages/userProfile/userProfile";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
+import store from "@/store";
 
 interface AppProps {
   nothing: boolean;
 }
 interface IAppState {
   hasError: boolean;
-  isAuth: boolean;
 }
 
 class AppContainer extends Component<AppProps, IAppState> {
@@ -26,10 +27,7 @@ class AppContainer extends Component<AppProps, IAppState> {
 
     this.state = {
       hasError: false,
-      isAuth: false,
     };
-
-    this.setAuth = this.setAuth.bind(this);
   }
 
   componentDidMount() {
@@ -42,34 +40,30 @@ class AppContainer extends Component<AppProps, IAppState> {
     });
   }
 
-  setAuth(authState: boolean) {
-    this.setState({
-      isAuth: authState,
-    });
-  }
-
   render() {
     return (
-      <StrictMode>
-        <BrowserRouter>
-          <Layout isAuth={this.state.isAuth} setAuth={this.setAuth}>
-            {this.state.hasError ? (
-              <Home />
-            ) : (
-              <Routes>
-                <Route path="*" element={<Home />} />
-                <Route element={<ProtectedRoute isAuth={this.state.isAuth} />}>
-                  <Route path="/products/*" element={<Products />}>
-                    <Route path=":category" element={<Products />} />
+      <Provider store={store}>
+        <StrictMode>
+          <BrowserRouter>
+            <Layout>
+              {this.state.hasError ? (
+                <Home />
+              ) : (
+                <Routes>
+                  <Route path="*" element={<Home />} />
+                  <Route element={<ProtectedRoute />}>
+                    <Route path="/products/*" element={<Products />}>
+                      <Route path=":category" element={<Products />} />
+                    </Route>
+                    <Route path="/profile" element={<UserProfile />} />
                   </Route>
-                  <Route path="/profile" element={<UserProfile />} />
-                </Route>
-                <Route path="/about" element={<About />} />
-              </Routes>
-            )}
-          </Layout>
-        </BrowserRouter>
-      </StrictMode>
+                  <Route path="/about" element={<About />} />
+                </Routes>
+              )}
+            </Layout>
+          </BrowserRouter>
+        </StrictMode>
+      </Provider>
     );
   }
 }

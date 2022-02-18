@@ -1,38 +1,37 @@
 import React, { FC } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import classes from "./header.module.scss";
 import routes from "@/constants/routes";
 import images from "@/constants/images";
 import { storeName } from "@/constants/constants";
 import Navbar from "@/components/header/navbar";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import { signInModalOpen, signUpModalOpen } from "@/store/actions/modals";
+import { signOut } from "@/store/actions/auth";
 
-interface IHeaderProps {
-  isAuth: boolean;
-  userName: string;
-  setAuth: (authState: boolean) => void;
-  setSignInActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setSignUpActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const Header: FC = () => {
+  const { isAuth, user } = useTypedSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-const Header: FC<IHeaderProps> = ({ isAuth, userName, setAuth, setSignInActive, setSignUpActive }) => {
   const onSignInHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    setSignInActive(true);
+    dispatch(signInModalOpen());
   };
 
   const onSignUpHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    setSignUpActive(true);
+    dispatch(signUpModalOpen());
   };
 
   const onSignOutHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    setAuth(false);
+    dispatch(signOut());
   };
 
   const onClickHandler = (event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>) => {
     event.preventDefault();
-    setSignInActive(true);
+    dispatch(signInModalOpen());
   };
 
   return (
@@ -53,7 +52,7 @@ const Header: FC<IHeaderProps> = ({ isAuth, userName, setAuth, setSignInActive, 
                     to="/profile"
                   >
                     <i className="fa fa-solid fa-user" aria-hidden />
-                    {userName}
+                    {user?.login}
                   </NavLink>
                 </li>
                 <li>
