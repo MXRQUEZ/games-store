@@ -5,10 +5,9 @@ import { authorize } from "@/shared/utils/apiRequests";
 
 export const signIn =
   (userData: IUser) =>
-  async (dispatch: Dispatch<IAuthAction>): Promise<boolean> => {
+  async (dispatch: Dispatch<IAuthAction>): Promise<void> => {
     const isAuth = await authorize(userData);
     isAuth && dispatch({ type: AuthActionType.SIGN_IN, payload: userData });
-    return isAuth;
   };
 
 export const signUp = (userData: IUser): IAuthAction => ({

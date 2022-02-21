@@ -1,6 +1,5 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
@@ -11,8 +10,8 @@ import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import { signInModalOpen } from "@/store/actions/modals";
 import Pathname from "@/types/pathname";
+import useActions from "@/hooks/redux/useActions";
 
 const Home: FC = () => {
   const router = useNavigate();
@@ -28,10 +27,11 @@ const Home: FC = () => {
   };
 
   const isAuth = useTypedSelector((state) => state.auth.isAuth);
-  const dispatch = useDispatch();
+  const { signInModalOpen } = useActions();
+
   useEffect(() => {
     if (location.pathname === Pathname.Login && !isAuth) {
-      dispatch(signInModalOpen());
+      signInModalOpen();
     }
   }, [isAuth]);
 

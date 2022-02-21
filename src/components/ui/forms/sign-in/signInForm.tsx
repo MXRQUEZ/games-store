@@ -1,7 +1,6 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
@@ -18,8 +17,8 @@ import {
   requiredFieldMessage,
   userInvalidMessage,
 } from "@/constants/constants";
-import { signIn } from "@/store/actions/auth";
-import { signInModalClose } from "@/store/actions/modals";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import useActions from "@/hooks/redux/useActions";
 
 const SignInForm: FC = () => {
   const {
@@ -28,34 +27,42 @@ const SignInForm: FC = () => {
     handleSubmit,
     reset,
     setError,
+    clearErrors,
   } = useForm<IUser>({
     mode: "onChange",
   });
 
-  const dispatch = useDispatch();
+  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const { signInModalClose, signIn } = useActions();
   const router = useNavigate();
   const location = useLocation();
 
-  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
-    if (await dispatch(signIn(userData))) {
-      dispatch(signInModalClose());
+  useEffect(() => {
+    if (isAuth) {
+      clearErrors();
       reset();
+      signInModalClose();
 
       const state = location.state as { from: Location };
       const from = state ? state.from.pathname : "/";
       router(from, { replace: true });
-      return;
     }
+  }, [isAuth]);
 
-    setError(loginLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
+  const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
+    signIn(userData);
 
-    setError(passwordLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
+    if (!isAuth) {
+      setError(loginLabel, {
+        type: "manual",
+        message: userInvalidMessage,
+      });
+
+      setError(passwordLabel, {
+        type: "manual",
+        message: userInvalidMessage,
+      });
+    }
   };
 
   return (

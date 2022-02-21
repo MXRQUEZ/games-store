@@ -1,32 +1,30 @@
 import React, { FC } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import { signInModalOpen, signUpModalOpen } from "@/store/actions/modals";
-import { signOut } from "@/store/actions/auth";
 import Pathname from "@/types/pathname";
+import useActions from "@/hooks/redux/useActions";
 
 type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const UserMenu: FC = () => {
   const { isAuth, user } = useTypedSelector((state) => state.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { signOut, signInModalOpen, signUpModalOpen } = useActions();
 
   const onSignInHandler: ClickEvent = (event) => {
     event.preventDefault();
-    dispatch(signInModalOpen());
+    signInModalOpen();
   };
 
   const onSignUpHandler: ClickEvent = (event) => {
     event.preventDefault();
-    dispatch(signUpModalOpen());
+    signUpModalOpen();
   };
 
   const onSignOutHandler: ClickEvent = (event) => {
     event.preventDefault();
-    dispatch(signOut());
+    signOut();
     navigate("/");
   };
 

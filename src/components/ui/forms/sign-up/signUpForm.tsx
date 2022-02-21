@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
@@ -19,8 +18,7 @@ import {
   passwordRepeatMessage,
   requiredFieldMessage,
 } from "@/constants/constants";
-import { signUp } from "@/store/actions/auth";
-import { signUpModalClose } from "@/store/actions/modals";
+import useActions from "@/hooks/redux/useActions";
 
 const SignUpForm: FC = () => {
   const {
@@ -33,11 +31,11 @@ const SignUpForm: FC = () => {
     mode: "onBlur",
   });
 
-  const dispatch = useDispatch();
+  const { signUp, signUpModalClose } = useActions();
   const router = useNavigate();
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    dispatch(signUp(userData));
-    dispatch(signUpModalClose());
+    signUp(userData);
+    signUpModalClose();
     reset();
     router("/profile");
   };

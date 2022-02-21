@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "@/components/footer/footer";
@@ -7,20 +6,20 @@ import Modal from "@/components/ui/modal/modal";
 import SignInForm from "@/components/ui/forms/sign-in/signInForm";
 import SignUpForm from "../ui/forms/sign-up/signUpForm";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import { signInModalClose, signUpModalClose } from "@/store/actions/modals";
+import useActions from "@/hooks/redux/useActions";
 
 const Layout: FC = ({ children }) => {
   const navigate = useNavigate();
   const { isSignInActive, isSignUpActive } = useTypedSelector((state) => state.modals);
-  const dispatch = useDispatch();
+  const { signInModalClose, signUpModalClose } = useActions();
 
   const onSignInClose = () => {
-    dispatch(signInModalClose());
+    signInModalClose();
     navigate("/");
   };
 
   const onSignUpClose = () => {
-    dispatch(signUpModalClose());
+    signUpModalClose();
     navigate("/");
   };
 
