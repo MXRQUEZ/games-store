@@ -28,13 +28,13 @@ const SignUpForm: FC = () => {
     reset,
     getValues,
   } = useForm<IUser>({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
-  const { signUp, signUpModalClose } = useActions();
+  const { signIn, signUpModalClose } = useActions();
   const router = useNavigate();
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    signUp(userData);
+    signIn(userData);
     signUpModalClose();
     reset();
     router("/profile");

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
@@ -17,9 +17,8 @@ import {
   requiredFieldMessage,
   userInvalidMessage,
 } from "@/constants/constants";
-import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import useActions from "@/hooks/redux/useActions";
-import Spinner from "@/components/ui/spinner/spinner";
+import { authorize } from "@/shared/utils/apiRequests";
 
 const SignInForm: FC = () => {
   const {
@@ -32,43 +31,32 @@ const SignInForm: FC = () => {
     mode: "onChange",
   });
 
-  const isAuth = useTypedSelector((state) => state.auth.isAuth);
   const { signInModalClose, signIn } = useActions();
   const router = useNavigate();
   const location = useLocation();
-  const [spinner, setSpinner] = useState(false);
 
-  useEffect(() => {
-    if (isAuth) {
-      setSpinner(false);
+  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
+    const isUserValid = await authorize(userData);
+    if (isUserValid) {
+      signIn(userData);
       signInModalClose();
+      reset();
+
       const state = location.state as { from: Location };
       const from = state ? state.from.pathname : "/";
       router(from, { replace: true });
-      setTimeout(() => {
-        reset();
-      }, 1000);
+      return;
     }
-  }, [isAuth]);
 
-  const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    signIn(userData);
+    setError(loginLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
 
-    setSpinner(true);
-    setTimeout(() => {
-      if (!isAuth) {
-        setError(loginLabel, {
-          type: "manual",
-          message: userInvalidMessage,
-        });
-
-        setError(passwordLabel, {
-          type: "manual",
-          message: userInvalidMessage,
-        });
-        setSpinner(false);
-      }
-    }, 1000);
+    setError(passwordLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
   };
 
   return (
@@ -99,7 +87,6 @@ const SignInForm: FC = () => {
         })}
         errors={errors}
       />
-      {spinner && <Spinner />}
       <Button disabled={!isValid} text="Sign In" />
     </form>
   );
