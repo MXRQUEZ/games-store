@@ -52,17 +52,15 @@ const SignInForm: FC = () => {
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
     signIn(userData);
 
-    if (!isAuth) {
-      setError(loginLabel, {
-        type: "manual",
-        message: userInvalidMessage,
-      });
+    setError(loginLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
 
-      setError(passwordLabel, {
-        type: "manual",
-        message: userInvalidMessage,
-      });
-    }
+    setError(passwordLabel, {
+      type: "manual",
+      message: userInvalidMessage,
+    });
   };
 
   return (
