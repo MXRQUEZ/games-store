@@ -14,7 +14,7 @@ interface IFormInputProps {
 
 const FormInput: FC<IFormInputProps> = ({ label, iconClass, type, register, errors }) => {
   const errorMessage: JSX.Element = errors[register.name] && (
-    <p>{errors[register.name]?.message || defaultErrorMessage}</p>
+    <span role="alert">{errors[register.name]?.message || defaultErrorMessage}</span>
   );
   const inputUniqueId = getUniqueId();
 

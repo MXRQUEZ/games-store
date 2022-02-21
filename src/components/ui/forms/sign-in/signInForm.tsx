@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
@@ -19,6 +19,7 @@ import {
 } from "@/constants/constants";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import useActions from "@/hooks/redux/useActions";
+import Spinner from "@/components/ui/spinner/spinner";
 
 const SignInForm: FC = () => {
   const {
@@ -27,7 +28,6 @@ const SignInForm: FC = () => {
     handleSubmit,
     reset,
     setError,
-    clearErrors,
   } = useForm<IUser>({
     mode: "onChange",
   });
@@ -36,31 +36,39 @@ const SignInForm: FC = () => {
   const { signInModalClose, signIn } = useActions();
   const router = useNavigate();
   const location = useLocation();
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     if (isAuth) {
-      clearErrors();
-      reset();
+      setSpinner(false);
       signInModalClose();
-
       const state = location.state as { from: Location };
       const from = state ? state.from.pathname : "/";
       router(from, { replace: true });
+      setTimeout(() => {
+        reset();
+      }, 1000);
     }
   }, [isAuth]);
 
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
     signIn(userData);
 
-    setError(loginLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
+    setSpinner(true);
+    setTimeout(() => {
+      if (!isAuth) {
+        setError(loginLabel, {
+          type: "manual",
+          message: userInvalidMessage,
+        });
 
-    setError(passwordLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
+        setError(passwordLabel, {
+          type: "manual",
+          message: userInvalidMessage,
+        });
+        setSpinner(false);
+      }
+    }, 1000);
   };
 
   return (
@@ -91,6 +99,7 @@ const SignInForm: FC = () => {
         })}
         errors={errors}
       />
+      {spinner && <Spinner />}
       <Button disabled={!isValid} text="Sign In" />
     </form>
   );
