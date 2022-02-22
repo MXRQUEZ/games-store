@@ -5,7 +5,6 @@ import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
 import IUser from "@/types/iUser";
-import IAuthFormProps from "@/types/iAuthFormProps";
 import {
   loginIconClass,
   loginLabel,
@@ -19,8 +18,9 @@ import {
   passwordRepeatMessage,
   requiredFieldMessage,
 } from "@/constants/constants";
+import useActions from "@/hooks/redux/useActions";
 
-const SignUpForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName }) => {
+const SignUpForm: FC = () => {
   const {
     register,
     formState: { errors, isValid },
@@ -28,14 +28,14 @@ const SignUpForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName 
     reset,
     getValues,
   } = useForm<IUser>({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
+  const { signIn, signUpModalClose } = useActions();
   const router = useNavigate();
   const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    setAuth(true);
-    setUserName(userData.login);
-    setModalVisible(false);
+    signIn(userData);
+    signUpModalClose();
     reset();
     router("/profile");
   };

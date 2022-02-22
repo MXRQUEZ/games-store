@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
@@ -9,9 +9,13 @@ import { getCategories, getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import Pathname from "@/types/pathname";
+import useActions from "@/hooks/redux/useActions";
 
 const Home: FC = () => {
   const router = useNavigate();
+  const location = useLocation();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [newProducts, setNewProducts] = useState<IProduct[]>([]);
@@ -21,6 +25,15 @@ const Home: FC = () => {
     setProducts(response || newProducts);
     setSpinner(false);
   };
+
+  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const { signInModalOpen } = useActions();
+
+  useEffect(() => {
+    if (location.pathname === Pathname.Login && !isAuth) {
+      signInModalOpen();
+    }
+  }, [isAuth]);
 
   const onCategoryClick = useCallback((category: ICategory): void => {
     router(`/products/${category.path}`);

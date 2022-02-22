@@ -4,9 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
 import classes from "../form.module.scss";
 import FormInput from "@/components/ui/forms/formInput/formInput";
-import { authSignIn } from "@/shared/utils/apiRequests";
 import IUser from "@/types/iUser";
-import IAuthFormProps from "@/types/iAuthFormProps";
 import {
   loginIconClass,
   loginLabel,
@@ -19,11 +17,10 @@ import {
   requiredFieldMessage,
   userInvalidMessage,
 } from "@/constants/constants";
+import useActions from "@/hooks/redux/useActions";
+import { authorize } from "@/shared/utils/apiRequests";
 
-const SignInForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName }) => {
-  const router = useNavigate();
-  const location = useLocation();
-
+const SignInForm: FC = () => {
   const {
     register,
     formState: { errors, isValid },
@@ -31,16 +28,18 @@ const SignInForm: FC<IAuthFormProps> = ({ setAuth, setModalVisible, setUserName 
     reset,
     setError,
   } = useForm<IUser>({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
-    const isUserValid = await authSignIn(userData);
+  const { signInModalClose, signIn } = useActions();
+  const router = useNavigate();
+  const location = useLocation();
 
+  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
+    const isUserValid = await authorize(userData);
     if (isUserValid) {
-      setAuth(true);
-      setUserName(userData.login);
-      setModalVisible(false);
+      signIn(userData);
+      signInModalClose();
       reset();
 
       const state = location.state as { from: Location };
