@@ -1,67 +1,49 @@
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
-import classes from "../form.module.scss";
-import FormInput from "@/components/ui/forms/formInput/formInput";
+import classes from "../formModal.module.scss";
+import FormInput from "@/components/ui/forms/modal-forms/modal-input/formInput";
 import IUser from "@/types/iUser";
 import {
   loginIconClass,
   loginLabel,
   loginLengthMessage,
   loginMaxLength,
+  loginMinLength,
   passwordIconClass,
   passwordLabel,
   passwordLengthMessage,
   passwordMinLength,
+  passwordRepeatLabel,
+  passwordRepeatMessage,
   requiredFieldMessage,
-  userInvalidMessage,
 } from "@/constants/constants";
 import useActions from "@/hooks/redux/useActions";
-import { authorize } from "@/shared/utils/apiRequests";
 
-const SignInForm: FC = () => {
+const SignUpForm: FC = () => {
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
     reset,
-    setError,
+    getValues,
   } = useForm<IUser>({
     mode: "onChange",
   });
 
-  const { signInModalClose, signIn } = useActions();
+  const { signIn, signUpModalClose } = useActions();
   const router = useNavigate();
-  const location = useLocation();
-
-  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
-    const isUserValid = await authorize(userData);
-    if (isUserValid) {
-      signIn(userData);
-      signInModalClose();
-      reset();
-
-      const state = location.state as { from: Location };
-      const from = state ? state.from.pathname : "/";
-      router(from, { replace: true });
-      return;
-    }
-
-    setError(loginLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
-
-    setError(passwordLabel, {
-      type: "manual",
-      message: userInvalidMessage,
-    });
+  const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
+    signIn(userData.login);
+    signUpModalClose();
+    reset();
+    router("/profile");
   };
 
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={classes.auth}>Authorization</h4>
+      <h4 className={classes.auth}>Registration</h4>
       <FormInput
         label={loginLabel}
         iconClass={loginIconClass}
@@ -69,6 +51,10 @@ const SignInForm: FC = () => {
           required: requiredFieldMessage,
           maxLength: {
             value: loginMaxLength,
+            message: loginLengthMessage,
+          },
+          minLength: {
+            value: loginMinLength,
             message: loginLengthMessage,
           },
         })}
@@ -87,9 +73,19 @@ const SignInForm: FC = () => {
         })}
         errors={errors}
       />
-      <Button disabled={!isValid} text="Sign In" />
+      <FormInput
+        label={passwordRepeatLabel}
+        iconClass={passwordIconClass}
+        type="password"
+        register={register("passwordRepeat", {
+          required: requiredFieldMessage,
+          validate: (value) => value === getValues().password || passwordRepeatMessage,
+        })}
+        errors={errors}
+      />
+      <Button disabled={!isValid} text="Sign Up" />
     </form>
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

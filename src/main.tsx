@@ -32,7 +32,7 @@ class AppContainer extends Component<AppProps, IAppState> {
   }
 
   componentDidMount() {
-    console.log(this.state.hasError);
+    this.state.hasError && console.error("UI error!");
   }
 
   componentDidCatch() {

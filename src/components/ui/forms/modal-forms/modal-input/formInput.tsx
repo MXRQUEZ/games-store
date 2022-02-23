@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import { v4 as getUniqueId } from "uuid";
-import classes from "@/components/ui/forms/form.module.scss";
+import classes from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import { defaultErrorMessage } from "@/constants/constants";
 
 interface IFormInputProps {

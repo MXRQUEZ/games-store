@@ -38,7 +38,7 @@ const UserMenu: FC = () => {
           to={Pathname.Profile}
         >
           <i className="fa fa-solid fa-user" aria-hidden />
-          {user?.login}
+          {user}
         </NavLink>
       </li>
       <li>

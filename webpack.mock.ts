@@ -70,6 +70,13 @@ export default webpackMockServer.add((app: Application) => {
     res.json(productsList);
   });
 
+  app.get("/api/profile", (_req, res) => {
+    const { user: userLogin } = _req.query;
+    const searchedUser = users.find((result) => result.login === userLogin);
+
+    res.json(searchedUser);
+  });
+
   app.post("/api/auth/sign-in", (_req, res) => {
     const { login, password } = JSON.parse(_req.body);
 
@@ -89,5 +96,32 @@ export default webpackMockServer.add((app: Application) => {
     }
 
     res.json(false);
+  });
+
+  app.post("/api/save-profile", (_req, res) => {
+    const { login, description } = JSON.parse(_req.body);
+
+    const currentUser = users.find((user) => user.login === login);
+
+    if (currentUser?.login && login) {
+      currentUser.login = login;
+    }
+
+    if (currentUser?.description && description) {
+      currentUser.description = description;
+    }
+
+    res.json(true);
+  });
+
+  app.post("/api/change-password", (_req, res) => {
+    const { password, login } = _req.body;
+    const currentUser = users.find((user) => user.login === login);
+
+    if (currentUser?.password) {
+      currentUser.password = password;
+    }
+
+    res.status(200).json({ message: "Password has been updated" });
   });
 });

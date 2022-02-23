@@ -27,7 +27,8 @@ export const requiredFieldMessage = "This field is required!";
 export const loginLabel = "login";
 export const loginIconClass = "fa fa-solid fa-address-card";
 export const loginMaxLength = 20;
-export const loginLengthMessage = `Max login length is ${loginMaxLength} symbols`;
+export const loginMinLength = 5;
+export const loginLengthMessage = `Login length must be between ${loginMinLength} and ${loginMaxLength}`;
 
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";

@@ -4,6 +4,9 @@ const api = {
   categories: "/api/categories",
   categoryByName: "/api/category",
   authSignIn: "/api/auth/sign-in",
+  changePassword: "/api/change-password",
+  saveProfile: "/api/save-profile",
+  profile: "/api/profile",
 };
 
 export default api;

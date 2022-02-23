@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "@/components/footer/footer";
 import Modal from "@/components/ui/modal/modal";
-import SignInForm from "@/components/ui/forms/sign-in/signInForm";
-import SignUpForm from "../ui/forms/sign-up/signUpForm";
+import SignInForm from "@/components/ui/forms/modal-forms/sign-in/signInForm";
+import SignUpForm from "../ui/forms/modal-forms/sign-up/signUpForm";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import useActions from "@/hooks/redux/useActions";
 

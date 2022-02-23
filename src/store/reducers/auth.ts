@@ -1,9 +1,8 @@
-import { AuthActionType, IAuthAction, IAuthState } from "@/store/types/auth";
-import IUser from "@/types/iUser";
+import { AuthActionType, IAuthAction, IAuthState, userKey } from "@/store/types/auth";
 
-const isAuth = !!localStorage.getItem("user");
+const isAuth = !!localStorage.getItem(userKey);
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const user: IUser | null = isAuth ? JSON.parse(localStorage.getItem("user")!) : null;
+const user: string | null = isAuth ? JSON.parse(localStorage.getItem(userKey)!) : null;
 const authInitialState: IAuthState = {
   isAuth,
   user,
@@ -13,10 +12,10 @@ const authInitialState: IAuthState = {
 const authReducer = (state: IAuthState = authInitialState, action: IAuthAction): IAuthState => {
   switch (action.type) {
     case AuthActionType.SIGN_IN:
-      localStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.setItem(userKey, JSON.stringify(action.payload));
       return { ...state, isAuth: true, user: action.payload };
     case AuthActionType.SIGN_OUT:
-      localStorage.removeItem("user");
+      localStorage.removeItem(userKey);
       return { ...state, isAuth: false, user: null };
 
     default:

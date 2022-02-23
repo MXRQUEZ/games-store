@@ -1,8 +1,7 @@
 import { Action } from "redux";
-import IUser from "@/types/iUser";
 import { AuthActionType, IAuthAction } from "@/store/types/auth";
 
-export const signIn = (userData: IUser): IAuthAction => ({
+export const signIn = (userData: string): IAuthAction => ({
   type: AuthActionType.SIGN_IN,
   payload: userData,
 });
