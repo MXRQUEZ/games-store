@@ -2,8 +2,9 @@ interface IUser {
   id?: number | string;
   login: string;
   password: string;
-  avatar?: string;
+  profilePicture?: string;
   description?: string;
+  username?: string;
   passwordRepeat?: string;
 }
 

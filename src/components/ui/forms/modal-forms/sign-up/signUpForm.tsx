@@ -18,8 +18,10 @@ import {
   passwordRepeatLabel,
   passwordRepeatMessage,
   requiredFieldMessage,
+  userExistsMessage,
 } from "@/constants/constants";
 import useActions from "@/hooks/redux/useActions";
+import { createUser } from "@/shared/utils/apiRequests";
 
 const SignUpForm: FC = () => {
   const {
@@ -27,18 +29,29 @@ const SignUpForm: FC = () => {
     formState: { errors, isValid },
     handleSubmit,
     reset,
+    setError,
     getValues,
   } = useForm<IUser>({
     mode: "onChange",
   });
 
-  const { signIn, signUpModalClose } = useActions();
+  const { signUp, signUpModalClose } = useActions();
   const router = useNavigate();
-  const onSubmit: SubmitHandler<IUser> = (userData: IUser) => {
-    signIn(userData.login);
-    signUpModalClose();
-    reset();
-    router("/profile");
+  const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
+    const newUser = await createUser(userData);
+
+    if (newUser) {
+      signUp(newUser);
+      signUpModalClose();
+      reset();
+      router("/profile");
+      return;
+    }
+
+    setError(loginLabel, {
+      type: "manual",
+      message: userExistsMessage,
+    });
   };
 
   return (

@@ -37,9 +37,9 @@ const SignInForm: FC = () => {
   const location = useLocation();
 
   const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
-    const isUserValid = await authorize(userData);
-    if (isUserValid) {
-      signIn(userData.login);
+    const user = await authorize(userData);
+    if (user) {
+      signIn(user);
       signInModalClose();
       reset();
 

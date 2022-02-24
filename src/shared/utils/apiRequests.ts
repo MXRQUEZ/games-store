@@ -28,22 +28,27 @@ export const getProductsByCategoryName = async (categoryName: IParams = {}): Pro
   return response.data;
 };
 
-export const getUserByLogin = async (user: IParams = {}): Promise<IUser> => {
+export const getUserById = async (user: IParams = {}): Promise<IUser> => {
   const response = await axios.get(`${api.profile}${buildQueryParams(user)}`);
   return response.data;
 };
 
-export const authorize = async (userData: IUser): Promise<boolean> => {
+export const authorize = async (userData: IUser): Promise<IUser | null> => {
   const response = await fetch(`${api.authSignIn}`, { method: "POST", body: JSON.stringify(userData) });
   return response.json();
 };
 
-export const changePassword = async (userData: IUser): Promise<void> => {
+export const createUser = async (userData: IUser): Promise<IUser | null> => {
+  const response = await fetch(`${api.authSignUp}`, { method: "PUT", body: JSON.stringify(userData) });
+  return response.json();
+};
+
+export const changePassword = async (userData: Pick<IUser, "id" | "password">): Promise<void> => {
   const response = await fetch(`${api.changePassword}`, { method: "POST", body: JSON.stringify(userData) });
   return response.json();
 };
 
-export const saveProfile = async (userData: Omit<IUser, "password">): Promise<boolean> => {
+export const saveProfile = async (userData: Omit<IUser, "login" | "password">): Promise<boolean> => {
   const response = await fetch(`${api.saveProfile}`, { method: "POST", body: JSON.stringify(userData) });
   return response.json();
 };

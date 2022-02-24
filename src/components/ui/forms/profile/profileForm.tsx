@@ -1,66 +1,73 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IUser from "@/types/iUser";
-import useActions from "@/hooks/redux/useActions";
 import { saveProfile } from "@/shared/utils/apiRequests";
 import Button from "@/components/ui/button/button";
 import classes from "./profile.module.scss";
-
-import {
-  defaultErrorMessage,
-  loginLabel,
-  loginLengthMessage,
-  loginMaxLength,
-  loginMinLength,
-} from "@/constants/constants";
+import { defaultErrorMessage, loginLengthMessage, loginMaxLength, loginMinLength } from "@/constants/constants";
 import ChangePasswordForm from "@/components/ui/forms/modal-forms/change-password/changePasswordForm";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
 
-interface IProfileFormProps {
-  profile: IUser;
-  setProfile: React.Dispatch<React.SetStateAction<IUser>>;
-}
-
-const ProfileForm: FC<IProfileFormProps> = ({ profile, setProfile }) => {
+const ProfileForm: FC = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
     reset,
-  } = useForm<Pick<IUser, "login" | "description" | "avatar">>({
+  } = useForm<Pick<IUser, "username" | "description" | "profilePicture">>({
     mode: "onSubmit",
   });
 
-  const { signIn } = useActions();
-  const onSubmit: SubmitHandler<Pick<IUser, "login" | "description" | "avatar">> = async (
-    userData: Pick<IUser, "login" | "description" | "avatar">
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const user = useTypedSelector((state) => state.auth.user!);
+  const onSubmit: SubmitHandler<Pick<IUser, "username" | "description" | "profilePicture">> = async (
+    userData: Pick<IUser, "username" | "description" | "profilePicture">
   ) => {
-    await saveProfile(userData);
-    const newProfile: IUser = {
-      login: userData.login || profile.login,
-      password: profile.password,
-      description: userData.description,
-    };
-    setProfile(newProfile);
-    console.log(profile);
-    console.log(userData.avatar);
-    userData.login && signIn(userData.login);
-    reset();
+    if (userData.username || userData.description || userData.profilePicture) {
+      await saveProfile({
+        id: user.id,
+        username: userData.username || user.username,
+        description: userData.description || user.description,
+      });
+
+      reset();
+      return;
+    }
+
+    setError("username", {
+      type: "manual",
+      message: "At least one field required",
+    });
+
+    setError("profilePicture", {
+      type: "manual",
+      message: "At least one field required",
+    });
+
+    setError("description", {
+      type: "manual",
+      message: "At least one field required",
+    });
   };
 
   const defaultAvatarUrl = "https://winnote.ru/wp-content/uploads/2016/01/1454222417_del_recent_avatar1.png";
-  const userImage = profile?.avatar || defaultAvatarUrl;
+  const userImage = user?.profilePicture || defaultAvatarUrl;
 
   return (
     <form className={classes.profile} onSubmit={handleSubmit(onSubmit)}>
       <div>
         <img src={userImage} alt="user pfp" />
         <input
-          id="avatar"
+          id="profilePicture"
           type="file"
-          {...register("avatar", {
+          {...register("profilePicture", {
             required: false,
           })}
         />
+        <div className={classes.error}>
+          {errors?.profilePicture && <span role="alert">{errors.profilePicture?.message || defaultErrorMessage}</span>}
+        </div>
       </div>
       <div>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -71,8 +78,8 @@ const ProfileForm: FC<IProfileFormProps> = ({ profile, setProfile }) => {
           id="username"
           className={classes.username__input}
           autoComplete="off"
-          placeholder={profile?.login || "username"}
-          {...register(loginLabel, {
+          placeholder={user.username || user.login}
+          {...register("username", {
             required: false,
             maxLength: {
               value: loginMaxLength,
@@ -85,7 +92,7 @@ const ProfileForm: FC<IProfileFormProps> = ({ profile, setProfile }) => {
           })}
         />
         <div className={classes.error}>
-          {errors?.login && <span role="alert">{errors.login?.message || defaultErrorMessage}</span>}
+          {errors?.username && <span role="alert">{errors.username?.message || defaultErrorMessage}</span>}
         </div>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="description" className={classes.label}>
@@ -95,7 +102,7 @@ const ProfileForm: FC<IProfileFormProps> = ({ profile, setProfile }) => {
           id="description"
           className={classes.description__textarea}
           autoComplete="off"
-          placeholder={profile.description || "Describe yourself in 150 symbols"}
+          placeholder={user.description || "Describe yourself in 150 symbols"}
           {...register("description", {
             required: false,
             maxLength: {

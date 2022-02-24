@@ -21,7 +21,8 @@ type Password = Pick<IUser, "password" | "passwordRepeat">;
 
 const ChangePasswordForm: FC = () => {
   const [isModalActive, setModalActive] = useState(false);
-  const user = useTypedSelector((state) => state.auth.user);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const userId = useTypedSelector((state) => state.auth.user!.id);
   const handleOpen = (): void => setModalActive(true);
   const handleClose = (): void => setModalActive(false);
 
@@ -36,8 +37,7 @@ const ChangePasswordForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<Password> = async (userPassword: Password) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const currentUser: IUser = { login: user!, password: userPassword.password };
+    const currentUser: Pick<IUser, "id" | "password"> = { id: userId, password: userPassword.password };
     await changePassword(currentUser);
     reset();
   };
