@@ -37,7 +37,8 @@ const ChangePasswordForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<Password> = async (userPassword: Password) => {
-    const currentUser: Pick<IUser, "id" | "password"> = { id: userId, password: userPassword.password };
+    type CurrentUser = Pick<IUser, "id" | "password">;
+    const currentUser: CurrentUser = { id: userId, password: userPassword.password };
     await changePassword(currentUser);
     reset();
   };

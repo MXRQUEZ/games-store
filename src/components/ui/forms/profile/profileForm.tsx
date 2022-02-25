@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IUser from "@/types/iUser";
 import useActions from "@/hooks/redux/useActions";
@@ -15,10 +15,14 @@ import {
   usernameMinLength,
 } from "@/constants/constants";
 import ChangePasswordForm from "@/components/ui/forms/modal-forms/change-password/changePasswordForm";
+import ProfilePicture from "@/components/ui/forms/profile/profilePicture";
+import images from "@/constants/images";
 
 interface IProfileForm {
   user: IUser;
 }
+
+type UserProfile = Pick<IUser, "username" | "description" | "profilePicture">;
 
 const ProfileForm: FC<IProfileForm> = ({ user }) => {
   const {
@@ -27,19 +31,16 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
     handleSubmit,
     setError,
     reset,
-  } = useForm<Pick<IUser, "username" | "description" | "profilePicture">>({
+  } = useForm<UserProfile>({
     mode: "onSubmit",
   });
 
-  const defaultAvatarUrl = "https://winnote.ru/wp-content/uploads/2016/01/1454222417_del_recent_avatar1.png";
-  const userImage = user?.profilePicture || defaultAvatarUrl;
+  const userImage = user?.profilePicture || images.defaultProfilePic.path;
   const [profilePic, setProfilePic] = useState<string>(userImage);
   const { signIn } = useActions();
 
-  const onSubmit: SubmitHandler<Pick<IUser, "username" | "description" | "profilePicture">> = async (
-    userData: Pick<IUser, "username" | "description" | "profilePicture">
-  ) => {
-    if (userData.username || userData.description || userData.profilePicture) {
+  const onSubmitSaveChanges: SubmitHandler<UserProfile> = async (userData: UserProfile) => {
+    if (userData.username || userData.description || profilePic !== userImage) {
       const updatedUser = await saveProfile({
         id: user.id,
         username: userData.username || user.username,
@@ -47,10 +48,8 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
         profilePicture: profilePic || user.profilePicture,
       });
 
-      console.log(profilePic);
-      console.log(updatedUser);
-
       signIn(updatedUser);
+      alert("Changes were saved!");
       reset();
       return;
     }
@@ -71,29 +70,14 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
     });
   };
 
-  const handleFiles = (event: ChangeEvent<HTMLInputElement>) => {
-    const file: File | null = event.target.files ? event.target.files[0] : null;
-    if (!file) return;
-
-    const fileUrl = window.URL.createObjectURL(file);
-    setProfilePic(fileUrl);
-  };
-
   return (
-    <form className={classes.profile} onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.profile__image}>
-        <img className={classes.image} src={profilePic} alt="user pfp" />
-        <input
-          id="profilePicture"
-          type="file"
-          accept="image/*"
-          {...register("profilePicture", { required: false })}
-          onChange={handleFiles}
-        />
-        <div className={classes.error}>
-          {errors?.profilePicture && <span role="alert">{errors.profilePicture?.message || defaultErrorMessage}</span>}
-        </div>
-      </div>
+    <form className={classes.profile} onSubmit={handleSubmit(onSubmitSaveChanges)}>
+      <ProfilePicture
+        errors={errors}
+        register={register("profilePicture")}
+        profilePic={profilePic}
+        setProfilePic={setProfilePic}
+      />
       <div className={classes.profile__fields}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="username" className={classes.label}>
