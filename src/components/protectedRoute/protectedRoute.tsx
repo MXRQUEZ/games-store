@@ -12,7 +12,6 @@ const ProtectedRoute: FC<IProtectedRouteProps> = ({ redirectTo = Pathname.Login 
   const location = useLocation();
   return isAuth ? <Outlet /> : <Navigate to={redirectTo} state={{ from: location }} />;
 };
-
 ProtectedRoute.defaultProps = {
   redirectTo: Pathname.Login,
 };

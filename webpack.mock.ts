@@ -74,9 +74,10 @@ export default webpackMockServer.add((app: Application) => {
 
   app.get("/api/profile", (_req, res) => {
     const { user: userId } = _req.query;
-    const searchedUser = users.find((user) => user.id === userId);
-
-    res.json(searchedUser);
+    if (userId) {
+      const searchedUser = users.find((user) => user.id === +userId);
+      res.json(searchedUser);
+    }
   });
 
   app.post("/api/auth/sign-in", (_req, res) => {
@@ -127,7 +128,7 @@ export default webpackMockServer.add((app: Application) => {
   });
 
   app.post("/api/save-profile", (_req, res) => {
-    const { id, username, description } = JSON.parse(_req.body);
+    const { id, username, description, profilePicture } = JSON.parse(_req.body);
 
     const currentUser = users.find((user) => user.id === id);
 
@@ -137,6 +138,10 @@ export default webpackMockServer.add((app: Application) => {
 
     if (currentUser && description) {
       currentUser.description = description;
+    }
+
+    if (currentUser && profilePicture) {
+      currentUser.profilePicture = profilePicture;
     }
 
     res.json(currentUser);

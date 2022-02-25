@@ -1,14 +1,26 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IUser from "@/types/iUser";
+import useActions from "@/hooks/redux/useActions";
 import { saveProfile } from "@/shared/utils/apiRequests";
 import Button from "@/components/ui/button/button";
 import classes from "./profile.module.scss";
-import { defaultErrorMessage, loginLengthMessage, loginMaxLength, loginMinLength } from "@/constants/constants";
+import {
+  defaultErrorMessage,
+  descriptionLengthMessage,
+  descriptionMaxLength,
+  descriptionMinLength,
+  usernameLengthMessage,
+  usernameMaxLength,
+  usernameMinLength,
+} from "@/constants/constants";
 import ChangePasswordForm from "@/components/ui/forms/modal-forms/change-password/changePasswordForm";
-import useTypedSelector from "@/hooks/redux/useTypedSelector";
 
-const ProfileForm: FC = () => {
+interface IProfileForm {
+  user: IUser;
+}
+
+const ProfileForm: FC<IProfileForm> = ({ user }) => {
   const {
     register,
     formState: { errors },
@@ -19,18 +31,26 @@ const ProfileForm: FC = () => {
     mode: "onSubmit",
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const user = useTypedSelector((state) => state.auth.user!);
+  const defaultAvatarUrl = "https://winnote.ru/wp-content/uploads/2016/01/1454222417_del_recent_avatar1.png";
+  const userImage = user?.profilePicture || defaultAvatarUrl;
+  const [profilePic, setProfilePic] = useState<string>(userImage);
+  const { signIn } = useActions();
+
   const onSubmit: SubmitHandler<Pick<IUser, "username" | "description" | "profilePicture">> = async (
     userData: Pick<IUser, "username" | "description" | "profilePicture">
   ) => {
     if (userData.username || userData.description || userData.profilePicture) {
-      await saveProfile({
+      const updatedUser = await saveProfile({
         id: user.id,
         username: userData.username || user.username,
         description: userData.description || user.description,
+        profilePicture: profilePic || user.profilePicture,
       });
 
+      console.log(profilePic);
+      console.log(updatedUser);
+
+      signIn(updatedUser);
       reset();
       return;
     }
@@ -51,25 +71,30 @@ const ProfileForm: FC = () => {
     });
   };
 
-  const defaultAvatarUrl = "https://winnote.ru/wp-content/uploads/2016/01/1454222417_del_recent_avatar1.png";
-  const userImage = user?.profilePicture || defaultAvatarUrl;
+  const handleFiles = (event: ChangeEvent<HTMLInputElement>) => {
+    const file: File | null = event.target.files ? event.target.files[0] : null;
+    if (!file) return;
+
+    const fileUrl = window.URL.createObjectURL(file);
+    setProfilePic(fileUrl);
+  };
 
   return (
     <form className={classes.profile} onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <img src={userImage} alt="user pfp" />
+      <div className={classes.profile__image}>
+        <img className={classes.image} src={profilePic} alt="user pfp" />
         <input
           id="profilePicture"
           type="file"
-          {...register("profilePicture", {
-            required: false,
-          })}
+          accept="image/*"
+          {...register("profilePicture", { required: false })}
+          onChange={handleFiles}
         />
         <div className={classes.error}>
           {errors?.profilePicture && <span role="alert">{errors.profilePicture?.message || defaultErrorMessage}</span>}
         </div>
       </div>
-      <div>
+      <div className={classes.profile__fields}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="username" className={classes.label}>
           Username
@@ -82,12 +107,12 @@ const ProfileForm: FC = () => {
           {...register("username", {
             required: false,
             maxLength: {
-              value: loginMaxLength,
-              message: loginLengthMessage,
+              value: usernameMaxLength,
+              message: usernameLengthMessage,
             },
             minLength: {
-              value: loginMinLength,
-              message: loginLengthMessage,
+              value: usernameMinLength,
+              message: usernameLengthMessage,
             },
           })}
         />
@@ -106,17 +131,17 @@ const ProfileForm: FC = () => {
           {...register("description", {
             required: false,
             maxLength: {
-              value: 150,
-              message: "Description max len is 150",
+              value: descriptionMaxLength,
+              message: descriptionLengthMessage,
             },
-            minLength: 1,
+            minLength: descriptionMinLength,
           })}
         />
         <div className={classes.error}>
           {errors?.description && <span role="alert">{errors.description?.message || defaultErrorMessage}</span>}
         </div>
       </div>
-      <div>
+      <div className={classes.profile__buttons}>
         <Button text="Save Changes" />
         <ChangePasswordForm />
       </div>

@@ -48,7 +48,7 @@ export const changePassword = async (userData: Pick<IUser, "id" | "password">): 
   return response.json();
 };
 
-export const saveProfile = async (userData: Omit<IUser, "login" | "password">): Promise<boolean> => {
+export const saveProfile = async (userData: Omit<IUser, "login" | "password">): Promise<IUser> => {
   const response = await fetch(`${api.saveProfile}`, { method: "POST", body: JSON.stringify(userData) });
   return response.json();
 };
