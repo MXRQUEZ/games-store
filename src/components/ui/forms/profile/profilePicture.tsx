@@ -23,7 +23,9 @@ const ProfilePicture: FC<IProfilePictureProps> = ({ profilePic, setProfilePic, e
     const maxFileSizeKB = 500;
     const maxFileSizeFull = maxFileSizeKB * 1000;
     if (file.size > maxFileSizeFull) {
-      alert(`Sorry, your image is too big! Max image size is ${maxFileSizeKB}kB`);
+      const errorMessage = `Sorry, your image is too big! Max image size is ${maxFileSizeKB}kB`;
+      alert(errorMessage);
+      console.error(errorMessage);
       return;
     }
 
