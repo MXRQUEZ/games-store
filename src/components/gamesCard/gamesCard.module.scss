@@ -43,8 +43,8 @@
       }
 
       & .category {
-        margin: 5px;
-        color: lightgray;
+        margin: 3px;
+        color: #a3a3a3;
         width: 20px;
         height: 20px;
       }
@@ -54,8 +54,8 @@
         justify-content: center;
         justify-items: left;
         align-items: center;
-        min-width: 30px;
         padding: 2px;
+        min-width: 30px;
         height: 30px;
         position: fixed;
         background: rgba(0, 0, 0, 0.7);
