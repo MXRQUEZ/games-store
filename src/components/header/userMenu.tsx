@@ -61,7 +61,7 @@ const UserMenu: FC = () => {
     <>
       <li>
         <Link to="/" onClick={onSignInHandler} className={classes.nav__routes_link}>
-          SignIn
+          Sign In
         </Link>
       </li>
       <li>
