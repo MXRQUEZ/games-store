@@ -42,18 +42,20 @@
         margin-bottom: 20px;
       }
 
-      &_category {
+      & .category {
         margin: 5px;
+        color: lightgray;
         width: 20px;
         height: 20px;
-        object-fit: cover;
       }
 
       & .category__container {
         display: flex;
         justify-content: center;
         justify-items: left;
+        align-items: center;
         min-width: 30px;
+        padding: 2px;
         height: 30px;
         position: fixed;
         background: rgba(0, 0, 0, 0.7);
