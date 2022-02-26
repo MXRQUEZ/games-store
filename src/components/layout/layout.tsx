@@ -12,9 +12,10 @@ import { getUserById } from "@/shared/utils/apiRequests";
 
 const Layout: FC = ({ children }) => {
   const navigate = useNavigate();
-  const { signIn } = useActions();
   const { isSignInActive, isSignUpActive } = useTypedSelector((state) => state.modals);
+  const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalClose, signUpModalClose } = useActions();
+  const { signIn } = useActions();
 
   const onSignInClose = () => {
     signInModalClose();
@@ -28,10 +29,10 @@ const Layout: FC = ({ children }) => {
 
   useEffect(() => {
     const userId = localStorage.getItem(userKey);
-    if (userId) {
+    if (userId && !isAuth) {
       (async () => {
         const user = await getUserById({ user: userId });
-        signIn(user);
+        user && signIn(user);
       })();
     }
   }, []);

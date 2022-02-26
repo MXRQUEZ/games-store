@@ -26,7 +26,7 @@ const Home: FC = () => {
     setSpinner(false);
   };
 
-  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalOpen } = useActions();
 
   useEffect(() => {

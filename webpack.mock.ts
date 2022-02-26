@@ -75,7 +75,7 @@ export default webpackMockServer.add((app: Application) => {
   app.get("/api/profile", (_req, res) => {
     const { user: userId } = _req.query;
     if (userId) {
-      const searchedUser = users.find((user) => user.id === +userId);
+      const searchedUser = users.find((user) => user.id === +userId) || null;
       res.json(searchedUser);
     }
   });

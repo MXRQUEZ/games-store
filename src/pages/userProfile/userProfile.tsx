@@ -3,15 +3,9 @@ import classes from "./userProfile.module.scss";
 import Container from "@/components/ui/container/container";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import ProfileForm from "@/components/ui/forms/profile/profileForm";
-import Spinner from "@/components/ui/spinner/spinner";
 
 const UserProfile: FC = () => {
   const user = useTypedSelector((state) => state.auth.user);
-
-  if (!user) {
-    return <Spinner />;
-  }
-
   const title = `${user?.username || user?.login} profile page`;
 
   return (

@@ -28,7 +28,7 @@ export const getProductsByCategoryName = async (categoryName: IParams = {}): Pro
   return response.data;
 };
 
-export const getUserById = async (user: IParams = {}): Promise<IUser> => {
+export const getUserById = async (user: IParams = {}): Promise<IUser | null> => {
   const response = await axios.get(`${api.profile}${buildQueryParams(user)}`);
   return response.data;
 };
