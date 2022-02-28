@@ -14,7 +14,7 @@ import Pathname from "@/types/pathname";
 import useActions from "@/hooks/redux/useActions";
 
 const Home: FC = () => {
-  const router = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -26,17 +26,23 @@ const Home: FC = () => {
     setSpinner(false);
   };
 
-  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalOpen } = useActions();
 
   useEffect(() => {
     if (location.pathname === Pathname.Login && !isAuth) {
       signInModalOpen();
+      navigate("/");
+      return;
+    }
+
+    if (location.pathname === Pathname.Login && isAuth) {
+      navigate("/");
     }
   }, [isAuth]);
 
   const onCategoryClick = useCallback((category: ICategory): void => {
-    router(`/products/${category.path}`);
+    navigate(`/products/${category.path}`);
   }, []);
 
   useEffect(() => {

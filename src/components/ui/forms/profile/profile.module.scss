@@ -1,0 +1,78 @@
+.profile {
+  margin-top: 30px;
+  font-family: Raleway, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+
+  &__image {
+    width: 250px;
+
+    & .image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    & .image__input {
+      display: none;
+      pointer-events: none;
+    }
+  }
+
+  & .label {
+    display: block;
+    color: white;
+    font-size: 16px;
+  }
+
+  &__fields {
+    width: 500px;
+
+    & .username__input {
+      display: block;
+      padding: 10px;
+      font-size: 20px;
+      width: 100%;
+      color: white;
+      border: 1px solid white;
+      outline: none;
+      background: transparent;
+    }
+
+    & .description__textarea {
+      height: 200px;
+      width: 100%;
+      resize: none;
+      display: block;
+      padding: 10px;
+      font-size: 20px;
+      color: white;
+      border: 1px solid white;
+      outline: none;
+      background: transparent;
+    }
+  }
+
+  & .error {
+    display: flex;
+    align-items: center;
+    height: 10px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-size: 16px;
+
+    & span {
+      color: #bf1650;
+    }
+
+    span:before {
+      content: "⚠ ";
+    }
+  }
+
+  &__buttons {
+    width: 150px;
+  }
+}

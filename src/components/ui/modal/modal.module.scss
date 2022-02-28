@@ -10,6 +10,7 @@
   background: rgba(0, 0, 0, 0.7);
   pointer-events: none;
   transition: 0.5s;
+  z-index: 100;
 
   &.active {
     opacity: 1;

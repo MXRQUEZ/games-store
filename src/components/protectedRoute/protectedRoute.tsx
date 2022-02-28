@@ -8,11 +8,11 @@ interface IProtectedRouteProps {
 }
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({ redirectTo = Pathname.Login }) => {
-  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const isAuth = !!useTypedSelector((state) => state.auth.user);
   const location = useLocation();
+
   return isAuth ? <Outlet /> : <Navigate to={redirectTo} state={{ from: location }} />;
 };
-
 ProtectedRoute.defaultProps = {
   redirectTo: Pathname.Login,
 };

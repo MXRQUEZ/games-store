@@ -8,7 +8,7 @@ import useActions from "@/hooks/redux/useActions";
 type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const UserMenu: FC = () => {
-  const { isAuth, user } = useTypedSelector((state) => state.auth);
+  const user = useTypedSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const { signOut, signInModalOpen, signUpModalOpen } = useActions();
 
@@ -28,7 +28,7 @@ const UserMenu: FC = () => {
     navigate("/");
   };
 
-  return isAuth ? (
+  return user ? (
     <>
       <li>
         <NavLink
@@ -38,7 +38,7 @@ const UserMenu: FC = () => {
           to={Pathname.Profile}
         >
           <i className="fa fa-solid fa-user" aria-hidden />
-          {user?.login}
+          {user?.username || user?.login}
         </NavLink>
       </li>
       <li>
@@ -61,7 +61,7 @@ const UserMenu: FC = () => {
     <>
       <li>
         <Link to="/" onClick={onSignInHandler} className={classes.nav__routes_link}>
-          SignIn
+          Sign In
         </Link>
       </li>
       <li>

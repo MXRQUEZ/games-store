@@ -2,11 +2,13 @@
 import webpackMockServer from "webpack-mock-server";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Application } from "express";
+import { v4 as getUniqueId } from "uuid";
 import { categories } from "./server/data/categories";
 import { products } from "./server/data/products";
 import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/no-named-as-default
 import users from "./server/data/users";
+import IUser from "@/types/iUser";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/categories", (_req, res) => {
@@ -70,6 +72,14 @@ export default webpackMockServer.add((app: Application) => {
     res.json(productsList);
   });
 
+  app.get("/api/profile", (_req, res) => {
+    const { user: userId } = _req.query;
+    if (userId) {
+      const searchedUser = users.find((user) => user.id === +userId) || null;
+      res.json(searchedUser);
+    }
+  });
+
   app.post("/api/auth/sign-in", (_req, res) => {
     const { login, password } = JSON.parse(_req.body);
 
@@ -83,11 +93,68 @@ export default webpackMockServer.add((app: Application) => {
       });
 
       if (userExists) {
-        res.json(true);
+        res.json(userExists);
         return;
       }
     }
 
-    res.json(false);
+    res.json(null);
+  });
+
+  app.put("/api/auth/sign-up", (_req, res) => {
+    const { login, password } = JSON.parse(_req.body);
+
+    if (login && password) {
+      const userExists = users.find((user) => {
+        if (user.login === login) {
+          return user.password === password;
+        }
+
+        return false;
+      });
+
+      if (userExists) {
+        res.json(null);
+        return;
+      }
+
+      const newUser: IUser = { login, password, id: getUniqueId() };
+      users.push(newUser);
+      res.json(newUser);
+      return;
+    }
+
+    res.json(null);
+  });
+
+  app.post("/api/save-profile", (_req, res) => {
+    const { id, username, description, profilePicture } = JSON.parse(_req.body);
+
+    const currentUser = users.find((user) => user.id === id);
+
+    if (currentUser && username) {
+      currentUser.username = username;
+    }
+
+    if (currentUser && description) {
+      currentUser.description = description;
+    }
+
+    if (currentUser && profilePicture) {
+      currentUser.profilePicture = profilePicture;
+    }
+
+    res.json(currentUser);
+  });
+
+  app.post("/api/change-password", (_req, res) => {
+    const { password, id } = _req.body;
+    const currentUser = users.find((user) => user.id === id);
+
+    if (currentUser?.password) {
+      currentUser.password = password;
+    }
+
+    res.status(200).json({ message: "Password has been updated" });
   });
 });

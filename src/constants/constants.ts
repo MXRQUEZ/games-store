@@ -22,12 +22,22 @@ export const gitHubRepoLink = "https://github.com/MXRQUEZ/js-react";
 // forms
 export const defaultErrorMessage = "Error!";
 export const userInvalidMessage = "Login or password is invalid";
+export const userExistsMessage = "User with this login already exists";
 export const requiredFieldMessage = "This field is required!";
 
 export const loginLabel = "login";
 export const loginIconClass = "fa fa-solid fa-address-card";
 export const loginMaxLength = 20;
-export const loginLengthMessage = `Max login length is ${loginMaxLength} symbols`;
+export const loginMinLength = 5;
+export const loginLengthMessage = `Login length must be between ${loginMinLength} and ${loginMaxLength}`;
+
+export const usernameMaxLength = 20;
+export const usernameMinLength = 5;
+export const usernameLengthMessage = `Username length must be between ${usernameMinLength} and ${usernameMaxLength}`;
+
+export const descriptionMaxLength = 150;
+export const descriptionMinLength = 1;
+export const descriptionLengthMessage = `Description length must be less than 150 ${descriptionMaxLength} symbols`;
 
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";
