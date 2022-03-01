@@ -1,15 +1,7 @@
-import { Ages, Criteria, Genres, Types } from "@/constants/searchFilterEnums";
-
 export interface ISearchFilterValues {
-  criteria?: string;
-  type?: string;
+  sortBy: string;
+  type: string;
   genre: string;
   age: string;
+  amount?: string;
 }
-
-export const initialSearchbarFilterValues = {
-  genres: Genres.All,
-  age: Ages.All,
-  criteria: Criteria.Name,
-  type: Types.Ascending,
-};

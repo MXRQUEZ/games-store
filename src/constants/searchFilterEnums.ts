@@ -1,3 +1,5 @@
+import { ISearchFilterValues } from "@/types/iSearchFilter";
+
 export enum Genres {
   All = "All",
   Shooter = "Shooter",
@@ -26,3 +28,10 @@ export enum Types {
   Ascending = "ascending",
   Descending = "descending",
 }
+
+export const initialFilterParams: ISearchFilterValues = {
+  age: "0+",
+  genre: "All",
+  sortBy: "Name",
+  type: "Ascending",
+};

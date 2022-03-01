@@ -6,13 +6,13 @@
   padding: 10px;
 }
 
-.sort {
+.sort__form {
   font-family: Raleway, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  &__by {
+  & .select__label {
     color: white;
     display: flex;
     justify-content: space-between;

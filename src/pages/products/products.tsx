@@ -4,13 +4,13 @@ import classes from "./products.module.scss";
 import GamesCard from "@/components/gamesCard/gamesCard";
 import Container from "@/components/ui/container/container";
 import IProduct from "@/types/iProduct";
-import { getProducts, getProductsByCategoryName } from "@/shared/utils/apiRequests";
+import { getProducts } from "@/shared/utils/apiRequests";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
 import { categories } from "../../../server/data/categories";
 import Pathname from "@/constants/pathname";
-import ProductSelectForm from "@/components/ui/forms/products/productSelectForm";
 import ProductFilter from "@/components/ui/forms/products/productFilter";
+import { initialFilterParams } from "@/constants/searchFilterEnums";
 
 type ProductsUrlParams = {
   category?: string;
@@ -41,14 +41,14 @@ const Products: FC = () => {
     (async () => {
       setSpinner(true);
       if (category) {
-        const categoryProducts = await getProductsByCategoryName({ category });
+        const categoryProducts = await getProducts({ ...initialFilterParams, category });
         setDefaultProducts(categoryProducts);
         setProducts(categoryProducts);
         setSpinner(false);
         return;
       }
 
-      const allProducts = await getProducts();
+      const allProducts = await getProducts({ ...initialFilterParams });
       setDefaultProducts(allProducts);
       setProducts(allProducts);
       setSpinner(false);
@@ -68,7 +68,6 @@ const Products: FC = () => {
     <>
       <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.filter} title={category || "Products"}>
-        <ProductSelectForm />
         <ProductFilter onFilter={onFilter} setSpinner={setSpinner} />
       </Container>
       <Container id={classes.games} title="Games" isCard>

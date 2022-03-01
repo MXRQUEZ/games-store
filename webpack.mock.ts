@@ -19,19 +19,24 @@ export default webpackMockServer.add((app: Application) => {
   app.get("/api/products", (_req, res) => {
     let matchedProducts = [...products];
 
-    // const { type, criteria, genre, age, categories } = _req.query;
-    const ascendingType = "ascending";
-    if (_req.query.sortBy) {
-      matchedProducts = matchedProducts.sort((a, b) => {
-        const sortByDefault = "date";
-        const sortQuery = _req.query.sortBy as string;
-        const sortKey = (sortQuery in a ? sortQuery : sortByDefault) as keyof IProduct;
+    if (_req.query.type && _req.query.sortBy) {
+      const { type: typeQuery, sortBy } = _req.query;
+      const sortQuery = (sortBy as string).toLocaleLowerCase();
+      const type = (typeQuery as string).toLocaleLowerCase();
+      const sortByDefault = "date";
+      const ascendingType = "ascending";
 
-        const fieldA = a[sortKey];
-        const fieldB = b[sortKey];
-
-        return fieldA > fieldB ? -1 : 1;
-      });
+      if (type === ascendingType) {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) => {
+          const sortKey = (sortQuery in prevGame ? sortQuery : sortByDefault) as keyof IProduct;
+          return prevGame[sortKey] < nextGame[sortKey] ? -1 : 1;
+        });
+      } else {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) => {
+          const sortKey = (sortQuery in prevGame ? sortQuery : sortByDefault) as keyof IProduct;
+          return nextGame[sortKey] < prevGame[sortKey] ? -1 : 1;
+        });
+      }
     }
 
     if (_req.query.amount) {
@@ -80,21 +85,6 @@ export default webpackMockServer.add((app: Application) => {
       const age = +(ageQuery as string).slice(0, -1);
 
       matchedProducts = matchedProducts.filter((product) => product.ageRating >= +age);
-    }
-
-    if (_req.query.type && _req.query.criteria) {
-      const { type, criteria: criteriaQuery } = _req.query;
-      const criteria = criteriaQuery as keyof IProduct;
-
-      if (type === ascendingType) {
-        matchedProducts = matchedProducts.sort((prevGame, nextGame) =>
-          prevGame[criteria] < nextGame[criteria] ? -1 : 1
-        );
-      } else {
-        matchedProducts = matchedProducts.sort((prevGame, nextGame) =>
-          nextGame[criteria] < prevGame[criteria] ? -1 : 1
-        );
-      }
     }
 
     res.json(matchedProducts);

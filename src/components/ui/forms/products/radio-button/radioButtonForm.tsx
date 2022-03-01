@@ -7,7 +7,7 @@ import IProduct from "@/types/iProduct";
 import { ISearchFilterValues } from "@/types/iSearchFilter";
 
 type FormChangeEvent = (event: React.ChangeEvent<HTMLFormElement>) => void;
-type FilterParams = "age" | "genre" | "criteria" | "type";
+type FilterParams = "age" | "genre";
 
 interface IRadioButtonProps {
   paramName: FilterParams;
@@ -43,7 +43,6 @@ const RadioButtonForm: FC<IRadioButtonProps> = ({
 
   return (
     <form className={classes.radiobtns__form} onChange={handleChangeFilter}>
-      <h4 className={classes.filter__text}>Age</h4>
       {values.map((value, index) => {
         const key = `${paramName}-${value}`;
         return <RadioButton key={key} text={value} name={paramName} checked={index === 0} />;
