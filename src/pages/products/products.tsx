@@ -9,8 +9,9 @@ import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
 import { categories } from "../../../server/data/categories";
 import Pathname from "@/constants/pathname";
-import ProductFilter from "@/components/ui/forms/products/productFilter";
 import { initialFilterParams } from "@/constants/searchFilterEnums";
+import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
+import { ISearchFilterValues } from "@/types/iSearchFilter";
 
 type ProductsUrlParams = {
   category?: string;
@@ -19,6 +20,7 @@ type ProductsUrlParams = {
 const Products: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [defaultProducts, setDefaultProducts] = useState<IProduct[]>([]);
+  const [filterParams, setParams] = useState<ISearchFilterValues>(initialFilterParams);
   const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
   const router = useNavigate();
@@ -66,9 +68,14 @@ const Products: FC = () => {
 
   return (
     <>
-      <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
+      <Searchbar filterParams={filterParams} onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.filter} title={category || "Products"}>
-        <ProductFilter onFilter={onFilter} setSpinner={setSpinner} />
+        <ProductFilterForm
+          filterParams={filterParams}
+          setParams={setParams}
+          onFilter={onFilter}
+          setSpinner={setSpinner}
+        />
       </Container>
       <Container id={classes.games} title="Games" isCard>
         {spinner ? <Spinner /> : searchResult}

@@ -3,18 +3,20 @@ import IProduct from "@/types/iProduct";
 import { getProducts } from "@/shared/utils/apiRequests";
 import debounce from "@/shared/utils/helpers/debounce";
 import classes from "@/components/ui/searchbar/searchbar.module.scss";
+import { ISearchFilterValues } from "@/types/iSearchFilter";
 
 interface ISearchbarProps {
   onSearch: (response: IProduct[] | null) => void;
   setSpinner: (isActive: boolean) => void;
+  filterParams?: ISearchFilterValues | null;
 }
 
 type InputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner }) => {
+const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams = null }) => {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
-    onSearch(search ? await getProducts({ filter: event.target.value }) : null);
+    onSearch(search ? await getProducts({ ...filterParams, filter: search }) : null);
   };
 
   const debounceDelay = 1000;
@@ -29,6 +31,10 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner }) => {
       <input className={classes.searchbar} type="text" onChange={handleChange} placeholder="Search" />
     </div>
   );
+};
+
+Searchbar.defaultProps = {
+  filterParams: null,
 };
 
 export default React.memo(Searchbar);

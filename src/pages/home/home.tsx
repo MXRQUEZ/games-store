@@ -58,7 +58,7 @@ const Home: FC = () => {
   const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {
     searchResult.push(
-      <h1 key={`${classes.text}${searchResult.length}`} className={classes.text}>
+      <h1 key={`${classes.nothing_found}${searchResult.length}`} className={classes.nothing_found}>
         Nothing Found
       </h1>
     );

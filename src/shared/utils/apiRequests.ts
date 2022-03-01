@@ -20,7 +20,7 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
 export const getHomeProducts = async (): Promise<IProduct[]> => {
   const homeProductsParams: ISearchFilterValues = {
     amount: "3",
-    age: "All",
+    age: "0+",
     genre: "All",
     sortBy: "date",
     type: "descending",
