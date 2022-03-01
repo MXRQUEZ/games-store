@@ -1,0 +1,19 @@
+.input__label {
+  font-family: Raleway, sans-serif;
+  margin-left: 5px;
+  display: flex;
+  justify-self: left;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  user-select: none;
+  cursor: pointer;
+
+  & .input {
+    margin: 5px;
+  }
+
+  &:hover {
+    filter: brightness(80%);
+  }
+}

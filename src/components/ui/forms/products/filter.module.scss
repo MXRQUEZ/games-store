@@ -1,0 +1,29 @@
+.filter__text {
+  font-family: Raleway, sans-serif;
+  border-bottom: 1px solid white;
+  text-align: left !important;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.sort {
+  font-family: Raleway, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__by {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    border-style: none;
+    outline: none;
+    margin: 5px;
+  }
+}
+
+.radiobtns__form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}

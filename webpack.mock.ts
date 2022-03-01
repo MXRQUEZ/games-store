@@ -9,6 +9,7 @@ import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/no-named-as-default
 import users from "./server/data/users";
 import IUser from "@/types/iUser";
+import { Genres } from "@/constants/searchFilterEnums";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/categories", (_req, res) => {
@@ -56,29 +57,29 @@ export default webpackMockServer.add((app: Application) => {
       const categoryName = category as string;
       const categoryFilter = categoryName in categories ? categories[categoryName] : null;
 
-      if (category) {
-        matchedProducts = matchedProducts.filter((product) => {
-          // eslint-disable-next-line no-restricted-syntax
-          for (const id of product.categoriesId) {
-            if (id === categoryFilter?.id) {
-              return true;
-            }
+      matchedProducts = matchedProducts.filter((product) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const id of product.categoriesId) {
+          if (id === categoryFilter?.id) {
+            return true;
           }
-          return false;
-        });
-      }
+        }
+        return false;
+      });
     }
 
     if (_req.query.genre) {
       const { genre } = _req.query;
-
-      matchedProducts.filter((product) => product.genre === genre);
+      if (genre !== Genres.All) {
+        matchedProducts = matchedProducts.filter((product) => product.genre === genre);
+      }
     }
 
     if (_req.query.age) {
-      const { age } = _req.query;
+      const { age: ageQuery } = _req.query;
+      const age = +(ageQuery as string).slice(0, -1);
 
-      matchedProducts.filter((product) => product.ageRating >= +age);
+      matchedProducts = matchedProducts.filter((product) => product.ageRating >= +age);
     }
 
     if (_req.query.type && _req.query.criteria) {

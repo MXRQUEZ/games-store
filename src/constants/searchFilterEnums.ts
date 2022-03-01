@@ -1,9 +1,9 @@
 export enum Genres {
-  All = "",
+  All = "All",
   Shooter = "Shooter",
   Sandbox = "Sandbox",
   RPG = "RPG",
-  Action = "Action-adventure",
+  Action = "Action",
   Simulator = "Simulator",
 }
 

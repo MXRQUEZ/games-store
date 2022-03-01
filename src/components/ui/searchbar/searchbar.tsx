@@ -9,7 +9,7 @@ interface ISearchbarProps {
   setSpinner: (isActive: boolean) => void;
 }
 
-type inputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
+type InputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner }) => {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,15 +18,15 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner }) => {
   };
 
   const debounceDelay = 1000;
-  const debounceOnChange: inputChangeEvent = debounce(onChange, debounceDelay);
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const debounceOnChange: InputChangeEvent = debounce(onChange, debounceDelay);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSpinner(true);
     debounceOnChange(event);
   };
 
   return (
     <div className={classes.searchbar__container}>
-      <input className={classes.searchbar} type="text" onChange={onChangeHandler} placeholder="Search" />
+      <input className={classes.searchbar} type="text" onChange={handleChange} placeholder="Search" />
     </div>
   );
 };

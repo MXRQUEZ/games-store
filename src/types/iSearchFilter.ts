@@ -1,10 +1,10 @@
 import { Ages, Criteria, Genres, Types } from "@/constants/searchFilterEnums";
 
 export interface ISearchFilterValues {
-  criteria?: Criteria;
-  type?: Types;
-  genres?: Genres;
-  age?: Ages;
+  criteria?: string;
+  type?: string;
+  genre: string;
+  age: string;
 }
 
 export const initialSearchbarFilterValues = {
