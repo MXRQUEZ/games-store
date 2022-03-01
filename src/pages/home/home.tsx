@@ -10,7 +10,7 @@ import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/types/pathname";
+import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
 
 const Home: FC = () => {
@@ -32,7 +32,6 @@ const Home: FC = () => {
   useEffect(() => {
     if (location.pathname === Pathname.Login && !isAuth) {
       signInModalOpen();
-      navigate("/");
       return;
     }
 
@@ -67,7 +66,7 @@ const Home: FC = () => {
 
   return (
     <>
-      <Searchbar onSearch={onSearch} loader={setSpinner} />
+      <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.categories} title="Categories" isCard>
         {categories.map((category) => (
           <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />

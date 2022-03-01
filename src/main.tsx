@@ -11,7 +11,7 @@ import About from "@/pages/about/about";
 import UserProfile from "@/pages/userProfile/userProfile";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 import store from "@/store";
-import Pathname from "./types/pathname";
+import Pathname from "./constants/pathname";
 
 interface AppProps {
   nothing: boolean;

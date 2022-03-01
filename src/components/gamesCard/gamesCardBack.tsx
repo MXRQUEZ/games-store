@@ -8,16 +8,20 @@ interface IGamesCardBackProps {
   product: IProduct;
 }
 
-const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => (
-  <div className={classes.card__back}>
-    <div className={classes.card__back__top}>
-      <p>{product.description}</p>
+const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
+  const ageRating = `${product.ageRating}+`;
+
+  return (
+    <div className={classes.card__back}>
+      <div className={classes.card__back__top}>
+        <p>{product.description}</p>
+      </div>
+      <div className={classes.card__back__bottom}>
+        <p>{ageRating}</p>
+        <Button text={buy} />
+      </div>
     </div>
-    <div className={classes.card__back__bottom}>
-      <p>{product.ageCriteria}</p>
-      <Button text={buy} />
-    </div>
-  </div>
-);
+  );
+};
 
 export default GamesCardBack;

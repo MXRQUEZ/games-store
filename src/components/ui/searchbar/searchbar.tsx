@@ -6,12 +6,12 @@ import classes from "@/components/ui/searchbar/searchbar.module.scss";
 
 interface ISearchbarProps {
   onSearch: (response: IProduct[] | null) => void;
-  loader: (isActive: boolean) => void;
+  setSpinner: (isActive: boolean) => void;
 }
 
 type inputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-const Searchbar: FC<ISearchbarProps> = ({ onSearch, loader }) => {
+const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner }) => {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
     onSearch(search ? await getProducts({ filter: event.target.value }) : null);
@@ -20,7 +20,7 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, loader }) => {
   const debounceDelay = 1000;
   const debounceOnChange: inputChangeEvent = debounce(onChange, debounceDelay);
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    loader(true);
+    setSpinner(true);
     debounceOnChange(event);
   };
 

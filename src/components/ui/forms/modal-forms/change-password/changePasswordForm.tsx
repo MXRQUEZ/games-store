@@ -46,7 +46,7 @@ const ChangePasswordForm: FC = () => {
   return (
     <>
       <Button text="Change password" type="button" onClick={handleOpen} />
-      <Modal isVisible={isModalActive} onClose={handleClose}>
+      <Modal isActive={isModalActive} onClose={handleClose}>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <h4 className={classes.auth}>Change Password</h4>
           <FormInput

@@ -16,16 +16,18 @@ export default webpackMockServer.add((app: Application) => {
   });
 
   app.get("/api/products", (_req, res) => {
-    let productsList = [...products];
+    let matchedProducts = [...products];
 
+    // const { type, criteria, genre, age, categories } = _req.query;
+    const ascendingType = "ascending";
     if (_req.query.sortBy) {
-      productsList = productsList.sort((a, b) => {
+      matchedProducts = matchedProducts.sort((a, b) => {
         const sortByDefault = "date";
         const sortQuery = _req.query.sortBy as string;
-        const sortBy = (sortQuery in a ? sortQuery : sortByDefault) as keyof IProduct;
+        const sortKey = (sortQuery in a ? sortQuery : sortByDefault) as keyof IProduct;
 
-        const fieldA = a[sortBy];
-        const fieldB = b[sortBy];
+        const fieldA = a[sortKey];
+        const fieldB = b[sortKey];
 
         return fieldA > fieldB ? -1 : 1;
       });
@@ -34,16 +36,14 @@ export default webpackMockServer.add((app: Application) => {
     if (_req.query.amount) {
       const { amount } = _req.query;
 
-      if (+amount) {
-        productsList = productsList.length > +amount ? productsList.slice(0, +amount) : productsList;
-      }
+      matchedProducts = matchedProducts.length > +amount ? matchedProducts.slice(0, +amount) : matchedProducts;
     }
 
     if (_req.query.filter) {
       const { filter } = _req.query;
       const searchString = filter as string;
 
-      productsList = productsList.filter((product) =>
+      matchedProducts = matchedProducts.filter((product) =>
         product.name
           .toLowerCase()
           .replace(/[^\w]/gi, "")
@@ -57,7 +57,7 @@ export default webpackMockServer.add((app: Application) => {
       const categoryFilter = categoryName in categories ? categories[categoryName] : null;
 
       if (category) {
-        productsList = productsList.filter((product) => {
+        matchedProducts = matchedProducts.filter((product) => {
           // eslint-disable-next-line no-restricted-syntax
           for (const id of product.categoriesId) {
             if (id === categoryFilter?.id) {
@@ -69,7 +69,34 @@ export default webpackMockServer.add((app: Application) => {
       }
     }
 
-    res.json(productsList);
+    if (_req.query.genre) {
+      const { genre } = _req.query;
+
+      matchedProducts.filter((product) => product.genre === genre);
+    }
+
+    if (_req.query.age) {
+      const { age } = _req.query;
+
+      matchedProducts.filter((product) => product.ageRating >= +age);
+    }
+
+    if (_req.query.type && _req.query.criteria) {
+      const { type, criteria: criteriaQuery } = _req.query;
+      const criteria = criteriaQuery as keyof IProduct;
+
+      if (type === ascendingType) {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) =>
+          prevGame[criteria] < nextGame[criteria] ? -1 : 1
+        );
+      } else {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) =>
+          nextGame[criteria] < prevGame[criteria] ? -1 : 1
+        );
+      }
+    }
+
+    res.json(matchedProducts);
   });
 
   app.get("/api/profile", (_req, res) => {

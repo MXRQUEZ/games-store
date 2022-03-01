@@ -1,8 +1,11 @@
+import { Ages, Genres } from "@/constants/searchFilterEnums";
+
 interface IProduct {
   name: string;
   id: string | number;
-  ageCriteria: string;
-  price: string | number;
+  ageRating: Ages;
+  genre: Genres;
+  price: number;
   rating: number;
   description: string;
   categoriesId: number[];

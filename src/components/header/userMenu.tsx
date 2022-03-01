@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/types/pathname";
+import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
 
 type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
