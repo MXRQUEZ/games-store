@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import IProduct from "@/types/iProduct";
 import { getProducts } from "@/shared/utils/apiRequests";
 import debounce from "@/shared/utils/helpers/debounce";
@@ -28,10 +28,10 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams = n
 
   const debounceDelayMS = 1000;
   const debounceOnChange: InputChangeEvent = debounce(onChange, debounceDelayMS);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSpinner(true);
     debounceOnChange(event);
-  };
+  }, []);
 
   return (
     <div className={classes.searchbar__container}>

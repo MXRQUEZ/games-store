@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import classes from "./products.module.scss";
 import GamesCard from "@/components/gamesCard/gamesCard";
@@ -24,6 +24,8 @@ const Products: FC = () => {
   const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
   const router = useNavigate();
+
+  const setParamsCallback = useCallback((params: ISearchFilterParams) => setParams(params), []);
 
   const onSearch = (response: IProduct[] | null): void => {
     setProducts(response || defaultProducts);
@@ -75,7 +77,7 @@ const Products: FC = () => {
       <Container id={classes.filter} title={category ? categories[category].name : "Products"}>
         <ProductFilterForm
           filterParams={filterParams}
-          setParams={setParams}
+          setParams={setParamsCallback}
           onFilter={onFilter}
           setSpinner={setSpinner}
         />
