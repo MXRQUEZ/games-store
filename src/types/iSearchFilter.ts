@@ -1,7 +1,9 @@
-export interface ISearchFilterValues {
-  sortBy: string;
-  type: string;
-  genre: string;
-  age: string;
+import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
+
+export interface ISearchFilterParams {
+  sortBy: SortBy;
+  type: Types;
+  genre: Genres;
+  age: Ages;
   amount?: string;
 }

@@ -9,7 +9,7 @@ import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/no-named-as-default
 import users from "./server/data/users";
 import IUser from "@/types/iUser";
-import { Genres } from "@/constants/searchFilterEnums";
+import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/categories", (_req, res) => {
@@ -22,11 +22,10 @@ export default webpackMockServer.add((app: Application) => {
     if (_req.query.type && _req.query.sortBy) {
       const { type: typeQuery, sortBy } = _req.query;
       const sortQuery = (sortBy as string).toLocaleLowerCase();
-      const type = (typeQuery as string).toLocaleLowerCase();
-      const sortByDefault = "date";
-      const ascendingType = "ascending";
+      const type = typeQuery as string;
+      const sortByDefault = SortBy.Date.toLocaleLowerCase();
 
-      if (type === ascendingType) {
+      if (type === Types.Ascending) {
         matchedProducts = matchedProducts.sort((prevGame, nextGame) => {
           const sortKey = (sortQuery in prevGame ? sortQuery : sortByDefault) as keyof IProduct;
           return prevGame[sortKey] < nextGame[sortKey] ? -1 : 1;
@@ -74,17 +73,20 @@ export default webpackMockServer.add((app: Application) => {
     }
 
     if (_req.query.genre) {
-      const { genre } = _req.query;
-      if (genre !== Genres.All) {
+      const { genre: genreQuery } = _req.query;
+      const genre = genreQuery as string;
+      if (genre in Genres && genre !== Genres.All) {
         matchedProducts = matchedProducts.filter((product) => product.genre === genre);
       }
     }
 
     if (_req.query.age) {
       const { age: ageQuery } = _req.query;
-      const age = +(ageQuery as string).slice(0, -1);
+      const age = ageQuery as string;
 
-      matchedProducts = matchedProducts.filter((product) => product.ageRating >= +age);
+      if (age in Ages && age !== Genres.All) {
+        matchedProducts = matchedProducts.filter((product) => product.ageRating === age);
+      }
     }
 
     res.json(matchedProducts);

@@ -1,4 +1,4 @@
-import { Ages, Genres } from "@/constants/searchFilterEnums";
+import { Ages, Genres } from "@/constants/searchFilters";
 
 interface IProduct {
   name: string;

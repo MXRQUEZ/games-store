@@ -3,14 +3,14 @@ import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
 import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/named
 import { categories } from "./categories";
-import { Ages, Genres } from "@/constants/searchFilterEnums";
+import { Ages, Genres } from "@/constants/searchFilters";
 
 export const products: IProduct[] = [
   {
     id: mockServerHelper.getUniqueIdInt(),
     name: "Horizon Zero Dawn",
     rating: 4,
-    ageRating: Ages.Twelve,
+    ageRating: Ages["12+"],
     genre: Genres.RPG,
     categoriesId: [categories.pc.id, categories.playstation.id],
     description:
@@ -23,7 +23,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "CS:GO",
     rating: 4,
-    ageRating: Ages.Twelve,
+    ageRating: Ages["12+"],
     genre: Genres.Shooter,
     categoriesId: [categories.pc.id, categories.playstation.id, categories.xbox.id],
     description:
@@ -36,7 +36,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Brawl Stars",
     rating: 2,
-    ageRating: Ages.Three,
+    ageRating: Ages["3+"],
     genre: Genres.Action,
     categoriesId: [categories.playstation.id],
     description:
@@ -49,7 +49,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Half-Life: Alyx",
     rating: 5,
-    ageRating: Ages.Sixteen,
+    ageRating: Ages["16+"],
     genre: Genres.Action,
     categoriesId: [categories.pc.id],
     description:
@@ -62,7 +62,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "TES V Skyrim",
     rating: 5,
-    ageRating: Ages.Eighteen,
+    ageRating: Ages["18+"],
     genre: Genres.RPG,
     categoriesId: [categories.pc.id, categories.playstation.id],
     description:
@@ -75,7 +75,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Clash Royale",
     rating: 5,
-    ageRating: Ages.All,
+    ageRating: Ages["3+"],
     genre: Genres.RPG,
     categoriesId: [categories.xbox.id],
     description:
@@ -88,7 +88,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Beat Saber",
     rating: 5,
-    ageRating: Ages.Twelve,
+    ageRating: Ages["12+"],
     genre: Genres.Action,
     categoriesId: [categories.playstation.id, categories.xbox.id],
     description:
@@ -101,7 +101,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Terraria",
     rating: 5,
-    ageRating: Ages.All,
+    ageRating: Ages["3+"],
     genre: Genres.Sandbox,
     categoriesId: [categories.pc.id, categories.playstation.id, categories.xbox.id],
     description:
@@ -114,7 +114,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Genshin Impact",
     rating: 4,
-    ageRating: Ages.Twelve,
+    ageRating: Ages["12+"],
     genre: Genres.RPG,
     categoriesId: [categories.pc.id, categories.xbox.id],
     description:
@@ -127,7 +127,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Counter-Strike 1.6",
     rating: 4,
-    ageRating: Ages.Six,
+    ageRating: Ages["6+"],
     genre: Genres.Shooter,
     categoriesId: [categories.pc.id],
     description:
@@ -140,7 +140,7 @@ export const products: IProduct[] = [
     id: mockServerHelper.getUniqueIdInt(),
     name: "Snake",
     rating: 3,
-    ageRating: Ages.All,
+    ageRating: Ages["3+"],
     genre: Genres.Simulator,
     categoriesId: [categories.xbox.id],
     description:

@@ -9,9 +9,9 @@ import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
 import { categories } from "../../../server/data/categories";
 import Pathname from "@/constants/pathname";
-import { initialFilterParams } from "@/constants/searchFilterEnums";
 import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
-import { ISearchFilterValues } from "@/types/iSearchFilter";
+import { ISearchFilterParams } from "@/types/iSearchFilter";
+import initialFilterParams from "@/constants/initialFilterParams";
 
 type ProductsUrlParams = {
   category?: string;
@@ -20,7 +20,7 @@ type ProductsUrlParams = {
 const Products: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [defaultProducts, setDefaultProducts] = useState<IProduct[]>([]);
-  const [filterParams, setParams] = useState<ISearchFilterValues>(initialFilterParams);
+  const [filterParams, setParams] = useState<ISearchFilterParams>(initialFilterParams);
   const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
   const router = useNavigate();
@@ -43,7 +43,7 @@ const Products: FC = () => {
     (async () => {
       setSpinner(true);
       if (category) {
-        const categoryProducts = await getProducts({ ...initialFilterParams, category });
+        const categoryProducts = await getProducts({ ...filterParams, category });
         setDefaultProducts(categoryProducts);
         setProducts(categoryProducts);
         setSpinner(false);

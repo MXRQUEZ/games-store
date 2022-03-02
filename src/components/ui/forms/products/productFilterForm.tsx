@@ -1,36 +1,39 @@
 import React, { FC } from "react";
 import IProduct from "@/types/iProduct";
-import { ISearchFilterValues } from "@/types/iSearchFilter";
-import RadioButtonForm from "@/components/ui/forms/products/radio-button/radioButtonForm";
+import { ISearchFilterParams } from "@/types/iSearchFilter";
+import FilterForm from "@/components/ui/forms/products/filter-form/filterForm";
 import classes from "@/components/ui/forms/products/filter.module.scss";
-import ProductSelectForm from "@/components/ui/forms/products/select/productSelectForm";
+import getEnumKeys from "@/shared/utils/helpers/getEnumKeys";
+import { SortBy, Genres, Types, Ages } from "@/constants/searchFilters";
 
 interface IProductFilterProps {
   setSpinner: React.Dispatch<React.SetStateAction<boolean>>;
   onFilter: (response: IProduct[]) => void;
-  filterParams: ISearchFilterValues;
-  setParams: React.Dispatch<React.SetStateAction<ISearchFilterValues>>;
+  filterParams: ISearchFilterParams;
+  setParams: React.Dispatch<React.SetStateAction<ISearchFilterParams>>;
 }
 
 const ProductFilterForm: FC<IProductFilterProps> = ({ onFilter, setSpinner, filterParams, setParams }) => {
-  const genres = ["All", "Shooter", "Sandbox", "RPG", "Action", "Simulator"];
-  const ages = ["0+", "3+", "6+", "12+", "16+", "18+"];
-  const types = ["Ascending", "Descending"];
-  const criteria = ["Name", "Rating", "Price"];
+  const genres = getEnumKeys(Genres);
+  const ages = getEnumKeys(Ages);
+  const types = getEnumKeys(Types);
+  const criteria = getEnumKeys(SortBy);
 
   return (
     <div>
       <h4 className={classes.filter__text}>Sort</h4>
-      <ProductSelectForm
+      <FilterForm
         paramName="type"
+        selectLabel="Type"
         filterParams={filterParams}
         setParams={setParams}
         onFilter={onFilter}
         setSpinner={setSpinner}
         values={types}
       />
-      <ProductSelectForm
+      <FilterForm
         paramName="sortBy"
+        selectLabel="Criteria"
         filterParams={filterParams}
         setParams={setParams}
         onFilter={onFilter}
@@ -38,7 +41,7 @@ const ProductFilterForm: FC<IProductFilterProps> = ({ onFilter, setSpinner, filt
         values={criteria}
       />
       <h4 className={classes.filter__text}>Genre</h4>
-      <RadioButtonForm
+      <FilterForm
         paramName="genre"
         filterParams={filterParams}
         setParams={setParams}
@@ -47,7 +50,7 @@ const ProductFilterForm: FC<IProductFilterProps> = ({ onFilter, setSpinner, filt
         values={genres}
       />
       <h4 className={classes.filter__text}>Age</h4>
-      <RadioButtonForm
+      <FilterForm
         paramName="age"
         filterParams={filterParams}
         setParams={setParams}

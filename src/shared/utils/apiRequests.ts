@@ -5,7 +5,8 @@ import IProduct from "@/types/iProduct";
 import api from "@/environment/api";
 import buildQueryParams from "./helpers/buildQueryParams";
 import IUser from "@/types/iUser";
-import { ISearchFilterValues } from "@/types/iSearchFilter";
+import { ISearchFilterParams } from "@/types/iSearchFilter";
+import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
 
 export const getCategories = async (): Promise<ICategory[]> => {
   const response = await axios.get(`${api.categories}`);
@@ -18,12 +19,12 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
 };
 
 export const getHomeProducts = async (): Promise<IProduct[]> => {
-  const homeProductsParams: ISearchFilterValues = {
+  const homeProductsParams: ISearchFilterParams = {
     amount: "3",
-    age: "0+",
-    genre: "All",
-    sortBy: "date",
-    type: "descending",
+    age: Ages.All,
+    genre: Genres.All,
+    sortBy: SortBy.Date,
+    type: Types.Descending,
   };
 
   const response = await axios.get(`${api.products}${buildQueryParams({ ...homeProductsParams })}`);
