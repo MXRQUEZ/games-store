@@ -20,7 +20,6 @@ const Modal: FC<IModalProps> = ({ isActive, onClose, children }) => {
         {children}
       </div>
     </div>,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("modal-root")!
   );
 };

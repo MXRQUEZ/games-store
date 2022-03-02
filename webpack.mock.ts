@@ -58,7 +58,6 @@ export default webpackMockServer.add((app: Application) => {
       const categoryFilter = categoryName in categories ? categories[categoryName] : null;
 
       matchedProducts = matchedProducts.filter((product) => {
-        // eslint-disable-next-line no-restricted-syntax
         for (const id of product.categoriesId) {
           if (id === categoryFilter?.id) {
             return true;

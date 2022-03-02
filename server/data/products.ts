@@ -1,13 +1,11 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
+import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
-// eslint-disable-next-line import/named
 import { categories } from "@/constants/categories";
 import { Ages, Genres } from "@/constants/searchFilters";
 
 export const products: IProduct[] = [
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Horizon Zero Dawn",
     rating: 4,
     ageRating: Ages["12+"],
@@ -20,7 +18,7 @@ export const products: IProduct[] = [
     date: new Date(2015, 5, 15),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "CS:GO",
     rating: 4,
     ageRating: Ages["12+"],
@@ -33,7 +31,7 @@ export const products: IProduct[] = [
     date: new Date(2021, 7, 21),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Brawl Stars",
     rating: 2,
     ageRating: Ages["3+"],
@@ -46,7 +44,7 @@ export const products: IProduct[] = [
     date: new Date(2018, 11, 12),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Half-Life: Alyx",
     rating: 5,
     ageRating: Ages["16+"],
@@ -59,7 +57,7 @@ export const products: IProduct[] = [
     date: new Date(2020, 2, 23),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "TES V Skyrim",
     rating: 5,
     ageRating: Ages["18+"],
@@ -72,7 +70,7 @@ export const products: IProduct[] = [
     date: new Date(2011, 10, 11),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Clash Royale",
     rating: 5,
     ageRating: Ages["3+"],
@@ -85,7 +83,7 @@ export const products: IProduct[] = [
     date: new Date(2016, 2, 2),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Beat Saber",
     rating: 5,
     ageRating: Ages["12+"],
@@ -98,7 +96,7 @@ export const products: IProduct[] = [
     date: new Date(2019, 4, 21),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Terraria",
     rating: 5,
     ageRating: Ages["3+"],
@@ -111,7 +109,7 @@ export const products: IProduct[] = [
     date: new Date(2011, 4, 16),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Genshin Impact",
     rating: 4,
     ageRating: Ages["12+"],
@@ -124,7 +122,7 @@ export const products: IProduct[] = [
     date: new Date(2020, 7, 28),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Counter-Strike 1.6",
     rating: 4,
     ageRating: Ages["6+"],
@@ -137,7 +135,7 @@ export const products: IProduct[] = [
     date: new Date(2010, 9, 25),
   },
   {
-    id: mockServerHelper.getUniqueIdInt(),
+    id: getUniqueId(),
     name: "Snake",
     rating: 3,
     ageRating: Ages["3+"],

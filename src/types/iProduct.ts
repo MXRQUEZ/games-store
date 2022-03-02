@@ -8,7 +8,7 @@ interface IProduct {
   price: number;
   rating: number;
   description: string;
-  categoriesId: number[];
+  categoriesId: (string | number)[];
   img: string;
   date: Date;
 }

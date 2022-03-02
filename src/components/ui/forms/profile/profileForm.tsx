@@ -79,7 +79,6 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
         setProfilePic={setProfilePic}
       />
       <div className={classes.profile__fields}>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="username" className={classes.label}>
           Username
         </label>
@@ -103,7 +102,6 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
         <div className={classes.error}>
           {errors?.username && <span role="alert">{errors.username?.message || defaultErrorMessage}</span>}
         </div>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="description" className={classes.label}>
           Description
         </label>
