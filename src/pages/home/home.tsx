@@ -5,7 +5,7 @@ import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
 import GamesCard from "@/components/gamesCard/gamesCard";
-import { getCategories, getHomeProducts } from "@/shared/utils/apiRequests";
+import { getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
@@ -48,7 +48,7 @@ const Home: FC = () => {
     (async () => {
       const homeProducts = await getHomeProducts();
       setSpinner(true);
-      setCategories(await getCategories());
+      setCategories(Object.values(categories));
       setNewProducts(homeProducts);
       setProducts(homeProducts);
       setSpinner(false);

@@ -3,7 +3,7 @@ import webpackMockServer from "webpack-mock-server";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Application } from "express";
 import { v4 as getUniqueId } from "uuid";
-import { categories } from "./server/data/categories";
+import { categories } from "@/constants/categories";
 import { products } from "./server/data/products";
 import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/no-named-as-default
@@ -12,10 +12,6 @@ import IUser from "@/types/iUser";
 import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
 
 export default webpackMockServer.add((app: Application) => {
-  app.get("/api/categories", (_req, res) => {
-    res.json(Object.values(categories));
-  });
-
   app.get("/api/products", (_req, res) => {
     let matchedProducts = [...products];
 

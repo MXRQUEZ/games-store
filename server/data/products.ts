@@ -2,7 +2,7 @@
 import mockServerHelper from "webpack-mock-server/lib/mockServerHelper";
 import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/named
-import { categories } from "./categories";
+import { categories } from "@/constants/categories";
 import { Ages, Genres } from "@/constants/searchFilters";
 
 export const products: IProduct[] = [

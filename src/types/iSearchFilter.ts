@@ -6,4 +6,5 @@ export interface ISearchFilterParams {
   genre: Genres;
   age: Ages;
   amount?: string;
+  category?: string;
 }

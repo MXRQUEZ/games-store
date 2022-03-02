@@ -7,7 +7,7 @@ import IProduct from "@/types/iProduct";
 import { getProducts } from "@/shared/utils/apiRequests";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
-import { categories } from "../../../server/data/categories";
+import { categories } from "@/constants/categories";
 import Pathname from "@/constants/pathname";
 import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
@@ -37,13 +37,16 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (category && !((category as string) in categories)) {
+      setParams({ ...filterParams, category: undefined });
       router(Pathname.Products);
       return;
     }
     (async () => {
       setSpinner(true);
       if (category) {
-        const categoryProducts = await getProducts({ ...filterParams, category });
+        const newParams = { ...filterParams, category };
+        const categoryProducts = await getProducts(newParams);
+        setParams(newParams);
         setDefaultProducts(categoryProducts);
         setProducts(categoryProducts);
         setSpinner(false);
@@ -69,7 +72,7 @@ const Products: FC = () => {
   return (
     <>
       <Searchbar filterParams={filterParams} onSearch={onSearch} setSpinner={setSpinner} />
-      <Container id={classes.filter} title={category || "Products"}>
+      <Container id={classes.filter} title={category ? categories[category].name : "Products"}>
         <ProductFilterForm
           filterParams={filterParams}
           setParams={setParams}
