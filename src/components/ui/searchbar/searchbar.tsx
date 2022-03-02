@@ -16,7 +16,14 @@ type InputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams = null }) => {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
-    onSearch(search ? await getProducts({ ...filterParams, filter: search }) : null);
+    if (search) {
+      const filteredProducts = await getProducts({ ...filterParams, filter: search });
+      onSearch(filteredProducts);
+      return;
+    }
+
+    const filteredProducts = filterParams ? await getProducts({ ...filterParams }) : null;
+    onSearch(filteredProducts);
   };
 
   const debounceDelayMS = 1000;
