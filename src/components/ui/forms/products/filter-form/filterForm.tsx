@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { getProducts } from "@/shared/utils/apiRequests";
 import debounce from "@/shared/utils/helpers/debounce";
 import classes from "@/components/ui/forms/products/filter.module.scss";
@@ -16,9 +16,9 @@ type RadioButtonProps = {
   paramName: FilterParams;
   selectLabel?: string;
   filterParams: ISearchFilterParams;
-  setParams: React.Dispatch<React.SetStateAction<ISearchFilterParams>>;
+  setParams: (params: ISearchFilterParams) => void;
   onFilter: (response: IProduct[]) => void;
-  setSpinner: React.Dispatch<React.SetStateAction<boolean>>;
+  setSpinner: (isLoading: boolean) => void;
   values: string[];
 };
 
@@ -26,9 +26,9 @@ type SelectProps = {
   paramName: SortParams;
   selectLabel: string;
   filterParams: ISearchFilterParams;
-  setParams: React.Dispatch<React.SetStateAction<ISearchFilterParams>>;
+  setParams: (params: ISearchFilterParams) => void;
   onFilter: (response: IProduct[]) => void;
-  setSpinner: React.Dispatch<React.SetStateAction<boolean>>;
+  setSpinner: (isLoading: boolean) => void;
   values: string[];
 };
 
@@ -49,14 +49,15 @@ const FilterForm: FC<FilterProps> = ({
     const products = await getProducts({ ...newFilterParams });
     onFilter(products);
     setParams(newFilterParams);
+    console.log("products");
   };
 
-  const debounceDelayMS = 1000;
+  const debounceDelayMS = 750;
   const debounceOnChange: FormChangeEvent = debounce(onChange, debounceDelayMS);
-  const handleChangeFilter = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleChangeFilter = useCallback((event: React.ChangeEvent<HTMLFormElement>) => {
     setSpinner(true);
     debounceOnChange(event);
-  };
+  }, []);
 
   const isSortParam = (param: Params): param is SortParams =>
     ["type", "sortBy"].some((sortParam) => sortParam === param);
