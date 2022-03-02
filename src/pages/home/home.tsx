@@ -12,11 +12,11 @@ import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
+import { categories } from "@/constants/categories";
 
 const Home: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [newProducts, setNewProducts] = useState<IProduct[]>([]);
   const [spinner, setSpinner] = useState(true);
@@ -48,7 +48,6 @@ const Home: FC = () => {
     (async () => {
       const homeProducts = await getHomeProducts();
       setSpinner(true);
-      setCategories(Object.values(categories));
       setNewProducts(homeProducts);
       setProducts(homeProducts);
       setSpinner(false);
@@ -68,7 +67,7 @@ const Home: FC = () => {
     <>
       <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.categories} title="Categories" isCard>
-        {categories.map((category) => (
+        {Object.values(categories).map((category) => (
           <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />
         ))}
       </Container>
