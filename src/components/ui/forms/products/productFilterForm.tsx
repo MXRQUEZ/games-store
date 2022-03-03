@@ -3,8 +3,7 @@ import IProduct from "@/types/iProduct";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import FilterForm from "@/components/ui/forms/products/filter-form/filterForm";
 import classes from "@/components/ui/forms/products/filter.module.scss";
-import getEnumKeys from "@/shared/utils/helpers/getEnumKeys";
-import { SortBy, Genres, Types, Ages } from "@/constants/searchFilters";
+import { types, criteria, genres, ages } from "@/constants/searchFilters";
 
 interface IProductFilterProps {
   setSpinner: (isLoading: boolean) => void;
@@ -14,11 +13,6 @@ interface IProductFilterProps {
 }
 
 const ProductFilterForm: FC<IProductFilterProps> = ({ onFilter, setSpinner, filterParams, setParams }) => {
-  const genres = getEnumKeys(Genres);
-  const ages = getEnumKeys(Ages);
-  const types = getEnumKeys(Types);
-  const criteria = getEnumKeys(SortBy);
-
   const setSpinnerCallback = useCallback((isLoading: boolean): void => setSpinner(isLoading), []);
   const onFilterCallback = useCallback((response: IProduct[]): void => onFilter(response), []);
   const setParamsCallback = useCallback((params: ISearchFilterParams): void => setParams(params), []);

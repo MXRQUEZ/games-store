@@ -49,7 +49,6 @@ const FilterForm: FC<FilterProps> = ({
     const products = await getProducts({ ...newFilterParams });
     onFilter(products);
     setParams(newFilterParams);
-    console.log("products");
   };
 
   const debounceDelayMS = 750;
