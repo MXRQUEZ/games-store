@@ -4,7 +4,6 @@ const authInitialState: IAuthState = {
   user: null,
 };
 
-// eslint-disable-next-line default-param-last
 const authReducer = (state: IAuthState = authInitialState, action: IAuthAction): IAuthState => {
   switch (action.type) {
     case AuthActionType.SIGN_IN:
