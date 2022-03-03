@@ -5,18 +5,18 @@ import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
 import GamesCard from "@/components/gamesCard/gamesCard";
-import { getCategories, getHomeProducts } from "@/shared/utils/apiRequests";
+import { getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/types/pathname";
+import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
+import { categories } from "@/constants/categories";
 
 const Home: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [newProducts, setNewProducts] = useState<IProduct[]>([]);
   const [spinner, setSpinner] = useState(true);
@@ -32,7 +32,6 @@ const Home: FC = () => {
   useEffect(() => {
     if (location.pathname === Pathname.Login && !isAuth) {
       signInModalOpen();
-      navigate("/");
       return;
     }
 
@@ -49,7 +48,6 @@ const Home: FC = () => {
     (async () => {
       const homeProducts = await getHomeProducts();
       setSpinner(true);
-      setCategories(await getCategories());
       setNewProducts(homeProducts);
       setProducts(homeProducts);
       setSpinner(false);
@@ -59,7 +57,7 @@ const Home: FC = () => {
   const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {
     searchResult.push(
-      <h1 key={`${classes.text}${searchResult.length}`} className={classes.text}>
+      <h1 key={`${classes.nothing_found}${searchResult.length}`} className={classes.nothing_found}>
         Nothing Found
       </h1>
     );
@@ -67,9 +65,9 @@ const Home: FC = () => {
 
   return (
     <>
-      <Searchbar onSearch={onSearch} loader={setSpinner} />
+      <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.categories} title="Categories" isCard>
-        {categories.map((category) => (
+        {Object.values(categories).map((category) => (
           <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />
         ))}
       </Container>

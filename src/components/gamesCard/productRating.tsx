@@ -14,7 +14,6 @@ const ProductRating: FC<IProductRatingProps> = ({ product }) => {
   for (let i = 0; i < starsMaxAmount; ++i) {
     if (product.rating < i + 1) {
       ratingStars.push(<i key={`${product.id}${product.name}emptyStar${i}`} className={starClassName} />);
-      // eslint-disable-next-line no-continue
       continue;
     }
 

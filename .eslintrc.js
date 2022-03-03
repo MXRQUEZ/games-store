@@ -32,6 +32,7 @@ module.exports = {
     ],
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
 
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     "react/destructuring-assignment": 0,
@@ -45,10 +46,14 @@ module.exports = {
     "react/jsx-wrap-multilines": ["error", { arrow: true, return: true, declaration: true }],
     // watch bug: https://github.com/airbnb/javascript/pull/2501
     "react/function-component-definition": [2, { namedComponents: "arrow-function" }],
+    "react/button-has-type": "off",
 
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["warn"],
 
     "no-shadow": "off",
+    "no-continue": "off",
+    "no-restricted-syntax": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "no-use-before-define": "off",
     "require-await": "error",
     "spaced-comment": ["error", "always"],

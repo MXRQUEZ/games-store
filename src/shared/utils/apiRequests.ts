@@ -1,15 +1,11 @@
 import axios from "axios";
-import ICategory from "@/types/iCategory";
 import IParams from "@/types/iParams";
 import IProduct from "@/types/iProduct";
 import api from "@/environment/api";
 import buildQueryParams from "./helpers/buildQueryParams";
 import IUser from "@/types/iUser";
-
-export const getCategories = async (): Promise<ICategory[]> => {
-  const response = await axios.get(`${api.categories}`);
-  return response.data;
-};
+import { ISearchFilterParams } from "@/types/iSearchFilter";
+import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
 
 export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => {
   const response = await axios.get(`${api.products}${buildQueryParams(params)}`);
@@ -17,14 +13,15 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
 };
 
 export const getHomeProducts = async (): Promise<IProduct[]> => {
-  const params: IParams = { amount: "3", sortBy: "date" };
-  const response = await axios.get(`${api.products}${buildQueryParams(params)}`);
-  return response.data;
-};
+  const homeProductsParams: ISearchFilterParams = {
+    amount: "3",
+    age: Ages.All,
+    genre: Genres.All,
+    sortBy: SortBy.Date,
+    type: Types.Descending,
+  };
 
-export const getProductsByCategoryName = async (categoryName: IParams = {}): Promise<IProduct[]> => {
-  const response = await axios.get(`${api.products}${buildQueryParams(categoryName)}`);
-  console.log(`${api.products}${buildQueryParams(categoryName)}`);
+  const response = await axios.get(`${api.products}${buildQueryParams({ ...homeProductsParams })}`);
   return response.data;
 };
 

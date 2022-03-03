@@ -1,14 +1,14 @@
 type debounceFunc = <T>(func: (...args: T[]) => void, delay: number) => (...args: T[]) => void;
 
-const debounce: debounceFunc = (func, delay) => {
-  let isCooldown = false;
+const debounce: debounceFunc = (func, delay = 500) => {
+  let timerId: ReturnType<typeof setTimeout>;
 
   return (...args) => {
-    if (isCooldown) return;
-    isCooldown = true;
-    setTimeout(() => {
-      func.apply(this, args);
-      isCooldown = false;
+    if (timerId) clearTimeout(timerId);
+
+    timerId = setTimeout(() => {
+      func(...args);
+      clearTimeout(timerId);
     }, delay);
   };
 };

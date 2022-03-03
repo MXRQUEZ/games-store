@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
-import { categories } from "../../../server/data/categories";
+import { categories } from "@/constants/categories";
 
 interface IProductCategoryProps {
   product: IProduct;

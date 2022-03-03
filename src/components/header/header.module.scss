@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .header {
   width: 100vw;
   max-height: 50px;
@@ -56,14 +58,6 @@
       & .drop_menu {
         z-index: 10;
 
-        & .arrow {
-          height: 20px;
-          width: 20px;
-          position: relative;
-          padding-left: 5px;
-          padding-top: 10px;
-        }
-
         & .menu {
           visibility: hidden;
           opacity: 0;
@@ -101,7 +95,7 @@
         .drop_menu:hover {
           visibility: visible;
           opacity: 1;
-          z-index: 1;
+          z-index: 10;
           display: block;
           min-width: 180px;
           text-align: left;

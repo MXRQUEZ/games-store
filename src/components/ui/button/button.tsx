@@ -11,7 +11,6 @@ interface IButtonProps {
 const Button: FC<IButtonProps> = ({ text, disabled = false, type = "submit", onClick }) => (
   <div className={classes.button__container}>
     <button
-      /* eslint-disable-next-line react/button-has-type */
       type={type}
       disabled={disabled}
       className={disabled ? `${classes.button} ${classes.disabled}` : classes.button}

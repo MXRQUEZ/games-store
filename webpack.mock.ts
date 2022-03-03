@@ -3,47 +3,48 @@ import webpackMockServer from "webpack-mock-server";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Application } from "express";
 import { v4 as getUniqueId } from "uuid";
-import { categories } from "./server/data/categories";
+import { categories } from "@/constants/categories";
 import { products } from "./server/data/products";
 import IProduct from "@/types/iProduct";
 // eslint-disable-next-line import/no-named-as-default
 import users from "./server/data/users";
 import IUser from "@/types/iUser";
+import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
 
 export default webpackMockServer.add((app: Application) => {
-  app.get("/api/categories", (_req, res) => {
-    res.json(Object.values(categories));
-  });
-
   app.get("/api/products", (_req, res) => {
-    let productsList = [...products];
+    let matchedProducts = [...products];
 
-    if (_req.query.sortBy) {
-      productsList = productsList.sort((a, b) => {
-        const sortByDefault = "date";
-        const sortQuery = _req.query.sortBy as string;
-        const sortBy = (sortQuery in a ? sortQuery : sortByDefault) as keyof IProduct;
+    if (_req.query.type && _req.query.sortBy) {
+      const { type: typeQuery, sortBy } = _req.query;
+      const sortQuery = (sortBy as string).toLocaleLowerCase();
+      const type = typeQuery as string;
+      const sortByDefault = SortBy.Date.toLocaleLowerCase();
 
-        const fieldA = a[sortBy];
-        const fieldB = b[sortBy];
-
-        return fieldA > fieldB ? -1 : 1;
-      });
+      if (type === Types.Ascending) {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) => {
+          const sortKey = (sortQuery in prevGame ? sortQuery : sortByDefault) as keyof IProduct;
+          return prevGame[sortKey] < nextGame[sortKey] ? -1 : 1;
+        });
+      } else {
+        matchedProducts = matchedProducts.sort((prevGame, nextGame) => {
+          const sortKey = (sortQuery in prevGame ? sortQuery : sortByDefault) as keyof IProduct;
+          return nextGame[sortKey] < prevGame[sortKey] ? -1 : 1;
+        });
+      }
     }
 
     if (_req.query.amount) {
       const { amount } = _req.query;
 
-      if (+amount) {
-        productsList = productsList.length > +amount ? productsList.slice(0, +amount) : productsList;
-      }
+      matchedProducts = matchedProducts.length > +amount ? matchedProducts.slice(0, +amount) : matchedProducts;
     }
 
     if (_req.query.filter) {
       const { filter } = _req.query;
       const searchString = filter as string;
 
-      productsList = productsList.filter((product) =>
+      matchedProducts = matchedProducts.filter((product) =>
         product.name
           .toLowerCase()
           .replace(/[^\w]/gi, "")
@@ -56,20 +57,34 @@ export default webpackMockServer.add((app: Application) => {
       const categoryName = category as string;
       const categoryFilter = categoryName in categories ? categories[categoryName] : null;
 
-      if (category) {
-        productsList = productsList.filter((product) => {
-          // eslint-disable-next-line no-restricted-syntax
-          for (const id of product.categoriesId) {
-            if (id === categoryFilter?.id) {
-              return true;
-            }
+      matchedProducts = matchedProducts.filter((product) => {
+        for (const id of product.categoriesId) {
+          if (id === categoryFilter?.id) {
+            return true;
           }
-          return false;
-        });
+        }
+        return false;
+      });
+    }
+
+    if (_req.query.genre) {
+      const { genre: genreQuery } = _req.query;
+      const genre = genreQuery as string;
+      if (genre in Genres && genre !== Genres.All) {
+        matchedProducts = matchedProducts.filter((product) => product.genre === genre);
       }
     }
 
-    res.json(productsList);
+    if (_req.query.age) {
+      const { age: ageQuery } = _req.query;
+      const age = ageQuery as string;
+
+      if (age in Ages && age !== Genres.All) {
+        matchedProducts = matchedProducts.filter((product) => product.ageRating === age);
+      }
+    }
+
+    res.json(matchedProducts);
   });
 
   app.get("/api/profile", (_req, res) => {

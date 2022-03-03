@@ -1,5 +1,5 @@
 interface ICategory {
-  id: number;
+  id: number | string;
   name: string;
   path: string;
   img: string;

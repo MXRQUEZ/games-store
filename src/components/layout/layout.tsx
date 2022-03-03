@@ -43,10 +43,10 @@ const Layout: FC = ({ children }) => {
     <>
       <Header />
       <main>{spinner ? <Spinner /> : children}</main>
-      <Modal isVisible={isSignInActive} onClose={onSignInClose}>
+      <Modal isActive={isSignInActive} onClose={onSignInClose}>
         <SignInForm />
       </Modal>
-      <Modal isVisible={isSignUpActive} onClose={onSignUpClose}>
+      <Modal isActive={isSignUpActive} onClose={onSignUpClose}>
         <SignUpForm />
       </Modal>
       <Footer />

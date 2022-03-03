@@ -6,7 +6,6 @@ const modalsInitialState: IModalsState = {
   isSignUpActive: false,
 };
 
-// eslint-disable-next-line default-param-last
 const modalsReducer = (state: IModalsState = modalsInitialState, action: Action): IModalsState => {
   switch (action.type) {
     case ModalActionTypes.SIGN_IN_MODAL_OPEN:

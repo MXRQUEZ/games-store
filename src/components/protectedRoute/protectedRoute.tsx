@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/types/pathname";
+import Pathname from "@/constants/pathname";
 
 interface IProtectedRouteProps {
   redirectTo?: string;
