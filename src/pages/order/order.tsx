@@ -30,12 +30,16 @@ const Order: FC = () => {
               </div>
               <p>{currentDate}</p>
               <div className={classes.amount_btn__wrapper}>
-                <button className={classes.btn}>-</button>
+                <button type="button" className={classes.btn}>
+                  -
+                </button>
                 <p>5</p>
-                <button className={classes.btn}>+</button>
+                <button type="button" className={classes.btn}>
+                  +
+                </button>
               </div>
               <p>100$</p>
-              <button className={classes.btn}>
+              <button type="button" className={classes.btn}>
                 <i className={trashCan} />
               </button>
             </div>

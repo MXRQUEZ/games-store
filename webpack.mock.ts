@@ -133,7 +133,7 @@ export default webpackMockServer.add((app: Application) => {
         return;
       }
 
-      const newUser: IUser = { login, password, id: getUniqueId() };
+      const newUser: IUser = { login, password, id: getUniqueId(), balance: 0 };
       users.push(newUser);
       res.json(newUser);
       return;
