@@ -12,7 +12,7 @@ import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
-import { categories } from "@/constants/categories";
+import { platforms } from "@/constants/searchFilters";
 
 const Home: FC = () => {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ const Home: FC = () => {
     <>
       <Searchbar onSearch={onSearch} setSpinner={setSpinner} />
       <Container id={classes.categories} title="Categories" isCard>
-        {Object.values(categories).map((category) => (
+        {platforms.map((category) => (
           <CategoryCard key={category.id} category={category} onClick={onCategoryClick} />
         ))}
       </Container>

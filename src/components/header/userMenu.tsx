@@ -46,7 +46,7 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to={Pathname.Profile}
+          to={Pathname.Order}
         >
           <i className="fa fa-solid fa-cart-shopping" aria-hidden />0
         </NavLink>

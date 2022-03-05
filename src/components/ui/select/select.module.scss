@@ -3,7 +3,7 @@
   grid-template-areas: "select";
   align-items: center;
   position: relative;
-  width: 125px;
+  min-width: 125px;
   padding: 5px;
   border: 1px solid white;
   cursor: pointer;
@@ -14,7 +14,7 @@
     font-size: 16px;
     font-family: Raleway, sans-serif;
     letter-spacing: 1px;
-    width: 115px;
+    min-width: 115px;
     color: white;
     line-height: 1;
     border-style: none;
