@@ -9,6 +9,7 @@ type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const UserMenu: FC = () => {
   const user = useTypedSelector((state) => state.auth.user);
+  const orderLength = useTypedSelector((state) => state.order.order.length);
   const navigate = useNavigate();
   const { signOut, signInModalOpen, signUpModalOpen } = useActions();
 
@@ -48,7 +49,8 @@ const UserMenu: FC = () => {
           }
           to={Pathname.Order}
         >
-          <i className="fa fa-solid fa-cart-shopping" aria-hidden />0
+          <i className="fa fa-solid fa-cart-shopping" aria-hidden />
+          {orderLength}
         </NavLink>
       </li>
       <li>
