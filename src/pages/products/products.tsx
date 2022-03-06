@@ -11,7 +11,7 @@ import { categories } from "@/constants/categories";
 import Pathname from "@/constants/pathname";
 import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
-import initialFilterParams from "@/constants/initialFilterParams";
+import { initialFilterParams } from "@/constants/initialFilterParams";
 
 type ProductsUrlParams = {
   category?: string;
@@ -19,7 +19,6 @@ type ProductsUrlParams = {
 
 const Products: FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [defaultProducts, setDefaultProducts] = useState<IProduct[]>([]);
   const [filterParams, setParams] = useState<ISearchFilterParams>(initialFilterParams);
   const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
@@ -27,12 +26,7 @@ const Products: FC = () => {
 
   const setParamsCallback = useCallback((params: ISearchFilterParams) => setParams(params), []);
 
-  const onSearch = (response: IProduct[] | null): void => {
-    setProducts(response || defaultProducts);
-    setSpinner(false);
-  };
-
-  const onFilter = (response: IProduct[]): void => {
+  const onSearchFilter = (response: IProduct[]): void => {
     setProducts(response);
     setSpinner(false);
   };
@@ -49,14 +43,12 @@ const Products: FC = () => {
         const newParams = { ...filterParams, category };
         const categoryProducts = await getProducts(newParams);
         setParams(newParams);
-        setDefaultProducts(categoryProducts);
         setProducts(categoryProducts);
         setSpinner(false);
         return;
       }
 
       const allProducts = await getProducts({ ...initialFilterParams });
-      setDefaultProducts(allProducts);
       setProducts(allProducts);
       setSpinner(false);
     })();
@@ -73,12 +65,12 @@ const Products: FC = () => {
 
   return (
     <>
-      <Searchbar filterParams={filterParams} onSearch={onSearch} setSpinner={setSpinner} />
+      <Searchbar filterParams={filterParams} onSearch={onSearchFilter} setSpinner={setSpinner} />
       <Container id={classes.filter} title={category ? categories[category].name : "Products"}>
         <ProductFilterForm
           filterParams={filterParams}
           setParams={setParamsCallback}
-          onFilter={onFilter}
+          onFilter={onSearchFilter}
           setSpinner={setSpinner}
         />
       </Container>

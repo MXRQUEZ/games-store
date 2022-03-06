@@ -4,8 +4,7 @@ import IProduct from "@/types/iProduct";
 import api from "@/environment/api";
 import buildQueryParams from "./helpers/buildQueryParams";
 import IUser from "@/types/iUser";
-import { ISearchFilterParams } from "@/types/iSearchFilter";
-import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
+import { homeFilterParams } from "@/constants/initialFilterParams";
 
 export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => {
   const response = await axios.get(`${api.products}${buildQueryParams(params)}`);
@@ -13,20 +12,17 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
 };
 
 export const getHomeProducts = async (): Promise<IProduct[]> => {
-  const homeProductsParams: ISearchFilterParams = {
-    amount: "3",
-    age: Ages.All,
-    genre: Genres.All,
-    sortBy: SortBy.Date,
-    type: Types.Descending,
-  };
-
-  const response = await axios.get(`${api.products}${buildQueryParams({ ...homeProductsParams })}`);
+  const response = await axios.get(`${api.products}${buildQueryParams({ ...homeFilterParams })}`);
   return response.data;
 };
 
 export const getUserById = async (user: IParams = {}): Promise<IUser | null> => {
   const response = await axios.get(`${api.profile}${buildQueryParams(user)}`);
+  return response.data;
+};
+
+export const getUserOrder = async (userId: IParams = {}): Promise<IProduct[]> => {
+  const response = await axios.get(`${api.order}${buildQueryParams(userId)}`);
   return response.data;
 };
 

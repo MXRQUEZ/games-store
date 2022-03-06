@@ -6,23 +6,19 @@ import classes from "@/components/ui/searchbar/searchbar.module.scss";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 
 interface ISearchbarProps {
-  onSearch: (response: IProduct[] | null) => void;
+  onSearch: (response: IProduct[]) => void;
   setSpinner: (isActive: boolean) => void;
-  filterParams?: ISearchFilterParams | null;
+  filterParams: ISearchFilterParams;
 }
 
 type InputChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams = null }) => {
+const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams }) => {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
-    if (search) {
-      const filteredProducts = await getProducts({ ...filterParams, filter: search });
-      onSearch(filteredProducts);
-      return;
-    }
-
-    const filteredProducts = filterParams ? await getProducts({ ...filterParams }) : null;
+    const filteredProducts = search
+      ? await getProducts({ ...filterParams, filter: search })
+      : await getProducts({ ...filterParams });
     onSearch(filteredProducts);
   };
 
@@ -38,10 +34,6 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams = n
       <input className={classes.searchbar} type="text" onChange={handleChange} placeholder="Search" />
     </div>
   );
-};
-
-Searchbar.defaultProps = {
-  filterParams: null,
 };
 
 export default React.memo(Searchbar);

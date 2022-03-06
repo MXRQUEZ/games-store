@@ -12,7 +12,6 @@ export interface IAuthAction extends Action {
 
 export enum AuthActionType {
   SIGN_IN = "SIGN_IN",
-  SIGN_UP = "SIGN_UP",
   SIGN_OUT = "SIGN_OUT",
 }
 

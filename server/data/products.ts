@@ -1,11 +1,10 @@
-import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
 import { categories } from "@/constants/categories";
 import { Ages, Genres } from "@/constants/searchFilters";
 
 export const products: IProduct[] = [
   {
-    id: getUniqueId(),
+    id: "product_0",
     name: "Horizon Zero Dawn",
     rating: 4,
     ageRating: Ages["12+"],
@@ -18,7 +17,7 @@ export const products: IProduct[] = [
     date: new Date(2015, 5, 15),
   },
   {
-    id: getUniqueId(),
+    id: "product_1",
     name: "CS:GO",
     rating: 4,
     ageRating: Ages["12+"],
@@ -31,7 +30,7 @@ export const products: IProduct[] = [
     date: new Date(2021, 7, 21),
   },
   {
-    id: getUniqueId(),
+    id: "product_2",
     name: "Brawl Stars",
     rating: 2,
     ageRating: Ages["3+"],
@@ -44,7 +43,7 @@ export const products: IProduct[] = [
     date: new Date(2018, 11, 12),
   },
   {
-    id: getUniqueId(),
+    id: "product_3",
     name: "Half-Life: Alyx",
     rating: 5,
     ageRating: Ages["16+"],
@@ -57,7 +56,7 @@ export const products: IProduct[] = [
     date: new Date(2020, 2, 23),
   },
   {
-    id: getUniqueId(),
+    id: "product_4",
     name: "TES V Skyrim",
     rating: 5,
     ageRating: Ages["18+"],
@@ -70,7 +69,7 @@ export const products: IProduct[] = [
     date: new Date(2011, 10, 11),
   },
   {
-    id: getUniqueId(),
+    id: "product_5",
     name: "Clash Royale",
     rating: 5,
     ageRating: Ages["3+"],
@@ -83,7 +82,7 @@ export const products: IProduct[] = [
     date: new Date(2016, 2, 2),
   },
   {
-    id: getUniqueId(),
+    id: "product_6",
     name: "Beat Saber",
     rating: 5,
     ageRating: Ages["12+"],
@@ -96,7 +95,7 @@ export const products: IProduct[] = [
     date: new Date(2019, 4, 21),
   },
   {
-    id: getUniqueId(),
+    id: "product_7",
     name: "Terraria",
     rating: 5,
     ageRating: Ages["3+"],
@@ -109,7 +108,7 @@ export const products: IProduct[] = [
     date: new Date(2011, 4, 16),
   },
   {
-    id: getUniqueId(),
+    id: "product_8",
     name: "Genshin Impact",
     rating: 4,
     ageRating: Ages["12+"],
@@ -122,7 +121,7 @@ export const products: IProduct[] = [
     date: new Date(2020, 7, 28),
   },
   {
-    id: getUniqueId(),
+    id: "product_9",
     name: "Counter-Strike 1.6",
     rating: 4,
     ageRating: Ages["6+"],
@@ -135,7 +134,7 @@ export const products: IProduct[] = [
     date: new Date(2010, 9, 25),
   },
   {
-    id: getUniqueId(),
+    id: "product_10",
     name: "Snake",
     rating: 3,
     ageRating: Ages["3+"],
