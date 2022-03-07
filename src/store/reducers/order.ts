@@ -1,13 +1,7 @@
-import { IOrderAction, IOrderState, OrderActionType } from "@/store/types/order";
-import { IOrderItem } from "@/types/iOrderItem";
-import products from "../../../server/data/products";
+import { IOrderAction, IOrderState, OrderActionType, orderKey } from "@/store/types/order";
 
-const defaultItem: IOrderItem = {
-  product: products[0],
-  date: new Date(),
-};
 const orderInitialState: IOrderState = {
-  order: [defaultItem],
+  order: [],
 };
 
 const orderReducer = (state: IOrderState = orderInitialState, action: IOrderAction): IOrderState => {
@@ -17,12 +11,17 @@ const orderReducer = (state: IOrderState = orderInitialState, action: IOrderActi
       if (orderItem) {
         return state;
       }
-      state.order?.push(action.payload);
+      state.order.push(action.payload);
+      const newProductsId = state.order.map((item) => item.product.id);
+      localStorage.setItem(orderKey, JSON.stringify(newProductsId));
       return { ...state };
     case OrderActionType.REMOVE_ITEM:
       const newOrder = state.order?.filter((item) => item.product.id !== action.payload.product.id);
+      const removeProductsId = newOrder.map((item) => item.product.id);
+      localStorage.setItem(orderKey, JSON.stringify(removeProductsId));
       return { ...state, order: newOrder };
     case OrderActionType.CLEAR_ORDER:
+      localStorage.removeItem(orderKey);
       return { ...state, order: [] };
 
     default:

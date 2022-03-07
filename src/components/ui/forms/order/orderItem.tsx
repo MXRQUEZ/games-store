@@ -38,7 +38,7 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
       <p>{orderItem.product.name}</p>
       <div className={classes.select__wrapper}>
         <Select
-          id={orderItem.product.name}
+          id={orderItem.product!.name}
           options={orderItem.product.categoriesId.map((categoryId) => {
             const platform = platforms.find((category) => category.id === categoryId);
             return platform!.name;

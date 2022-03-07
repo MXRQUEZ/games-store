@@ -43,7 +43,7 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
           <h3>Price</h3>
         </div>
         {order.map((orderItem) => {
-          const key = `${orderItem.product.id}_order`;
+          const key = `${orderItem.product!.id}_order`;
           return <OrderItem key={key} orderItem={orderItem} totalPrice={totalPrice} setTotalPrice={setTotalPrice} />;
         })}
       </div>

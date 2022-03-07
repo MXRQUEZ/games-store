@@ -6,7 +6,7 @@ import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import OrderForm from "@/components/ui/forms/order/orderForm";
 
 const Order: FC = () => {
-  const orderItems = useTypedSelector((state) => state.order.order)!;
+  const orderItems = useTypedSelector((state) => state.order.order);
   const user = useTypedSelector((state) => state.auth.user);
   const [balance, setBalance] = useState<number>(user!.balance!);
   const balanceTitle = `Your current balance is ${balance.toFixed(2)}$`;

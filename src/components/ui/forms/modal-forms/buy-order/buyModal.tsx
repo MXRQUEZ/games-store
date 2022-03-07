@@ -25,9 +25,10 @@ const BuyModal: FC<IBuyModalProps> = ({ order, onBuy, disabled }) => {
         <form className={formClasses.form} onSubmit={onBuy}>
           <h4 className={buyClasses.title}>You are gonna purchase for the following items: </h4>
           <ul className={buyClasses.items}>
-            {order.map((item) => (
-              <li>{item.product.name}</li>
-            ))}
+            {order.map((item) => {
+              const key = `${item.product.id}_confirm`;
+              return <li key={key}>{item.product.name}</li>;
+            })}
           </ul>
           <Button text="Confirm purchase" />
         </form>
