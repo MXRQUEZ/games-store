@@ -10,6 +10,7 @@ import IProduct from "@/types/iProduct";
 import users from "./server/data/users";
 import IUser from "@/types/iUser";
 import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
+import Roles from "@/constants/roles";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/products", (_req, res) => {
@@ -133,7 +134,7 @@ export default webpackMockServer.add((app: Application) => {
         return;
       }
 
-      const newUser: IUser = { login, password, id: getUniqueId(), balance: 0 };
+      const newUser: IUser = { login, password, id: getUniqueId(), balance: 0, role: Roles.User };
       users.push(newUser);
       res.json(newUser);
       return;

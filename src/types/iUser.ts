@@ -1,3 +1,5 @@
+import Roles from "@/constants/roles";
+
 interface IUser {
   id?: number | string;
   login: string;
@@ -6,6 +8,7 @@ interface IUser {
   profilePicture?: string;
   description?: string;
   username?: string;
+  role?: Roles;
   passwordRepeat?: string;
 }
 

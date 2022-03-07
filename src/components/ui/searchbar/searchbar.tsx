@@ -4,6 +4,9 @@ import { getProducts } from "@/shared/utils/apiRequests";
 import debounce from "@/shared/utils/helpers/debounce";
 import classes from "@/components/ui/searchbar/searchbar.module.scss";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import Roles from "@/constants/roles";
+import Button from "@/components/ui/button/button";
 
 interface ISearchbarProps {
   onSearch: (response: IProduct[]) => void;
@@ -29,9 +32,24 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams }) 
     debounceOnChange(event);
   }, []);
 
+  const userRole = useTypedSelector((state) => state.auth.user?.role);
+
   return (
-    <div className={classes.searchbar__container}>
-      <input className={classes.searchbar} type="text" onChange={handleChange} placeholder="Search" />
+    <div className={classes.searchbar__wrapper}>
+      <div className={classes.searchbar__container}>
+        <input
+          id={userRole === Roles.Admin ? classes.admin__searchbar : undefined}
+          className={classes.searchbar}
+          type="text"
+          onChange={handleChange}
+          placeholder="Search"
+        />
+      </div>
+      {userRole === Roles.Admin && (
+        <div className={classes.button__container}>
+          <Button id={classes.create__card} text="Create Card" />
+        </div>
+      )}
     </div>
   );
 };

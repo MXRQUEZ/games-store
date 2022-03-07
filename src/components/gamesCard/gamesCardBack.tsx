@@ -2,10 +2,10 @@ import { FC, useEffect, useState } from "react";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
 import Button from "@/components/ui/button/button";
-import { buy } from "@/constants/constants";
 import useActions from "@/hooks/redux/useActions";
 import { IOrderItem } from "@/types/iOrderItem";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import Roles from "@/constants/roles";
 
 interface IGamesCardBackProps {
   product: IProduct;
@@ -32,6 +32,8 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
     setDisabled(!!order.find((item) => item.product.id === product.id));
   }, []);
 
+  const userRole = useTypedSelector((state) => state.auth.user?.role);
+
   return (
     <div className={classes.card__back}>
       <div className={classes.card__back__top}>
@@ -39,7 +41,10 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
       </div>
       <div className={classes.card__back__bottom}>
         <p>{product.ageRating}</p>
-        <Button disabled={disabled} text={buy} type="submit" onClick={onClickAddItem} />
+        <div className={classes.buttons_container}>
+          <Button disabled={disabled} text="To basket" type="submit" onClick={onClickAddItem} />
+          {userRole === Roles.Admin && <Button text="Edit card" type="button" />}
+        </div>
       </div>
     </div>
   );
