@@ -87,15 +87,6 @@ export default webpackMockServer.add((app: Application) => {
     res.json(matchedProducts);
   });
 
-  app.get("/api/products-id", (_req, res) => {
-    const { productsId: productsIdQuery } = _req.query;
-    if (productsIdQuery) {
-      const productsId: string[] = JSON.parse(productsIdQuery as string);
-      const searchedProducts = productsId.map((id) => products.find((product) => product.id === id));
-      res.json(searchedProducts);
-    }
-  });
-
   app.get("/api/profile", (_req, res) => {
     const { user: userId } = _req.query;
     if (userId) {

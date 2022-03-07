@@ -1,4 +1,4 @@
-import { IOrderAction, IOrderState, OrderActionType, orderKey } from "@/store/types/order";
+import { IOrderAction, IOrderState, OrderActionType } from "@/store/types/order";
 
 const orderInitialState: IOrderState = {
   order: [],
@@ -12,16 +12,11 @@ const orderReducer = (state: IOrderState = orderInitialState, action: IOrderActi
         return state;
       }
       state.order.push(action.payload);
-      const newProductsId = state.order.map((item) => item.product.id);
-      localStorage.setItem(orderKey, JSON.stringify(newProductsId));
       return { ...state };
     case OrderActionType.REMOVE_ITEM:
-      const newOrder = state.order?.filter((item) => item.product.id !== action.payload.product.id);
-      const removeProductsId = newOrder.map((item) => item.product.id);
-      localStorage.setItem(orderKey, JSON.stringify(removeProductsId));
+      const newOrder = state.order.filter((item) => item.product.id !== action.payload.product.id);
       return { ...state, order: newOrder };
     case OrderActionType.CLEAR_ORDER:
-      localStorage.removeItem(orderKey);
       return { ...state, order: [] };
 
     default:

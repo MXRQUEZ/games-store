@@ -15,5 +15,3 @@ export enum OrderActionType {
   REMOVE_ITEM = "REMOVE_ITEM",
   CLEAR_ORDER = "CLEAR_ORDER",
 }
-
-export const orderKey = "order";

@@ -7,15 +7,14 @@ import SignUpForm from "../ui/forms/modal-forms/sign-up/signUpForm";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import useActions from "@/hooks/redux/useActions";
 import { userKey } from "@/store/types/auth";
-import { getProductsById, getUserById } from "@/shared/utils/apiRequests";
+import { getUserById } from "@/shared/utils/apiRequests";
 import Spinner from "@/components/ui/spinner/spinner";
-import { orderKey } from "@/store/types/order";
 
 const Layout: FC = ({ children }) => {
   const { isSignInActive, isSignUpActive } = useTypedSelector((state) => state.modals);
   const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalClose, signUpModalClose } = useActions();
-  const { signIn, addNewOrderItem } = useActions();
+  const { signIn } = useActions();
   const [spinner, setSpinner] = useState(true);
 
   const onSignInClose = () => {
@@ -32,13 +31,6 @@ const Layout: FC = ({ children }) => {
       (async () => {
         const user = await getUserById({ user: userId });
         user && signIn(user);
-        const storageProducts = localStorage.getItem(orderKey);
-        if (storageProducts) {
-          const products = await getProductsById({ productsId: storageProducts });
-          products.forEach((product) => {
-            addNewOrderItem({ product, date: new Date() });
-          });
-        }
         setSpinner(false);
       })();
       return;

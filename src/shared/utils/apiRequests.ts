@@ -11,11 +11,6 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
   return response.data;
 };
 
-export const getProductsById = async (productsId: IParams = {}): Promise<IProduct[]> => {
-  const response = await axios.get(`${api.productsById}${buildQueryParams(productsId)}`);
-  return response.data;
-};
-
 export const getHomeProducts = async (): Promise<IProduct[]> => {
   const response = await axios.get(`${api.products}${buildQueryParams({ ...homeFilterParams })}`);
   return response.data;
