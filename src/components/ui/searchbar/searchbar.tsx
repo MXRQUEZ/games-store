@@ -47,7 +47,7 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams }) 
       </div>
       {userRole === Roles.Admin && (
         <div className={classes.button__container}>
-          <Button id={classes.create__card} text="Create Card" />
+          <Button id={classes.create__card} type="button" text="Create Card" />
         </div>
       )}
     </div>
