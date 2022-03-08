@@ -7,9 +7,8 @@ import Button from "@/components/ui/button/button";
 import classes from "./profile.module.scss";
 import {
   defaultErrorMessage,
-  descriptionLengthMessage,
-  descriptionMaxLength,
-  descriptionMinLength,
+  profileDescMaxLen,
+  descriptionMinLen,
   usernameLengthMessage,
   usernameMaxLength,
   usernameMinLength,
@@ -102,21 +101,18 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
         <div className={classes.error}>
           {errors?.username && <span role="alert">{errors.username?.message || defaultErrorMessage}</span>}
         </div>
-        <label htmlFor="description" className={classes.label}>
+        <label htmlFor="profile_description" className={classes.label}>
           Description
         </label>
         <textarea
-          id="description"
+          id="profile_description"
           className={classes.description__textarea}
           autoComplete="off"
+          maxLength={profileDescMaxLen}
           placeholder={user.description || "Describe yourself in 150 symbols"}
           {...register("description", {
             required: false,
-            maxLength: {
-              value: descriptionMaxLength,
-              message: descriptionLengthMessage,
-            },
-            minLength: descriptionMinLength,
+            minLength: descriptionMinLen,
           })}
         />
         <div className={classes.error}>

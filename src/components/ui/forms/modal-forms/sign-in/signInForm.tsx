@@ -62,7 +62,7 @@ const SignInForm: FC = () => {
 
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={classes.auth}>Authorization</h4>
+      <h4 className={classes.title}>Authorization</h4>
       <FormInput
         label={loginLabel}
         iconClass={loginIconClass}

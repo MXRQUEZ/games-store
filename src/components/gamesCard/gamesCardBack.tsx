@@ -6,6 +6,7 @@ import useActions from "@/hooks/redux/useActions";
 import { IOrderItem } from "@/types/iOrderItem";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Roles from "@/constants/roles";
+import CardEditForm from "@/components/ui/forms/modal-forms/admin/cardEditForm";
 
 interface IGamesCardBackProps {
   product: IProduct;
@@ -43,7 +44,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
         <p>{product.ageRating}</p>
         <div className={classes.buttons_container}>
           <Button disabled={disabled} text="To basket" type="submit" onClick={onClickAddItem} />
-          {userRole === Roles.Admin && <Button text="Edit card" type="button" />}
+          {userRole === Roles.Admin && <CardEditForm text="Edit card" product={product} />}
         </div>
       </div>
     </div>

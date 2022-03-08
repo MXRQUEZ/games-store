@@ -22,6 +22,10 @@ const images: IImages = {
     path: "https://res.cloudinary.com/mxrquez/image/upload/v1646426442/img_561097_fmczww.png",
     description: "empty basket",
   },
+  defaultCardImage: {
+    path: "https://gratitude-factory.com/img/no-image.png",
+    description: "product image",
+  },
 };
 
 export default images;

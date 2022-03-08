@@ -32,9 +32,9 @@ export const usernameMaxLength = 20;
 export const usernameMinLength = 5;
 export const usernameLengthMessage = `Username length must be between ${usernameMinLength} and ${usernameMaxLength}`;
 
-export const descriptionMaxLength = 150;
-export const descriptionMinLength = 1;
-export const descriptionLengthMessage = `Description length must be less than 150 ${descriptionMaxLength} symbols`;
+export const profileDescMaxLen = 150;
+export const descriptionMinLen = 1;
+export const productDescMaxLen = 300;
 
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";

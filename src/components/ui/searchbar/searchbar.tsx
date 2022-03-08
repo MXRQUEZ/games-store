@@ -6,7 +6,7 @@ import classes from "@/components/ui/searchbar/searchbar.module.scss";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Roles from "@/constants/roles";
-import Button from "@/components/ui/button/button";
+import CardEditForm from "@/components/ui/forms/modal-forms/admin/cardEditForm";
 
 interface ISearchbarProps {
   onSearch: (response: IProduct[]) => void;
@@ -47,7 +47,7 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams }) 
       </div>
       {userRole === Roles.Admin && (
         <div className={classes.button__container}>
-          <Button id={classes.create__card} type="button" text="Create Card" />
+          <CardEditForm buttonId={classes.create__card} text="Create Card" />
         </div>
       )}
     </div>
