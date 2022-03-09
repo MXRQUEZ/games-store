@@ -6,7 +6,7 @@ import useActions from "@/hooks/redux/useActions";
 import { IOrderItem } from "@/types/iOrderItem";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Roles from "@/constants/roles";
-import CardEditForm from "@/components/ui/forms/modal-forms/admin/cardEditForm";
+import CardEditForm from "@/components/ui/forms/modal-forms/admin/card-edit/cardEditForm";
 
 interface IGamesCardBackProps {
   product: IProduct;
@@ -25,8 +25,6 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
 
     addNewOrderItem(orderItem);
     setDisabled(true);
-    const itemAddedText = `${orderItem.product.name} was added to your order`;
-    alert(itemAddedText);
   };
 
   useEffect(() => {

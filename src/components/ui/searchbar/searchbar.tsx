@@ -6,7 +6,7 @@ import classes from "@/components/ui/searchbar/searchbar.module.scss";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Roles from "@/constants/roles";
-import CardEditForm from "@/components/ui/forms/modal-forms/admin/cardEditForm";
+import CardEditForm from "@/components/ui/forms/modal-forms/admin/card-edit/cardEditForm";
 
 interface ISearchbarProps {
   onSearch: (response: IProduct[]) => void;

@@ -22,7 +22,8 @@ const BuyModal: FC<IBuyModalProps> = ({ order, onBuy, disabled }) => {
         <Button id={buyClasses.buy} disabled={disabled} type="button" text="Buy" onClick={handleOpen} />
       </div>
       <Modal isActive={isModalActive} onClose={handleClose}>
-        <form className={formClasses.form} onSubmit={onBuy}>
+        <form id={buyClasses.buyConfirm} className={formClasses.form} onSubmit={onBuy}>
+          <h3 className={formClasses.title}>Buy Confirmation</h3>
           <h4 className={buyClasses.title}>You are gonna purchase for the following items: </h4>
           <ul className={buyClasses.items}>
             {order.map((item) => {
