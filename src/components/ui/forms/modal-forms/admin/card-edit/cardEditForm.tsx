@@ -70,7 +70,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
                 title="Image"
                 productName={product?.name}
                 onClick={onClickSelect}
-                defaultValue={product?.genre}
+                defaultValue={product?.img}
                 onBlur={onBlurSetNewImage}
               />
               <CardInputField
