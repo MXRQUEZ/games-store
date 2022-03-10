@@ -27,7 +27,7 @@ const DeleteConfirmation: FC<IDeleteConfirmationProps> = ({ productName, setPrev
     <>
       <Button text="Delete" type="button" onClick={handleOpen} />
       <Modal isActive={isModalActive} onClose={onCloseOpenPrevious}>
-        <form id={confirmClasses.deleteConfirm} className={formClasses.form}>
+        <form className={`${formClasses.form} ${confirmClasses.delete__confirm}`}>
           <h4 className={formClasses.title}>Delete confirmation</h4>
           <h5 className={confirmClasses.title}>{confirmationText}</h5>
           <div className={confirmClasses.confirm__buttons}>

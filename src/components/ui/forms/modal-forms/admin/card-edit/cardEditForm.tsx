@@ -39,7 +39,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
     <>
       <Button id={buttonId} text={text} type="button" onClick={handleOpen} />
       <Modal isActive={isModalActive} onClose={handleClose}>
-        <form id={cardClasses.cardEdit} className={formClasses.form}>
+        <form className={`${formClasses.form} ${cardClasses.admin__edit_form}`}>
           <h3 className={formClasses.title}>{text}</h3>
           <div className={cardClasses.card__edit}>
             <div className={cardClasses.image__wrapper}>
