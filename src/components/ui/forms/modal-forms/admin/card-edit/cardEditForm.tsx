@@ -4,7 +4,7 @@ import cardClasses from "../adminForm.module.scss";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
-import { ages, Genres, genres } from "@/constants/searchFilters";
+import { ages, Genres, genres, platforms } from "@/constants/searchFilters";
 import images from "@/constants/images";
 import { productDescMaxLen } from "@/constants/constants";
 import DeleteConfirmation from "@/components/ui/forms/modal-forms/admin/confirm-delete/deleteConfirmation";
@@ -20,6 +20,13 @@ interface ICardEditProps {
 
 const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
   const [isModalActive, setModalActive] = useState(false);
+  const defaultPlatforms: (string | number)[] = [];
+  platforms.forEach((platform) => {
+    if (product?.categoriesId.includes(platform.id)) {
+      defaultPlatforms.push(platform.id);
+    }
+  });
+  const [platformsId, setPlatforms] = useState<(string | number)[]>(defaultPlatforms);
   const handleOpen = (): void => setModalActive(true);
   const handleClose = (): void => setModalActive(false);
   const productGenres = genres.filter((genre) => genre !== Genres.All);
@@ -87,7 +94,12 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
                 options={ages}
                 defaultValue={product?.ageRating}
               />
-              <CardPlatformsMenu productName={product?.name} productCategories={product?.categoriesId} />
+              <CardPlatformsMenu
+                productName={product?.name}
+                platformsId={platformsId}
+                productCategories={product?.categoriesId}
+                setPlatforms={setPlatforms}
+              />
             </div>
           </div>
           <div className={cardClasses.buttons}>
