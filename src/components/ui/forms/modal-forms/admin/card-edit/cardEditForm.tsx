@@ -155,7 +155,13 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
             <div className={cardClasses.card__error}>{errorMessage}</div>
             <div className={cardClasses.buttons}>
               <Button text="Submit" />
-              {product && <DeleteConfirmation setPreviousModal={setModalActive} productName={product?.name} />}
+              {product && (
+                <DeleteConfirmation
+                  setPreviousModal={setModalActive}
+                  productId={product?.id}
+                  productName={product?.name}
+                />
+              )}
             </div>
           </div>
         </form>

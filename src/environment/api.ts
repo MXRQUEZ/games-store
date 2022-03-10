@@ -1,5 +1,5 @@
 const api = {
-  products: "/api/products",
+  products: "/api/products/",
   productsByCategoryName: "/api/products/category",
   authSignIn: "/api/auth/sign-in",
   authSignUp: "/api/auth/sign-up",
