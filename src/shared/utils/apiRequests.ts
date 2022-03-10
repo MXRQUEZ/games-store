@@ -52,5 +52,5 @@ export const updateProduct = async (product: IProduct): Promise<IProduct> => {
 };
 
 export const removeProduct = async (id: string | number): Promise<void> => {
-  await axios.delete(`${api.products}${id}`);
+  await axios.delete(`${api.products}/${id}`);
 };

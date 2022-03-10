@@ -163,7 +163,7 @@ export default webpackMockServer.add((app: Application) => {
     res.json(currentUser);
   });
 
-  app.post("/api/products", (_req, res) => {
+  app.post("/api/change-password", (_req, res) => {
     const { password, id } = _req.body;
     const currentUser = users.find((user) => user.id === id);
 
@@ -185,7 +185,7 @@ export default webpackMockServer.add((app: Application) => {
       return;
     }
 
-    products.push({ id, img, description, price, name, rating, genre, ageRating, date, categoriesId });
+    products.push({ id, img, description, price: +price, name, rating: +rating, genre, ageRating, date, categoriesId });
     res.send(_req.body);
   });
 
@@ -199,8 +199,8 @@ export default webpackMockServer.add((app: Application) => {
       id,
       name,
       ageRating,
-      price,
-      rating,
+      price: +price,
+      rating: +rating,
       categoriesId,
       description,
       genre,

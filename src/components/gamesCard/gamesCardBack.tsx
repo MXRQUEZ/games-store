@@ -35,9 +35,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
 
   return (
     <div className={classes.card__back}>
-      <div className={classes.card__back__top}>
-        <p>{product.description}</p>
-      </div>
+      <div className={classes.card__back__top}>{product.description}</div>
       <div className={classes.card__back__bottom}>
         <p>{product.ageRating}</p>
         <div className={classes.buttons_container}>

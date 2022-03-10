@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
 import cardClasses from "../adminForm.module.scss";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
@@ -7,11 +8,19 @@ import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
 import { ages, Genres, genres } from "@/constants/searchFilters";
 import images from "@/constants/images";
-import { allFieldsRequired, pricePattern, pricePatternMessage, productDescMaxLen } from "@/constants/constants";
+import {
+  allFieldsRequired,
+  pricePattern,
+  pricePatternMessage,
+  productDescLenMessage,
+  productDescMaxLen,
+  productDescMinLen,
+} from "@/constants/constants";
 import DeleteConfirmation from "@/components/ui/forms/modal-forms/admin/confirm-delete/deleteConfirmation";
 import CardInputField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardInputField";
 import CardSelectField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardSelectField";
 import CardPlatformsMenu from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardPlatformsMenu";
+import { createProduct, updateProduct } from "@/shared/utils/apiRequests";
 
 interface ICardEditProps {
   text: string;
@@ -27,6 +36,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
     formState: { errors, isSubmitSuccessful, isSubmitted },
     handleSubmit,
     reset,
+    setError,
   } = useForm<ProductEdit>({
     mode: "onSubmit",
   });
@@ -42,9 +52,55 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
   const defaultCardImage = product?.img || images.defaultCardImage.path;
   const [cardImage, setCardImage] = useState<string>(defaultCardImage);
 
-  const onSubmitCreateProduct: SubmitHandler<ProductEdit> = (productCreateData: ProductEdit) => {
-    console.log(productCreateData);
-    console.log(platformsId);
+  const onSubmitUpdateProduct: SubmitHandler<ProductEdit> = async (productCreateData: ProductEdit) => {
+    if (!platformsId.length) {
+      setError("name", {
+        type: "manual",
+        message: allFieldsRequired,
+      });
+      return;
+    }
+
+    const updatedProduct: IProduct = {
+      id: product!.id,
+      name: productCreateData.name,
+      rating: product!.rating,
+      ageRating: productCreateData.ageRating,
+      genre: productCreateData.genre,
+      categoriesId: platformsId,
+      description: productCreateData.description,
+      price: +productCreateData.price,
+      img: productCreateData.img,
+      date: product!.date,
+    };
+    await updateProduct(updatedProduct);
+    setModalActive(false);
+    setCardImage(defaultCardImage);
+    reset();
+  };
+
+  const onSubmitCreateProduct: SubmitHandler<ProductEdit> = async (productCreateData: ProductEdit) => {
+    if (!platformsId.length) {
+      setError("name", {
+        type: "manual",
+        message: allFieldsRequired,
+      });
+      return;
+    }
+    const newProduct: IProduct = {
+      id: getUniqueId(),
+      name: productCreateData.name,
+      rating: 5,
+      ageRating: productCreateData.ageRating,
+      genre: productCreateData.genre,
+      categoriesId: platformsId,
+      description: productCreateData.description,
+      price: +productCreateData.price,
+      img: productCreateData.img,
+      date: new Date(),
+    };
+
+    await createProduct(newProduct);
     setModalActive(false);
     setCardImage(defaultCardImage);
     reset();
@@ -60,7 +116,9 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
   }, []);
 
   const errorMessage: JSX.Element | null =
-    !isSubmitSuccessful && isSubmitted ? <span role="alert">{errors?.price?.message || allFieldsRequired}</span> : null;
+    !isSubmitSuccessful && isSubmitted ? (
+      <span role="alert">{errors?.price?.message || errors?.description?.message || allFieldsRequired}</span>
+    ) : null;
 
   return (
     <>
@@ -68,7 +126,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
       <Modal isActive={isModalActive} onClose={handleClose}>
         <form
           className={`${formClasses.form} ${cardClasses.admin__edit_form}`}
-          onSubmit={handleSubmit(onSubmitCreateProduct)}
+          onSubmit={handleSubmit(product ? onSubmitUpdateProduct : onSubmitCreateProduct)}
         >
           <h3 className={formClasses.title}>{text}</h3>
           <div className={cardClasses.card__edit}>
@@ -131,7 +189,10 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
                 maxLength={productDescMaxLen}
                 register={register("description", {
                   required: true,
-                  minLength: 1,
+                  minLength: {
+                    value: productDescMinLen,
+                    message: productDescLenMessage,
+                  },
                 })}
               />
               <CardSelectField

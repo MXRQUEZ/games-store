@@ -36,6 +36,8 @@ export const usernameLengthMessage = `Username length must be between ${username
 export const profileDescMaxLen = 150;
 export const descriptionMinLen = 1;
 export const productDescMaxLen = 300;
+export const productDescMinLen = 30;
+export const productDescLenMessage = "Too small description";
 
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";

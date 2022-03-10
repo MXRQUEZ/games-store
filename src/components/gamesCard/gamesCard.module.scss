@@ -81,6 +81,9 @@
         height: 75%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        word-wrap: break-word;
+        line-break: anywhere;
         font-family: Raleway, sans-serif;
         font-size: 17px;
         margin-top: auto;
