@@ -20,8 +20,7 @@ interface ICardEditProps {
 
 const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
   const [isModalActive, setModalActive] = useState(false);
-  const initialPlatforms = product?.categoriesId || [];
-  const [platformsId, setPlatforms] = useState<(string | number)[]>(initialPlatforms);
+  const [platformsId, setPlatforms] = useState<(string | number)[]>(product?.categoriesId || []);
   const handleOpen = (): void => setModalActive(true);
   const handleClose = (): void => setModalActive(false);
   const productGenres = genres.filter((genre) => genre !== Genres.All);
