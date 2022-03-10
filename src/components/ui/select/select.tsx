@@ -10,7 +10,7 @@ interface ISelectProps {
 }
 const Select: FC<ISelectProps> = ({ options, id, defaultValue, register }) => (
   <div id={id} className={classes.select__container}>
-    <select className={classes.select} value={defaultValue} {...register}>
+    <select className={classes.select} defaultValue={defaultValue} {...register}>
       {options.map((value) => (
         <option key={value} value={value}>
           {value}

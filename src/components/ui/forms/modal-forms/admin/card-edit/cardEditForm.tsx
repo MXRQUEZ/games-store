@@ -4,12 +4,13 @@ import cardClasses from "../adminForm.module.scss";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
-import Select from "@/components/ui/select/select";
 import { ages, Genres, genres } from "@/constants/searchFilters";
 import images from "@/constants/images";
 import { productDescMaxLen } from "@/constants/constants";
-import { categories } from "@/constants/categories";
 import DeleteConfirmation from "@/components/ui/forms/modal-forms/admin/confirm-delete/deleteConfirmation";
+import CardInputField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardInputField";
+import CardSelectField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardSelectField";
+import CardPlatformsMenu from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardPlatformsMenu";
 
 interface ICardEditProps {
   text: string;
@@ -25,7 +26,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
   const defaultCardImage = product?.img || images.defaultCardImage.path;
   const [cardImage, setCardImage] = useState<string>(defaultCardImage);
 
-  const onBlurSetNewImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onBlurSetNewImage = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const imageUrl = event.target.value || defaultCardImage;
     setCardImage(imageUrl);
   };
@@ -47,90 +48,46 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
             </div>
             <div className={cardClasses.information}>
               <h4 className={cardClasses.title}>Information</h4>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productName">Name</label>
-                <input
-                  className={cardClasses.field__input}
-                  id="edit_productName"
-                  autoComplete="off"
-                  defaultValue={product?.name}
-                  onClick={onClickSelect}
-                />
-              </div>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productGenre">Genre</label>
-                <Select id="edit_productGenre" options={productGenres} defaultValue={product?.genre} />
-              </div>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productPrice">Price</label>
-                <input
-                  className={cardClasses.field__input}
-                  id="edit_productPrice"
-                  autoComplete="off"
-                  defaultValue={product?.price.toFixed(2)}
-                  onClick={onClickSelect}
-                />
-              </div>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productImage">Image</label>
-                <input
-                  className={cardClasses.field__input}
-                  id="edit_productImage"
-                  autoComplete="off"
-                  defaultValue={product?.img}
-                  onBlur={onBlurSetNewImage}
-                  onClick={onClickSelect}
-                />
-              </div>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productDescription">Description</label>
-                <textarea
-                  className={cardClasses.field__description}
-                  id="edit_productDescription"
-                  autoComplete="off"
-                  onClick={onClickSelect}
-                  value={product?.description}
-                  maxLength={productDescMaxLen}
-                />
-              </div>
-              <div className={cardClasses.field}>
-                <label htmlFor="edit_productAgeRating">Age Rating</label>
-                <Select id="edit_productAgeRating" options={ages} defaultValue={product?.ageRating} />
-              </div>
-              <div className={cardClasses.platforms__field}>
-                <label className={cardClasses.platform__label} htmlFor="edit_productPlatform">
-                  Platforms
-                </label>
-                <ul id="edit_productPlatform">
-                  <li className={cardClasses.field}>
-                    <label htmlFor="edit_productPlatform-PC">PC</label>
-                    <input
-                      className={cardClasses.checkbox}
-                      id="edit_productPlatform-PC"
-                      defaultChecked={product?.categoriesId.includes(categories.pc.id)}
-                      type="checkbox"
-                    />
-                  </li>
-                  <li className={cardClasses.field}>
-                    <label htmlFor="edit_productPlatform-PS">PlayStation 5</label>
-                    <input
-                      className={cardClasses.checkbox}
-                      id="edit_productPlatform-PS"
-                      type="checkbox"
-                      defaultChecked={product?.categoriesId.includes(categories.playstation.id)}
-                    />
-                  </li>
-                  <li className={cardClasses.field}>
-                    <label htmlFor="edit_productPlatform-Xbox">Xbox One</label>
-                    <input
-                      className={cardClasses.checkbox}
-                      id="edit_productPlatform-Xbox"
-                      type="checkbox"
-                      defaultChecked={product?.categoriesId.includes(categories.xbox.id)}
-                    />
-                  </li>
-                </ul>
-              </div>
+              <CardInputField
+                title="Name"
+                productName={product?.name}
+                onClick={onClickSelect}
+                defaultValue={product?.name}
+              />
+              <CardSelectField
+                title="Genres"
+                productName={product?.name}
+                options={productGenres}
+                defaultValue={product?.genre}
+              />
+              <CardInputField
+                title="Price"
+                productName={product?.name}
+                onClick={onClickSelect}
+                defaultValue={product?.price.toFixed(2)}
+              />
+              <CardInputField
+                title="Image"
+                productName={product?.name}
+                onClick={onClickSelect}
+                defaultValue={product?.genre}
+                onBlur={onBlurSetNewImage}
+              />
+              <CardInputField
+                isTextArea
+                title="Description"
+                productName={product?.name}
+                onClick={onClickSelect}
+                defaultValue={product?.description}
+                maxLength={productDescMaxLen}
+              />
+              <CardSelectField
+                title="Age Rating"
+                productName={product?.name}
+                options={ages}
+                defaultValue={product?.ageRating}
+              />
+              <CardPlatformsMenu productName={product?.name} productCategories={product?.categoriesId} />
             </div>
           </div>
           <div className={cardClasses.buttons}>
