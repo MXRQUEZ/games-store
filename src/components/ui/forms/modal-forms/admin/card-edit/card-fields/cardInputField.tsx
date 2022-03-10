@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 import cardClasses from "./cardFields.module.scss";
 
 interface ICardInputProps {
@@ -7,8 +8,10 @@ interface ICardInputProps {
   defaultValue?: string;
   isTextArea?: boolean;
   maxLength?: number;
+  max?: number;
   onClick?: (event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  register?: UseFormRegisterReturn;
 }
 
 const CardInputField: FC<ICardInputProps> = ({
@@ -19,6 +22,8 @@ const CardInputField: FC<ICardInputProps> = ({
   defaultValue,
   onClick,
   onBlur,
+  max,
+  register,
 }) => {
   const id = `edit_product${title}-${productName || "NewProduct"}`;
   return isTextArea ? (
@@ -30,8 +35,9 @@ const CardInputField: FC<ICardInputProps> = ({
         autoComplete="off"
         defaultValue={defaultValue}
         onClick={onClick}
-        onBlur={onBlur}
         maxLength={maxLength}
+        {...register}
+        onBlur={onBlur}
       />
     </div>
   ) : (
@@ -43,6 +49,8 @@ const CardInputField: FC<ICardInputProps> = ({
         autoComplete="off"
         defaultValue={defaultValue}
         onClick={onClick}
+        max={max}
+        {...register}
         onBlur={onBlur}
       />
     </div>
@@ -56,6 +64,8 @@ CardInputField.defaultProps = {
   onBlur: undefined,
   isTextArea: false,
   maxLength: undefined,
+  register: undefined,
+  max: undefined,
 };
 
 export default CardInputField;

@@ -73,20 +73,20 @@
       transition: 0.5s all ease;
     }
   }
+}
 
-  & .error {
-    display: flex;
-    align-items: center;
-    height: 10px;
-    margin-bottom: 30px;
-    font-size: 16px;
+.error {
+  display: flex;
+  align-items: center;
+  height: 10px;
+  margin-bottom: 30px;
+  font-size: 16px;
 
-    & span {
-      color: #bf1650;
-    }
+  & span {
+    color: #bf1650;
+  }
 
-    span:before {
-      content: "⚠ ";
-    }
+  span:before {
+    content: "⚠ ";
   }
 }

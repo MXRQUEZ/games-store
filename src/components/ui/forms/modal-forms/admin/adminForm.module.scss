@@ -67,9 +67,29 @@
   }
 }
 
-.buttons {
+.bottom__wrapper {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .card__error {
+    font-size: 16px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+
+    & span {
+      color: #bf1650;
+    }
+
+    span:before {
+      content: "⚠ ";
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+  }
 }

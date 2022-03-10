@@ -18,6 +18,7 @@ export const gitHubRepoLink = "https://github.com/MXRQUEZ/js-react";
 
 // forms
 export const defaultErrorMessage = "Error!";
+export const allFieldsRequired = "All fields are required";
 export const userInvalidMessage = "Login or password is invalid";
 export const userExistsMessage = "User with this login already exists";
 export const requiredFieldMessage = "This field is required!";
@@ -42,3 +43,6 @@ export const passwordMinLength = 6;
 export const passwordLengthMessage = `Min password length is ${passwordMinLength} symbols`;
 export const passwordRepeatLabel = "repeat password";
 export const passwordRepeatMessage = "The passwords do not match";
+
+export const pricePattern = /^\d+(\.\d\d)?$/;
+export const pricePatternMessage = "Price must contain only numbers with two decimal places";
