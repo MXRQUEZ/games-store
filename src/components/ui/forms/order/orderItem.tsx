@@ -4,6 +4,7 @@ import Select from "@/components/ui/select/select";
 import { platforms } from "@/constants/searchFilters";
 import { IOrderItem } from "@/types/iOrderItem";
 import useActions from "@/hooks/redux/useActions";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
 
 interface IOrderItemProps {
   orderItem: IOrderItem;
@@ -13,16 +14,20 @@ interface IOrderItemProps {
 
 const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }) => {
   const [amount, setAmount] = useState<number>(1);
+  const order = useTypedSelector((state) => state.order.order);
   const { removeFromOrder } = useActions();
   const trashCan = "fa-solid fa-trash-can";
   const increment = "increment";
   const decrement = "decrement";
 
   const onClickRemoveItem = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const removeItem: IOrderItem = JSON.parse(event.currentTarget.value);
-    removeFromOrder(removeItem);
-    const newTotalPrice = totalPrice - orderItem.product.price * amount;
-    setTotalPrice(newTotalPrice);
+    const removeItemId: string = event.currentTarget.value;
+    const removeItem = order.find((item) => item.id === removeItemId);
+    if (removeItem) {
+      removeFromOrder(removeItem);
+      const newTotalPrice = totalPrice - orderItem.product.price * amount;
+      setTotalPrice(newTotalPrice);
+    }
   };
 
   const onClickChangeAmount = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -56,7 +61,7 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
         </button>
       </div>
       <p>{orderItem.product.price}$</p>
-      <button type="button" className={classes.btn} value={JSON.stringify(orderItem)} onClick={onClickRemoveItem}>
+      <button type="button" className={classes.btn} value={orderItem.id} onClick={onClickRemoveItem}>
         <i className={trashCan} />
       </button>
     </div>

@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { v4 as getUniqueId } from "uuid";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
 import Button from "@/components/ui/button/button";
@@ -19,6 +20,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
   const { addNewOrderItem } = useActions();
   const onClickAddItem = (): void => {
     const orderItem: IOrderItem = {
+      id: getUniqueId(),
       product,
       date: new Date(),
     };
