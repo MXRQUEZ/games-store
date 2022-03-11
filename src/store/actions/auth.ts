@@ -7,11 +7,6 @@ export const signIn = (userData: IUser): IAuthAction => ({
   payload: userData,
 });
 
-export const signUp = (userData: IUser): IAuthAction => ({
-  type: AuthActionType.SIGN_UP,
-  payload: userData,
-});
-
 export const signOut = (): Action => ({
   type: AuthActionType.SIGN_OUT,
 });

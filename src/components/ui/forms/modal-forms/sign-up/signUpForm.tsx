@@ -35,13 +35,13 @@ const SignUpForm: FC = () => {
     mode: "onChange",
   });
 
-  const { signUp, signUpModalClose } = useActions();
+  const { signIn, signUpModalClose } = useActions();
   const router = useNavigate();
   const onSubmit: SubmitHandler<IUser> = async (userData: IUser) => {
     const newUser = await createUser(userData);
 
     if (newUser) {
-      signUp(newUser);
+      signIn(newUser);
       signUpModalClose();
       reset();
       router("/profile");
@@ -56,7 +56,7 @@ const SignUpForm: FC = () => {
 
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={classes.auth}>Registration</h4>
+      <h4 className={classes.title}>Registration</h4>
       <FormInput
         label={loginLabel}
         iconClass={loginIconClass}

@@ -4,13 +4,16 @@ import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
+import Roles from "@/constants/roles";
 
 type ClickEvent = (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const UserMenu: FC = () => {
   const user = useTypedSelector((state) => state.auth.user);
   const navigate = useNavigate();
+  const orderLength = useTypedSelector((state) => state.order.order.length);
   const { signOut, signInModalOpen, signUpModalOpen } = useActions();
+  const userIconClass = user?.role === Roles.Admin ? "fa fa-solid fa-crown" : "fa fa-solid fa-user";
 
   const onSignInHandler: ClickEvent = (event) => {
     event.preventDefault();
@@ -37,7 +40,7 @@ const UserMenu: FC = () => {
           }
           to={Pathname.Profile}
         >
-          <i className="fa fa-solid fa-user" aria-hidden />
+          <i className={userIconClass} aria-hidden />
           {user?.username || user?.login}
         </NavLink>
       </li>
@@ -46,9 +49,10 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to={Pathname.Profile}
+          to={Pathname.Order}
         >
-          <i className="fa fa-solid fa-cart-shopping" aria-hidden />0
+          <i className="fa fa-solid fa-cart-shopping" aria-hidden />
+          {orderLength}
         </NavLink>
       </li>
       <li>

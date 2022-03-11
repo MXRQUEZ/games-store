@@ -1,4 +1,5 @@
 import getEnumKeys from "@/shared/utils/helpers/getEnumKeys";
+import { categories } from "@/constants/categories";
 
 export enum Genres {
   All = "All",
@@ -34,3 +35,4 @@ export const genres = getEnumKeys(Genres);
 export const ages = getEnumKeys(Ages);
 export const types = getEnumKeys(Types);
 export const criteria = getEnumKeys(SortBy);
+export const platforms = Object.values(categories);

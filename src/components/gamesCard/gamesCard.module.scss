@@ -73,26 +73,31 @@
       padding: 10px;
       top: 0;
       left: 0;
-      align-items: center;
       height: 100%;
-      justify-content: center;
       transform: rotateY(180deg);
       backface-visibility: hidden;
 
       &__top {
-        height: 100%;
+        height: 75%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        word-wrap: break-word;
+        line-break: anywhere;
         font-family: Raleway, sans-serif;
         font-size: 17px;
         margin-top: auto;
       }
 
       &__bottom {
-        height: 30%;
+        height: 25%;
         font-family: Raleway, sans-serif;
         font-size: 20px;
         text-align: center;
+
+        & .buttons_container {
+          display: flex;
+        }
       }
     }
   }

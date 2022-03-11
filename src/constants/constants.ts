@@ -5,9 +5,6 @@ export const storeName = "Game $tore";
 export const yearNow = new Date().getFullYear();
 export const copyrights = `${yearNow} ${storeName} | All rights reserved | Terms Of Service | Privacy`;
 
-// games card
-export const buy = "Add to card";
-
 // about
 export const about =
   "Game Store пришёл на смену системе WON, которая была более узкоспециализированным сервисом и не являлась системой распространения данных через Интернет (цифровой дистрибуции). История Game Store началась в 1999 году и связана с успехом игр Team Fortress Classic (TFC) и Counter-Strike (CS). Ещё до выхода своих финальных версий, они стали одними из самых популярных многопользовательских игр. В то время их популярность достигала максимум 2—3 тысяч активных игроков. Cпустя пару лет число игроков TFC и CS возросло в несколько раз. В результате, Game Store Corp. приступила к пересмотру традиционных методов организации онлайн-игр. Необходимо было решить проблемы в свете дальнейшего роста числа игроков. В основном это касалось автоматического обновления, совершенствования античит-системы.\n" +
@@ -21,6 +18,7 @@ export const gitHubRepoLink = "https://github.com/MXRQUEZ/js-react";
 
 // forms
 export const defaultErrorMessage = "Error!";
+export const allFieldsRequired = "All fields are required";
 export const userInvalidMessage = "Login or password is invalid";
 export const userExistsMessage = "User with this login already exists";
 export const requiredFieldMessage = "This field is required!";
@@ -35,9 +33,11 @@ export const usernameMaxLength = 20;
 export const usernameMinLength = 5;
 export const usernameLengthMessage = `Username length must be between ${usernameMinLength} and ${usernameMaxLength}`;
 
-export const descriptionMaxLength = 150;
-export const descriptionMinLength = 1;
-export const descriptionLengthMessage = `Description length must be less than 150 ${descriptionMaxLength} symbols`;
+export const profileDescMaxLen = 150;
+export const descriptionMinLen = 1;
+export const productDescMaxLen = 300;
+export const productDescMinLen = 30;
+export const productDescLenMessage = "Too small description";
 
 export const passwordLabel = "password";
 export const passwordIconClass = "fa fa-solid fa-lock";
@@ -45,3 +45,6 @@ export const passwordMinLength = 6;
 export const passwordLengthMessage = `Min password length is ${passwordMinLength} symbols`;
 export const passwordRepeatLabel = "repeat password";
 export const passwordRepeatMessage = "The passwords do not match";
+
+export const pricePattern = /^\d+(\.\d\d)?$/;
+export const pricePatternMessage = "Price must contain only numbers with two decimal places";

@@ -12,6 +12,7 @@ import UserProfile from "@/pages/userProfile/userProfile";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 import store from "@/store";
 import Pathname from "./constants/pathname";
+import Order from "@/pages/order/order";
 
 interface AppProps {
   nothing: boolean;
@@ -58,6 +59,7 @@ class AppContainer extends Component<AppProps, IAppState> {
                       <Route path=":category" element={<Products />} />
                     </Route>
                     <Route path={Pathname.Profile} element={<UserProfile />} />
+                    <Route path={Pathname.Order} element={<Order />} />
                   </Route>
                   <Route path={Pathname.About} element={<About />} />
                 </Routes>

@@ -4,8 +4,7 @@ import IProduct from "@/types/iProduct";
 import api from "@/environment/api";
 import buildQueryParams from "./helpers/buildQueryParams";
 import IUser from "@/types/iUser";
-import { ISearchFilterParams } from "@/types/iSearchFilter";
-import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
+import { homeFilterParams } from "@/constants/initialFilterParams";
 
 export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => {
   const response = await axios.get(`${api.products}${buildQueryParams(params)}`);
@@ -13,15 +12,7 @@ export const getProducts = async (params: IParams = {}): Promise<IProduct[]> => 
 };
 
 export const getHomeProducts = async (): Promise<IProduct[]> => {
-  const homeProductsParams: ISearchFilterParams = {
-    amount: "3",
-    age: Ages.All,
-    genre: Genres.All,
-    sortBy: SortBy.Date,
-    type: Types.Descending,
-  };
-
-  const response = await axios.get(`${api.products}${buildQueryParams({ ...homeProductsParams })}`);
+  const response = await axios.get(`${api.products}${buildQueryParams({ ...homeFilterParams })}`);
   return response.data;
 };
 
@@ -48,4 +39,18 @@ export const changePassword = async (userData: Pick<IUser, "id" | "password">): 
 export const saveProfile = async (userData: Omit<IUser, "login" | "password">): Promise<IUser> => {
   const response = await fetch(`${api.saveProfile}`, { method: "POST", body: JSON.stringify(userData) });
   return response.json();
+};
+
+export const createProduct = async (product: IProduct): Promise<IProduct | null> => {
+  const response = await fetch(`${api.products}`, { method: "POST", body: JSON.stringify(product) });
+  return response.json();
+};
+
+export const updateProduct = async (product: IProduct): Promise<IProduct> => {
+  const response = await fetch(`${api.products}`, { method: "PUT", body: JSON.stringify(product) });
+  return response.json();
+};
+
+export const removeProduct = async (id: string | number): Promise<void> => {
+  await axios.delete(`${api.products}/${id}`);
 };

@@ -10,6 +10,7 @@ import IProduct from "@/types/iProduct";
 import users from "./server/data/users";
 import IUser from "@/types/iUser";
 import { Ages, Genres, SortBy, Types } from "@/constants/searchFilters";
+import Roles from "@/constants/roles";
 
 export default webpackMockServer.add((app: Application) => {
   app.get("/api/products", (_req, res) => {
@@ -133,7 +134,7 @@ export default webpackMockServer.add((app: Application) => {
         return;
       }
 
-      const newUser: IUser = { login, password, id: getUniqueId() };
+      const newUser: IUser = { login, password, id: getUniqueId(), balance: 0, role: Roles.User };
       users.push(newUser);
       res.json(newUser);
       return;
@@ -171,5 +172,53 @@ export default webpackMockServer.add((app: Application) => {
     }
 
     res.status(200).json({ message: "Password has been updated" });
+  });
+
+  app.post("/api/products", (_req, res) => {
+    const { id, img, description, price, name, rating, genre, ageRating, categoriesId, date } = JSON.parse(
+      _req.body
+    ) as IProduct;
+    const existingGame = products.find((product) => product.id === id);
+
+    if (existingGame) {
+      res.status(400).json(null);
+      return;
+    }
+
+    products.push({ id, img, description, price: +price, name, rating: +rating, genre, ageRating, date, categoriesId });
+    res.send(_req.body);
+  });
+
+  app.put("/api/products", (_req, res) => {
+    const { id, img, description, price, name, rating, genre, ageRating, categoriesId, date } = JSON.parse(
+      _req.body
+    ) as IProduct;
+
+    const existingGameIndex = products.findIndex((product) => product.id === id);
+    products[existingGameIndex] = {
+      id,
+      name,
+      ageRating,
+      price: +price,
+      rating: +rating,
+      categoriesId,
+      description,
+      genre,
+      img,
+      date,
+    };
+    res.status(200).json({ message: "Game was updated" });
+    res.json(products[existingGameIndex]);
+  });
+
+  app.delete("/api/products/:id", (_req, res) => {
+    const { id } = _req.params;
+
+    const removeProduct = products.find((product) => product.id === id);
+    if (removeProduct) {
+      const removeIndex = products.indexOf(removeProduct);
+      products.splice(removeIndex, 1);
+    }
+    res.status(200).json({ message: "Game was deleted" });
   });
 });

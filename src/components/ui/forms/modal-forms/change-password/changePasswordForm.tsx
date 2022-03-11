@@ -20,8 +20,8 @@ import useTypedSelector from "@/hooks/redux/useTypedSelector";
 type Password = Pick<IUser, "password" | "passwordRepeat">;
 
 const ChangePasswordForm: FC = () => {
-  const [isModalActive, setModalActive] = useState(false);
   const userId = useTypedSelector((state) => state.auth.user!.id);
+  const [isModalActive, setModalActive] = useState(false);
   const handleOpen = (): void => setModalActive(true);
   const handleClose = (): void => setModalActive(false);
 
@@ -47,7 +47,7 @@ const ChangePasswordForm: FC = () => {
       <Button text="Change password" type="button" onClick={handleOpen} />
       <Modal isActive={isModalActive} onClose={handleClose}>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-          <h4 className={classes.auth}>Change Password</h4>
+          <h4 className={classes.title}>Change Password</h4>
           <FormInput
             label={passwordLabel}
             iconClass={passwordIconClass}

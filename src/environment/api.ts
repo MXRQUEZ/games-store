@@ -6,6 +6,7 @@ const api = {
   changePassword: "/api/change-password",
   saveProfile: "/api/save-profile",
   profile: "/api/profile",
+  order: "/api/order-list",
 };
 
 export default api;

@@ -1,0 +1,32 @@
+#buyConfirm {
+  width: 250px;
+}
+
+#buy {
+  padding: 15px 25px;
+}
+
+.amount_btn__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.title {
+  margin-top: 10px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  font-size: 20px;
+}
+
+.items {
+  margin: 20px;
+
+  & li {
+    margin: 10px 0;
+  }
+}

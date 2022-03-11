@@ -18,6 +18,14 @@ const images: IImages = {
     path: "https://winnote.ru/wp-content/uploads/2016/01/1454222417_del_recent_avatar1.png",
     description: "user profile picture",
   },
+  emptyBasket: {
+    path: "https://res.cloudinary.com/mxrquez/image/upload/v1646426442/img_561097_fmczww.png",
+    description: "empty basket",
+  },
+  defaultCardImage: {
+    path: "https://gratitude-factory.com/img/no-image.png",
+    description: "product image",
+  },
 };
 
 export default images;
