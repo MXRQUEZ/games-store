@@ -5,7 +5,7 @@ import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
 import GamesCard from "@/components/gamesCard/gamesCard";
-import { getHomeProducts } from "@/shared/utils/apiRequests";
+import { getHomeProducts, getProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
@@ -44,14 +44,17 @@ const Home: FC = () => {
     navigate(`/products/${category.path}`);
   }, []);
 
+  const renderCount = useTypedSelector((state) => state.products.productsRenderCount);
+
   useEffect(() => {
     (async () => {
       const homeProducts = await getHomeProducts();
       setSpinner(true);
       setProducts(homeProducts);
       setSpinner(false);
+      console.log(await getProducts());
     })();
-  }, []);
+  }, [renderCount]);
 
   const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {

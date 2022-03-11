@@ -12,6 +12,7 @@ import Pathname from "@/constants/pathname";
 import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import { initialFilterParams } from "@/constants/initialFilterParams";
+import useTypedSelector from "@/hooks/redux/useTypedSelector";
 
 type ProductsUrlParams = {
   category?: string;
@@ -31,6 +32,7 @@ const Products: FC = () => {
     setSpinner(false);
   };
 
+  const renderCount = useTypedSelector((state) => state.products.productsRenderCount);
   useEffect(() => {
     if (category && !((category as string) in categories)) {
       setParams({ ...filterParams, category: undefined });
@@ -52,7 +54,7 @@ const Products: FC = () => {
       setProducts(allProducts);
       setSpinner(false);
     })();
-  }, [category]);
+  }, [category, renderCount]);
 
   const searchResult: JSX.Element[] = products.map((product) => <GamesCard product={product} key={product.id} />);
   if (!searchResult.length) {

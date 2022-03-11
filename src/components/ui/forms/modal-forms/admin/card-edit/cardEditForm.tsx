@@ -6,7 +6,7 @@ import cardClasses from "../adminForm.module.scss";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
-import { ages, Genres, genres } from "@/constants/searchFilters";
+import { Ages, ages, Genres, genres } from "@/constants/searchFilters";
 import images from "@/constants/images";
 import {
   allFieldsRequired,
@@ -20,7 +20,7 @@ import DeleteConfirmation from "@/components/ui/forms/modal-forms/admin/confirm-
 import CardInputField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardInputField";
 import CardSelectField from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardSelectField";
 import CardPlatformsMenu from "@/components/ui/forms/modal-forms/admin/card-edit/card-fields/cardPlatformsMenu";
-import { createProduct, updateProduct } from "@/shared/utils/apiRequests";
+import useActions from "@/hooks/redux/useActions";
 
 interface ICardEditProps {
   text: string;
@@ -49,10 +49,12 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
     reset();
   };
   const productGenres = genres.filter((genre) => genre !== Genres.All);
+  const productAges = ages.filter((age) => age !== Ages.All);
   const defaultCardImage = product?.img || images.defaultCardImage.path;
   const [cardImage, setCardImage] = useState<string>(defaultCardImage);
 
-  const onSubmitUpdateProduct: SubmitHandler<ProductEdit> = async (productCreateData: ProductEdit) => {
+  const { addCard, updateCard } = useActions();
+  const onSubmitUpdateProduct: SubmitHandler<ProductEdit> = (productCreateData: ProductEdit) => {
     if (!platformsId.length) {
       setError("name", {
         type: "manual",
@@ -73,13 +75,13 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
       img: productCreateData.img,
       date: product!.date,
     };
-    await updateProduct(updatedProduct);
+    updateCard(updatedProduct);
     setModalActive(false);
     setCardImage(defaultCardImage);
     reset();
   };
 
-  const onSubmitCreateProduct: SubmitHandler<ProductEdit> = async (productCreateData: ProductEdit) => {
+  const onSubmitCreateProduct: SubmitHandler<ProductEdit> = (productCreateData: ProductEdit) => {
     if (!platformsId.length) {
       setError("name", {
         type: "manual",
@@ -100,7 +102,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
       date: new Date(),
     };
 
-    await createProduct(newProduct);
+    addCard(newProduct);
     setModalActive(false);
     setCardImage(defaultCardImage);
     reset();
@@ -198,7 +200,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
               <CardSelectField
                 title="Age Rating"
                 productName={product?.name}
-                options={ages}
+                options={productAges}
                 defaultValue={product?.ageRating}
                 register={register("ageRating", {
                   required: true,
