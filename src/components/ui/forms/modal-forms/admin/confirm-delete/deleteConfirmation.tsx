@@ -3,7 +3,7 @@ import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss
 import confirmClasses from "./deleteConfirm.module.scss";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
-import { removeProduct } from "@/shared/utils/apiRequests";
+import useActions from "@/hooks/redux/useActions";
 
 interface IDeleteConfirmationProps {
   productId?: string | number;
@@ -25,9 +25,10 @@ const DeleteConfirmation: FC<IDeleteConfirmationProps> = ({ productId, productNa
   const name = `"${productName}"` || "this product";
   const confirmationText = `Are you sure you want to delete ${name} from store?`;
 
-  const onClickRemoveProduct = async () => {
+  const { removeCard } = useActions();
+  const onClickRemoveProduct = () => {
     setModalActive(false);
-    productId && (await removeProduct(productId));
+    productId && removeCard(productId);
   };
 
   return (

@@ -175,7 +175,7 @@ export default webpackMockServer.add((app: Application) => {
   });
 
   app.post("/api/products", (_req, res) => {
-    const { id, img, description, price, name, rating, genre, ageRating, categoriesId, date } = JSON.parse(
+    const { id, img, description, price, name, rating, genre, ageRating, categoriesId } = JSON.parse(
       _req.body
     ) as IProduct;
     const existingGame = products.find((product) => product.id === id);
@@ -185,27 +185,36 @@ export default webpackMockServer.add((app: Application) => {
       return;
     }
 
-    products.push({ id, img, description, price: +price, name, rating: +rating, genre, ageRating, date, categoriesId });
+    products.push({
+      id,
+      img,
+      description,
+      price: +price,
+      name,
+      rating: +rating,
+      genre,
+      ageRating,
+      date: new Date(),
+      categoriesId,
+    });
     res.send(_req.body);
   });
 
   app.put("/api/products", (_req, res) => {
-    const { id, img, description, price, name, rating, genre, ageRating, categoriesId, date } = JSON.parse(
-      _req.body
-    ) as IProduct;
+    const { id, img, description, price, name, genre, ageRating, categoriesId } = JSON.parse(_req.body) as IProduct;
 
     const existingGameIndex = products.findIndex((product) => product.id === id);
     products[existingGameIndex] = {
-      id,
+      id: products[existingGameIndex].id,
       name,
       ageRating,
       price: +price,
-      rating: +rating,
+      rating: products[existingGameIndex].rating,
       categoriesId,
       description,
       genre,
       img,
-      date,
+      date: products[existingGameIndex].date,
     };
     res.status(200).json({ message: "Game was updated" });
     res.json(products[existingGameIndex]);
