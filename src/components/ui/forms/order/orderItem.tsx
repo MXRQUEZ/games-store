@@ -21,9 +21,8 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
   const increment = "increment";
   const decrement = "decrement";
 
-  const onClickRemoveItem = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const removeItemId: string = event.currentTarget.value;
-    const removeItem = order.find((item) => item.id === removeItemId);
+  const onClickRemoveItem = () => {
+    const removeItem = order.find((item) => item.id === orderItem.id);
     if (removeItem) {
       removeFromOrder(removeItem);
       const newTotalPrice = totalPrice - orderItem.product.price * amount;
@@ -40,7 +39,10 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
 
   const onClickChangeAmount = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     const newAmount = event.currentTarget.name === increment ? amount + 1 : amount - 1;
-    if (newAmount < 0) return;
+    if (newAmount <= 0) {
+      onClickRemoveItem();
+      return;
+    }
     const newTotalPrice =
       newAmount > amount ? totalPrice + orderItem.product.price : totalPrice - orderItem.product.price;
     setAmount(newAmount);
@@ -71,7 +73,7 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
         </button>
       </div>
       <p>{orderItem.product.price}$</p>
-      <button type="button" className={classes.btn} value={orderItem.id} onClick={onClickRemoveItem}>
+      <button type="button" className={classes.btn} onClick={onClickRemoveItem}>
         <i className={trashCan} />
       </button>
     </div>
