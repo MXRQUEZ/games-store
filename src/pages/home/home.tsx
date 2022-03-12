@@ -4,7 +4,6 @@ import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
-import GamesCard from "@/components/gamesCard/gamesCard";
 import { getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
@@ -14,10 +13,9 @@ import Pathname from "@/constants/pathname";
 import useActions from "@/hooks/redux/useActions";
 import { platforms } from "@/constants/searchFilters";
 import { homeFilterParams } from "@/constants/initialFilterParams";
+import getSearchResult from "@/shared/utils/helpers/getSearchResult";
 
 const Home: FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [spinner, setSpinner] = useState(true);
 
@@ -26,6 +24,8 @@ const Home: FC = () => {
     setSpinner(false);
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
   const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalOpen } = useActions();
 
@@ -35,9 +35,7 @@ const Home: FC = () => {
       return;
     }
 
-    if (location.pathname === Pathname.Login && isAuth) {
-      navigate("/");
-    }
+    navigate("/");
   }, [isAuth]);
 
   const onCategoryClick = useCallback((category: ICategory): void => {
@@ -55,14 +53,7 @@ const Home: FC = () => {
     })();
   }, [renderCount]);
 
-  const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
-  if (!searchResult.length) {
-    searchResult.push(
-      <h1 key={`${classes.nothing_found}${searchResult.length}`} className={classes.nothing_found}>
-        Nothing Found
-      </h1>
-    );
-  }
+  const searchResult: JSX.Element[] = getSearchResult(products);
 
   return (
     <>
