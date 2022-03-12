@@ -4,4 +4,5 @@ export interface IOrderItem {
   id: string;
   product: IProduct;
   date: Date;
+  amount: number;
 }

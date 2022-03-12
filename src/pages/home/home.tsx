@@ -1,11 +1,11 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
 import GamesCard from "@/components/gamesCard/gamesCard";
-import { getHomeProducts, getProducts } from "@/shared/utils/apiRequests";
+import { getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
@@ -52,7 +52,6 @@ const Home: FC = () => {
       setSpinner(true);
       setProducts(homeProducts);
       setSpinner(false);
-      console.log(await getProducts());
     })();
   }, [renderCount]);
 
@@ -80,4 +79,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

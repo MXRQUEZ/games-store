@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
@@ -77,4 +77,4 @@ const UserMenu: FC = () => {
   );
 };
 
-export default UserMenu;
+export default memo(UserMenu);

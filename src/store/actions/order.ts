@@ -6,6 +6,11 @@ export const addNewOrderItem = (orderItem: IOrderItem): IOrderAction => ({
   payload: orderItem,
 });
 
+export const changeOrderItemAmount = (orderItem: IOrderItem): IOrderAction => ({
+  type: OrderActionType.CHANGE_AMOUNT,
+  payload: orderItem,
+});
+
 export const removeFromOrder = (orderItem: IOrderItem): IOrderAction => ({
   type: OrderActionType.REMOVE_ITEM,
   payload: orderItem,

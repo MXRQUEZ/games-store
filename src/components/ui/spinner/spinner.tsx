@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import classes from "./spinner.module.scss";
 
 const Spinner: FC = () => <div className={classes.spinner} />;
 
-export default Spinner;
+export default memo(Spinner);

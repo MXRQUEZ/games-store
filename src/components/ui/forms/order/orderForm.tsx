@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, memo, useMemo, useState } from "react";
 import { IOrderItem } from "@/types/iOrderItem";
 import classes from "./order.module.scss";
 import useActions from "@/hooks/redux/useActions";
@@ -12,8 +12,16 @@ interface IOrderFormProps {
 }
 
 const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
+  const initialTotalPrice = useMemo(() => {
+    let price = 0;
+    order.forEach((item) => {
+      price += item.product.price * item.amount;
+    });
+    return price;
+  }, []);
+
   const { clearOrder } = useActions();
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(initialTotalPrice);
   const balanceTitle = `Your balance: ${balance.toFixed(2)}$`;
   const totalPriceTitle = `Total price: ${totalPrice.toFixed(2)}$`;
   const buyBtnDisabled = balance < totalPrice;
@@ -23,14 +31,6 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
     setBalance(balance - totalPrice);
     setTotalPrice(0);
   };
-
-  useEffect(() => {
-    let initialTotalPrice = 0;
-    order.forEach((orderItem) => {
-      initialTotalPrice += orderItem.product.price;
-    });
-    setTotalPrice(initialTotalPrice);
-  }, []);
 
   return (
     <form>
@@ -56,4 +56,4 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
   );
 };
 
-export default OrderForm;
+export default memo(OrderForm);

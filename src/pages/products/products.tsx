@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import classes from "./products.module.scss";
 import GamesCard from "@/components/gamesCard/gamesCard";
@@ -83,4 +83,4 @@ const Products: FC = () => {
   );
 };
 
-export default Products;
+export default memo(Products);

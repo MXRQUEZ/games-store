@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
@@ -48,8 +48,8 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
     setModalActive(false);
     reset();
   };
-  const productGenres = genres.filter((genre) => genre !== Genres.All);
-  const productAges = ages.filter((age) => age !== Ages.All);
+  const productGenres = useMemo(() => genres.filter((genre) => genre !== Genres.All), []);
+  const productAges = useMemo(() => ages.filter((age) => age !== Ages.All), []);
   const defaultCardImage = product?.img || images.defaultCardImage.path;
   const [cardImage, setCardImage] = useState<string>(defaultCardImage);
 

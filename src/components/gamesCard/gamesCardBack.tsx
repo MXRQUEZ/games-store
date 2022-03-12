@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { v4 as getUniqueId } from "uuid";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
@@ -23,15 +23,14 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
       id: getUniqueId(),
       product,
       date: new Date(),
+      amount: 1,
     };
 
     addNewOrderItem(orderItem);
     setDisabled(true);
   };
 
-  useEffect(() => {
-    setDisabled(!!order.find((item) => item.product.id === product.id));
-  }, []);
+  const isDisabled = useMemo(() => !!order.find((item) => item.product.id === product.id), [order]);
 
   const userRole = useTypedSelector((state) => state.auth.user?.role);
 
@@ -41,7 +40,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
       <div className={classes.card__back__bottom}>
         <p>{product.ageRating}</p>
         <div className={classes.buttons_container}>
-          <Button disabled={disabled} text="To basket" type="submit" onClick={onClickAddItem} />
+          <Button disabled={disabled || isDisabled} text="To basket" type="submit" onClick={onClickAddItem} />
           {userRole === Roles.Admin && <CardEditForm text="Edit card" product={product} />}
         </div>
       </div>
