@@ -14,9 +14,11 @@ const Button: FC<IButtonProps> = ({ id, text, disabled = false, type = "submit",
     <button
       id={id}
       type={type}
+      tabIndex={0}
       disabled={disabled}
       className={disabled ? `${classes.button} ${classes.disabled}` : classes.button}
       onClick={onClick}
+      onKeyDown={onClick}
     >
       {text}
     </button>
