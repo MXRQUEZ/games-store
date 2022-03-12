@@ -2,7 +2,7 @@ import React, { FC, memo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import classes from "@/components/header/header.module.scss";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/constants/pathname";
+import Pathnames from "@/constants/pathnames";
 import useActions from "@/hooks/redux/useActions";
 import Roles from "@/constants/roles";
 
@@ -38,7 +38,7 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to={Pathname.Profile}
+          to={Pathnames.Profile}
         >
           <i className={userIconClass} aria-hidden />
           {user?.username || user?.login}
@@ -49,7 +49,7 @@ const UserMenu: FC = () => {
           className={({ isActive }) =>
             isActive ? `${classes.link__active} ${classes.nav__routes_link}` : classes.nav__routes_link
           }
-          to={Pathname.Order}
+          to={Pathnames.Order}
         >
           <i className="fa fa-solid fa-cart-shopping" aria-hidden />
           {orderLength}

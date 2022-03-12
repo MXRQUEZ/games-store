@@ -9,7 +9,7 @@ import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/constants/pathname";
+import Pathnames from "@/constants/pathnames";
 import useActions from "@/hooks/redux/useActions";
 import { platforms } from "@/constants/searchFilters";
 import { homeFilterParams } from "@/constants/initialFilterParams";
@@ -30,7 +30,7 @@ const Home: FC = () => {
   const { signInModalOpen } = useActions();
 
   useEffect(() => {
-    if (location.pathname === Pathname.Login && !isAuth) {
+    if (location.pathname === Pathnames.Login && !isAuth) {
       signInModalOpen();
       return;
     }

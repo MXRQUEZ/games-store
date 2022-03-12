@@ -7,7 +7,7 @@ import { getProducts } from "@/shared/utils/apiRequests";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import Spinner from "@/components/ui/spinner/spinner";
 import { categories } from "@/constants/categories";
-import Pathname from "@/constants/pathname";
+import Pathnames from "@/constants/pathnames";
 import ProductFilterForm from "@/components/ui/forms/products/productFilterForm";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import { initialFilterParams } from "@/constants/initialFilterParams";
@@ -36,7 +36,7 @@ const Products: FC = () => {
   useEffect(() => {
     if (category && !((category as string) in categories)) {
       setParams({ ...filterParams, category: undefined });
-      navigate(Pathname.Products);
+      navigate(Pathnames.Products);
       return;
     }
     (async () => {

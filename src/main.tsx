@@ -8,7 +8,7 @@ import Layout from "@/components/layout/layout";
 import Home from "@/pages/home/home";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 import store from "@/store";
-import Pathname from "./constants/pathname";
+import Pathnames from "./constants/pathnames";
 import { AboutPage, OrderPage, ProductsPage, ProfilePage } from "@/pages/lazyPages";
 
 interface AppProps {
@@ -50,15 +50,15 @@ class AppContainer extends Component<AppProps, IAppState> {
               ) : (
                 <Routes>
                   <Route path="*" element={<Home />} />
-                  <Route path={Pathname.Login} element={<Home />} />
+                  <Route path={Pathnames.Login} element={<Home />} />
                   <Route element={<ProtectedRoute />}>
-                    <Route path={Pathname.Products} element={<ProductsPage />}>
+                    <Route path={Pathnames.Products} element={<ProductsPage />}>
                       <Route path=":category" element={<ProductsPage />} />
                     </Route>
-                    <Route path={Pathname.Profile} element={<ProfilePage />} />
-                    <Route path={Pathname.Order} element={<OrderPage />} />
+                    <Route path={Pathnames.Profile} element={<ProfilePage />} />
+                    <Route path={Pathnames.Order} element={<OrderPage />} />
                   </Route>
-                  <Route path={Pathname.About} element={<AboutPage />} />
+                  <Route path={Pathnames.About} element={<AboutPage />} />
                 </Routes>
               )}
             </Layout>

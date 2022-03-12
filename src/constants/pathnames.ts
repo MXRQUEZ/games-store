@@ -1,4 +1,4 @@
-enum Pathname {
+const enum Pathnames {
   Login = "/login",
   Products = "/products/*",
   About = "/about",
@@ -6,4 +6,4 @@ enum Pathname {
   Order = "/order",
 }
 
-export default Pathname;
+export default Pathnames;
