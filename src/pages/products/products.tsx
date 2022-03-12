@@ -23,7 +23,7 @@ const Products: FC = () => {
   const [filterParams, setParams] = useState<ISearchFilterParams>(initialFilterParams);
   const [spinner, setSpinner] = useState(true);
   const { category } = useParams<ProductsUrlParams>();
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   const setParamsCallback = useCallback((params: ISearchFilterParams) => setParams(params), []);
 
@@ -36,7 +36,7 @@ const Products: FC = () => {
   useEffect(() => {
     if (category && !((category as string) in categories)) {
       setParams({ ...filterParams, category: undefined });
-      router(Pathname.Products);
+      navigate(Pathname.Products);
       return;
     }
     (async () => {
