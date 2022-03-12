@@ -22,7 +22,7 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
 
   const { clearOrder } = useActions();
   const [totalPrice, setTotalPrice] = useState<number>(initialTotalPrice);
-  const balanceTitle = `Your balance: ${balance.toFixed(2)}$`;
+  const balanceTitle = `Your balance: ${Math.abs(balance).toFixed(2)}$`;
   const totalPriceTitle = `Total price: ${Math.abs(totalPrice).toFixed(2)}$`;
   const buyBtnDisabled = balance < totalPrice;
 
