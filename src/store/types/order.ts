@@ -10,7 +10,7 @@ export interface IOrderAction extends Action {
   payload: IOrderItem;
 }
 
-export enum OrderActionType {
+export const enum OrderActionType {
   ADD_ITEM = "ADD_ITEM",
   REMOVE_ITEM = "REMOVE_ITEM",
   CLEAR_ORDER = "CLEAR_ORDER",
