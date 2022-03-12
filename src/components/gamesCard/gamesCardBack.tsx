@@ -30,7 +30,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
     setDisabled(true);
   };
 
-  const isDisabled = useMemo(() => !!order.find((item) => item.product.id === product.id), [order]);
+  const isDisabled = useMemo(() => !!order.find((item) => item.product.id === product.id), [order.length]);
 
   const userRole = useTypedSelector((state) => state.auth.user?.role);
 
