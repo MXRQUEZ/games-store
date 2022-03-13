@@ -48,8 +48,8 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
     setModalActive(false);
     reset();
   };
-  const productGenres = useMemo(() => genres.filter((genre) => genre !== Genres.All), []);
-  const productAges = useMemo(() => ages.filter((age) => age !== Ages.All), []);
+  const productGenres = useMemo(() => genres.filter((genre) => genre !== Genres.All), [genres.length]);
+  const productAges = useMemo(() => ages.filter((age) => age !== Ages.All), [ages.length]);
   const defaultCardImage = product?.img || images.defaultCardImage.path;
   const [cardImage, setCardImage] = useState<string>(defaultCardImage);
 
