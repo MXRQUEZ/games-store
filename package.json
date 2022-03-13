@@ -1,7 +1,7 @@
 {
-  "name": "webpack-must-have",
+  "name": "game-store",
   "version": "1.2.0",
-  "description": "Must-have config for Webpack 5",
+  "description": "React web app",
   "main": "main.tsx",
   "scripts": {
     "test": "exit 0",
@@ -33,7 +33,7 @@
     "webpack-must-have",
     "mock"
   ],
-  "author": "Yegor.Golubchik",
+  "author": "MXRQUEZ",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Yegorich555/webpack-must-have/issues"
@@ -71,6 +71,7 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-webpack-plugin": "^3.1.1",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
@@ -99,11 +100,13 @@
     "stylelint-no-unsupported-browser-features": "^5.0.2",
     "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.0.0",
+    "stylelint-webpack-plugin": "^3.1.1",
     "terser-webpack-plugin": "^5.2.5",
     "ts-loader": "^9.2.6",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.5.2",
     "webpack": "^5.64.2",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0",

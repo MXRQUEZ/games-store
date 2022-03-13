@@ -18,7 +18,7 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
       price += item.product.price * item.amount;
     });
     return price;
-  }, []);
+  }, [order.length]);
 
   const { clearOrder } = useActions();
   const [totalPrice, setTotalPrice] = useState<number>(initialTotalPrice);
