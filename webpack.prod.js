@@ -4,9 +4,6 @@ const { merge } = require("webpack-merge");
 const CompressionPlugin = require("compression-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-const StylelintPlugin = require("stylelint-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const common = require("./webpack.common");
 
 module.exports = (env, argv) => {
@@ -82,13 +79,6 @@ module.exports = (env, argv) => {
         filename: "[path][base].br[query]",
         threshold: common.filesThreshold, // (bytes). Only assets bigger than this size are processed
       }),
-      new ESLintPlugin({
-        cache: true,
-      }),
-      new StylelintPlugin({
-        cache: true,
-      }),
-      new BundleAnalyzerPlugin(),
     ],
   };
 
