@@ -33,7 +33,7 @@
     "webpack-must-have",
     "mock"
   ],
-  "author": "MXRQUEZ",
+  "author": "Yegor.Golubchik",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Yegorich555/webpack-must-have/issues"
