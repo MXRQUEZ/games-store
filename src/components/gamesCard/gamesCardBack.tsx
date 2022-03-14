@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, memo, useMemo, useState } from "react";
 import { v4 as getUniqueId } from "uuid";
 import classes from "@/components/gamesCard/gamesCard.module.scss";
 import IProduct from "@/types/iProduct";
@@ -48,4 +48,4 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
   );
 };
 
-export default GamesCardBack;
+export default memo(GamesCardBack);

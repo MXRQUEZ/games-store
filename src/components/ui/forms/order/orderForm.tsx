@@ -1,4 +1,4 @@
-import { FC, memo, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { IOrderItem } from "@/types/iOrderItem";
 import classes from "./order.module.scss";
 import useActions from "@/hooks/redux/useActions";
@@ -56,4 +56,4 @@ const OrderForm: FC<IOrderFormProps> = ({ order, balance, setBalance }) => {
   );
 };
 
-export default memo(OrderForm);
+export default OrderForm;

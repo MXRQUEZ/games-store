@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import buyClasses from "./buyModal.module.scss";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import Button from "@/components/ui/button/button";
@@ -38,4 +38,4 @@ const BuyModal: FC<IBuyModalProps> = ({ order, onBuy, disabled }) => {
   );
 };
 
-export default BuyModal;
+export default memo(BuyModal);

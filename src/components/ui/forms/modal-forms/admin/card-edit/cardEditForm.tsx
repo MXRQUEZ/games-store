@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useState } from "react";
+import React, { FC, memo, useCallback, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
@@ -239,4 +239,4 @@ CardEditForm.defaultProps = {
   buttonId: undefined,
 };
 
-export default CardEditForm;
+export default memo(CardEditForm);

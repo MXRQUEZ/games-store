@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import classes from "./footer.module.scss";
 import sponsors from "@/constants/sponsors";
 import SponsorLogos from "@/components/footer/sponsorLogos";
@@ -13,4 +13,4 @@ const Footer: FC = () => (
   </footer>
 );
 
-export default memo(Footer);
+export default Footer;

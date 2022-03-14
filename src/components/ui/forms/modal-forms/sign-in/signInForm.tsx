@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/button/button";
@@ -97,4 +97,4 @@ const SignInForm: FC = () => {
   );
 };
 
-export default memo(SignInForm);
+export default SignInForm;

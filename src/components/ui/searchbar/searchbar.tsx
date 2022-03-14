@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { FC, useCallback } from "react";
 import IProduct from "@/types/iProduct";
 import { getProducts } from "@/shared/utils/apiRequests";
 import debounce from "@/shared/utils/helpers/debounce";
@@ -54,4 +54,4 @@ const Searchbar: FC<ISearchbarProps> = ({ onSearch, setSpinner, filterParams }) 
   );
 };
 
-export default memo(Searchbar);
+export default Searchbar;

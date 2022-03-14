@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import ICategory from "@/types/iCategory";
 import classes from "./categoryCard.module.scss";
 
@@ -25,4 +25,4 @@ const CategoryCard: FC<ICardProps> = ({ category, onClick }) => {
   );
 };
 
-export default CategoryCard;
+export default memo(CategoryCard);
