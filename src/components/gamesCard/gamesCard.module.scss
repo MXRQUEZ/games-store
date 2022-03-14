@@ -82,8 +82,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        word-wrap: break-word;
-        line-break: anywhere;
+        white-space: normal;
+        hyphens: auto;
+        word-wrap: anywhere;
+        overflow-wrap: anywhere;
         font-family: Raleway, sans-serif;
         font-size: 17px;
         margin-top: auto;

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import classes from "./userProfile.module.scss";
 import Container from "@/components/ui/container/container";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
@@ -15,4 +15,4 @@ const UserProfile: FC = () => {
   );
 };
 
-export default UserProfile;
+export default memo(UserProfile);

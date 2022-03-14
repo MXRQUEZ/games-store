@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import classes from "./footer.module.scss";
 import SponsorLogo from "@/components/footer/sponsorLogo";
 import ISponsor from "@/types/iSponsor";
@@ -15,4 +15,4 @@ const SponsorLogos: FC<ISponsorLogosProps> = ({ sponsorsList }) => (
   </div>
 );
 
-export default SponsorLogos;
+export default memo(SponsorLogos);

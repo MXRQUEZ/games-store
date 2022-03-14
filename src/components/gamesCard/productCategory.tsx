@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import IProduct from "@/types/iProduct";
 import classes from "./gamesCard.module.scss";
 import { categories } from "@/constants/categories";
@@ -34,4 +34,4 @@ const ProductCategory: FC<IProductCategoryProps> = ({ product }) => {
   return <div className={classes.category__container}>{productCategories}</div>;
 };
 
-export default ProductCategory;
+export default memo(ProductCategory);

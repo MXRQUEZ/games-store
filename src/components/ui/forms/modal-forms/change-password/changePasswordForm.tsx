@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
@@ -78,4 +78,4 @@ const ChangePasswordForm: FC = () => {
   );
 };
 
-export default ChangePasswordForm;
+export default memo(ChangePasswordForm);

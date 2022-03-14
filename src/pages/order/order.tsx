@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import Container from "@/components/ui/container/container";
 import classes from "./order.module.scss";
 import images from "@/constants/images";
@@ -26,4 +26,4 @@ const Order: FC = () => {
   );
 };
 
-export default Order;
+export default memo(Order);

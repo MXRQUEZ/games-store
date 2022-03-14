@@ -1,8 +1,9 @@
+import { FC, memo } from "react";
 import Container from "@/components/ui/container/container";
 import classes from "@/pages/about/about.module.scss";
 import { about, gitHubLink, gitHubRepoLink, gmail } from "@/constants/constants";
 
-const About = () => (
+const About: FC = () => (
   <Container id={classes.about} title="About us">
     <div className={classes.about}>
       <p>{about}</p>
@@ -23,4 +24,4 @@ const About = () => (
   </Container>
 );
 
-export default About;
+export default memo(About);

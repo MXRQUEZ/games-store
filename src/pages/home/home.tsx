@@ -1,23 +1,21 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
 import Container from "@/components/ui/container/container";
 import CategoryCard from "@/components/categoryCard/categoryCard";
-import GamesCard from "@/components/gamesCard/gamesCard";
-import { getHomeProducts, getProducts } from "@/shared/utils/apiRequests";
+import { getHomeProducts } from "@/shared/utils/apiRequests";
 import ICategory from "@/types/iCategory";
 import IProduct from "@/types/iProduct";
 import Spinner from "@/components/ui/spinner/spinner";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
-import Pathname from "@/constants/pathname";
+import Pathnames from "@/constants/pathnames";
 import useActions from "@/hooks/redux/useActions";
 import { platforms } from "@/constants/searchFilters";
 import { homeFilterParams } from "@/constants/initialFilterParams";
+import getSearchResult from "@/shared/utils/helpers/getSearchResult";
 
 const Home: FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [spinner, setSpinner] = useState(true);
 
@@ -26,18 +24,18 @@ const Home: FC = () => {
     setSpinner(false);
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
   const isAuth = !!useTypedSelector((state) => state.auth.user);
   const { signInModalOpen } = useActions();
 
   useEffect(() => {
-    if (location.pathname === Pathname.Login && !isAuth) {
+    if (location.pathname === Pathnames.Login && !isAuth) {
       signInModalOpen();
       return;
     }
 
-    if (location.pathname === Pathname.Login && isAuth) {
-      navigate("/");
-    }
+    navigate("/");
   }, [isAuth]);
 
   const onCategoryClick = useCallback((category: ICategory): void => {
@@ -52,18 +50,10 @@ const Home: FC = () => {
       setSpinner(true);
       setProducts(homeProducts);
       setSpinner(false);
-      console.log(await getProducts());
     })();
   }, [renderCount]);
 
-  const searchResult = products.map((product) => <GamesCard product={product} key={product.id} />);
-  if (!searchResult.length) {
-    searchResult.push(
-      <h1 key={`${classes.nothing_found}${searchResult.length}`} className={classes.nothing_found}>
-        Nothing Found
-      </h1>
-    );
-  }
+  const searchResult: JSX.Element[] = getSearchResult(products);
 
   return (
     <>
@@ -80,4 +70,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

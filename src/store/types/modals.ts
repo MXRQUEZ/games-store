@@ -3,7 +3,7 @@ export interface IModalsState {
   isSignUpActive: boolean;
 }
 
-export enum ModalActionTypes {
+export const enum ModalActionTypes {
   SIGN_IN_MODAL_OPEN = "SIGN_IN_MODAL_OPEN",
   SIGN_IN_MODAL_CLOSE = "SIGN_IN_MODAL_CLOSE",
   SIGN_UP_MODAL_OPEN = "SIGN_UP_MODAL_OPEN",

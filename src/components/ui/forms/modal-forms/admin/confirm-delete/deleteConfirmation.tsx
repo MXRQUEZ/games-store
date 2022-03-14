@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import formClasses from "@/components/ui/forms/modal-forms/formModal.module.scss";
 import confirmClasses from "./deleteConfirm.module.scss";
 import Button from "@/components/ui/button/button";
@@ -57,4 +57,4 @@ DeleteConfirmation.defaultProps = {
   productName: undefined,
 };
 
-export default DeleteConfirmation;
+export default memo(DeleteConfirmation);

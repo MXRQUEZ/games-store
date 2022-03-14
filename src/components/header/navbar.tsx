@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./header.module.scss";
 import IRoute from "@/types/iRoute";
@@ -31,4 +31,4 @@ const Navbar: FC<INavbarProps> = ({ routes }) => (
   </ul>
 );
 
-export default Navbar;
+export default memo(Navbar);

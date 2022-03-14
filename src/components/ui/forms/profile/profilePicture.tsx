@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef } from "react";
+import React, { ChangeEvent, FC, memo, useRef } from "react";
 import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import imageCompression from "browser-image-compression";
 import classes from "@/components/ui/forms/profile/profile.module.scss";
@@ -66,4 +66,4 @@ const ProfilePicture: FC<IProfilePictureProps> = ({ profilePic, setProfilePic, e
   );
 };
 
-export default ProfilePicture;
+export default memo(ProfilePicture);

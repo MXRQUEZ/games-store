@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IUser from "@/types/iUser";
 import useActions from "@/hooks/redux/useActions";
@@ -127,4 +127,4 @@ const ProfileForm: FC<IProfileForm> = ({ user }) => {
   );
 };
 
-export default ProfileForm;
+export default memo(ProfileForm);

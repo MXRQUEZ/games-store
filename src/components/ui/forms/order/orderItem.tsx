@@ -1,10 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import classes from "./order.module.scss";
 import Select from "@/components/ui/select/select";
 import { platforms } from "@/constants/searchFilters";
 import { IOrderItem } from "@/types/iOrderItem";
 import useActions from "@/hooks/redux/useActions";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
+import debounce from "@/shared/utils/helpers/debounce";
 
 interface IOrderItemProps {
   orderItem: IOrderItem;
@@ -13,16 +14,15 @@ interface IOrderItemProps {
 }
 
 const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }) => {
-  const [amount, setAmount] = useState<number>(1);
+  const [amount, setAmount] = useState<number>(orderItem.amount);
   const order = useTypedSelector((state) => state.order.order);
   const { removeFromOrder } = useActions();
   const trashCan = "fa-solid fa-trash-can";
   const increment = "increment";
   const decrement = "decrement";
 
-  const onClickRemoveItem = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const removeItemId: string = event.currentTarget.value;
-    const removeItem = order.find((item) => item.id === removeItemId);
+  const onClickRemoveItem = () => {
+    const removeItem = order.find((item) => item.id === orderItem.id);
     if (removeItem) {
       removeFromOrder(removeItem);
       const newTotalPrice = totalPrice - orderItem.product.price * amount;
@@ -30,12 +30,24 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
     }
   };
 
+  const { changeOrderItemAmount } = useActions();
+  const debounceDelayMS = 1000;
+  const debounceOnChange: (item: IOrderItem) => void = debounce(changeOrderItemAmount, debounceDelayMS);
+  const debounceOnChangeCallback = useCallback((item: IOrderItem) => {
+    debounceOnChange(item);
+  }, []);
+
   const onClickChangeAmount = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     const newAmount = event.currentTarget.name === increment ? amount + 1 : amount - 1;
+    if (newAmount <= 0) {
+      onClickRemoveItem();
+      return;
+    }
     const newTotalPrice =
       newAmount > amount ? totalPrice + orderItem.product.price : totalPrice - orderItem.product.price;
-    setAmount(newAmount < 0 ? 0 : newAmount);
-    setTotalPrice(newTotalPrice < 0 ? 0 : newTotalPrice);
+    setAmount(newAmount);
+    setTotalPrice(newTotalPrice);
+    debounceOnChangeCallback({ id: orderItem.id, product: orderItem.product, amount: newAmount, date: orderItem.date });
   };
 
   return (
@@ -61,7 +73,7 @@ const OrderItem: FC<IOrderItemProps> = ({ orderItem, totalPrice, setTotalPrice }
         </button>
       </div>
       <p>{orderItem.product.price}$</p>
-      <button type="button" className={classes.btn} value={orderItem.id} onClick={onClickRemoveItem}>
+      <button type="button" className={classes.btn} onClick={onClickRemoveItem}>
         <i className={trashCan} />
       </button>
     </div>

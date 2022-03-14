@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { v4 as getUniqueId } from "uuid";
 import IProduct from "@/types/iProduct";
@@ -43,15 +43,16 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
 
   const [isModalActive, setModalActive] = useState(false);
   const [platformsId, setPlatforms] = useState<(string | number)[]>(product?.categoriesId || []);
+  const defaultCardImage = product?.img || images.defaultCardImage.path;
+  const [cardImage, setCardImage] = useState<string>(defaultCardImage);
   const handleOpen = (): void => setModalActive(true);
   const handleClose = (): void => {
     setModalActive(false);
+    setCardImage(defaultCardImage);
     reset();
   };
-  const productGenres = genres.filter((genre) => genre !== Genres.All);
-  const productAges = ages.filter((age) => age !== Ages.All);
-  const defaultCardImage = product?.img || images.defaultCardImage.path;
-  const [cardImage, setCardImage] = useState<string>(defaultCardImage);
+  const productGenres = useMemo(() => genres.filter((genre) => genre !== Genres.All), [genres.length]);
+  const productAges = useMemo(() => ages.filter((age) => age !== Ages.All), [ages.length]);
 
   const { addCard, updateCard } = useActions();
   const onSubmitUpdateProduct: SubmitHandler<ProductEdit> = (productCreateData: ProductEdit) => {
@@ -104,7 +105,7 @@ const CardEditForm: FC<ICardEditProps> = ({ buttonId, text, product }) => {
 
     addCard(newProduct);
     setModalActive(false);
-    setCardImage(defaultCardImage);
+    setCardImage(productCreateData.img);
     reset();
   };
 

@@ -1,4 +1,4 @@
-enum Roles {
+const enum Roles {
   Admin = "admin",
   User = "user",
 }

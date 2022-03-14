@@ -10,7 +10,7 @@ export interface IAuthAction extends Action {
   payload: IUser | null;
 }
 
-export enum AuthActionType {
+export const enum AuthActionType {
   SIGN_IN = "SIGN_IN",
   SIGN_OUT = "SIGN_OUT",
 }

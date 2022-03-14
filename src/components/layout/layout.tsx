@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "@/components/footer/footer";
 import Modal from "@/components/ui/modal/modal";
@@ -13,16 +14,19 @@ import Spinner from "@/components/ui/spinner/spinner";
 const Layout: FC = ({ children }) => {
   const { isSignInActive, isSignUpActive } = useTypedSelector((state) => state.modals);
   const isAuth = !!useTypedSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const { signInModalClose, signUpModalClose } = useActions();
   const { signIn } = useActions();
   const [spinner, setSpinner] = useState(true);
 
   const onSignInClose = () => {
     signInModalClose();
+    navigate("/");
   };
 
   const onSignUpClose = () => {
     signUpModalClose();
+    navigate("/");
   };
 
   useEffect(() => {

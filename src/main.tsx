@@ -6,13 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import Layout from "@/components/layout/layout";
 import Home from "@/pages/home/home";
-import Products from "@/pages/products/products";
-import About from "@/pages/about/about";
-import UserProfile from "@/pages/userProfile/userProfile";
 import ProtectedRoute from "@/components/protectedRoute/protectedRoute";
 import store from "@/store";
-import Pathname from "./constants/pathname";
-import Order from "@/pages/order/order";
+import Pathnames from "./constants/pathnames";
+import { AboutPage, OrderPage, ProductsPage, ProfilePage } from "@/pages/lazyPages";
 
 interface AppProps {
   nothing: boolean;
@@ -53,15 +50,15 @@ class AppContainer extends Component<AppProps, IAppState> {
               ) : (
                 <Routes>
                   <Route path="*" element={<Home />} />
-                  <Route path={Pathname.Login} element={<Home />} />
+                  <Route path={Pathnames.Login} element={<Home />} />
                   <Route element={<ProtectedRoute />}>
-                    <Route path={Pathname.Products} element={<Products />}>
-                      <Route path=":category" element={<Products />} />
+                    <Route path={Pathnames.Products} element={<ProductsPage />}>
+                      <Route path=":category" element={<ProductsPage />} />
                     </Route>
-                    <Route path={Pathname.Profile} element={<UserProfile />} />
-                    <Route path={Pathname.Order} element={<Order />} />
+                    <Route path={Pathnames.Profile} element={<ProfilePage />} />
+                    <Route path={Pathnames.Order} element={<OrderPage />} />
                   </Route>
-                  <Route path={Pathname.About} element={<About />} />
+                  <Route path={Pathnames.About} element={<AboutPage />} />
                 </Routes>
               )}
             </Layout>
