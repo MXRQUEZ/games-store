@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useTypedSelector from "@/hooks/redux/useTypedSelector";
 import Pathnames from "@/constants/pathnames";
@@ -17,4 +17,4 @@ ProtectedRoute.defaultProps = {
   redirectTo: Pathnames.Login,
 };
 
-export default memo(ProtectedRoute);
+export default ProtectedRoute;

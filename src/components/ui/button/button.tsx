@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import classes from "@/components/ui/button/button.module.scss";
 
 interface IButtonProps {
@@ -32,4 +32,4 @@ Button.defaultProps = {
   onClick: undefined,
 };
 
-export default Button;
+export default memo(Button);

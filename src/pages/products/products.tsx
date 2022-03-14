@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import classes from "./products.module.scss";
 import Container from "@/components/ui/container/container";
@@ -76,4 +76,4 @@ const Products: FC = () => {
   );
 };
 
-export default memo(Products);
+export default Products;

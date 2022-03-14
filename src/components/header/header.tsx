@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import classes from "./header.module.scss";
 import routes from "@/constants/routes";
 import images from "@/constants/images";
@@ -15,4 +15,4 @@ const Header: FC = () => (
   </header>
 );
 
-export default memo(Header);
+export default Header;

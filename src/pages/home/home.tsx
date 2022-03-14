@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Searchbar from "@/components/ui/searchbar/searchbar";
 import classes from "./home.module.scss";
@@ -70,4 +70,4 @@ const Home: FC = () => {
   );
 };
 
-export default memo(Home);
+export default Home;

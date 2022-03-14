@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { FC, useCallback } from "react";
 import IProduct from "@/types/iProduct";
 import { ISearchFilterParams } from "@/types/iSearchFilter";
 import FilterForm from "@/components/ui/forms/products/filter-form/filterForm";
@@ -60,4 +60,4 @@ const ProductFilterForm: FC<IProductFilterProps> = ({ onFilter, setSpinner, filt
   );
 };
 
-export default memo(ProductFilterForm);
+export default ProductFilterForm;
