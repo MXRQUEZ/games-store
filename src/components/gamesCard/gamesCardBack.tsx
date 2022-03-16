@@ -17,7 +17,7 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
   const order = useTypedSelector((state) => state.order.order);
   const [disabled, setDisabled] = useState(false);
 
-  const { addNewOrderItem } = useActions();
+  const { addNewOrderItem, signInModalOpen } = useActions();
   const onClickAddItem = (): void => {
     const orderItem: IOrderItem = {
       id: getUniqueId(),
@@ -30,9 +30,14 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
     setDisabled(true);
   };
 
+  const onClickOpenModal = (): void => {
+    signInModalOpen();
+  };
+
   const isDisabled = useMemo(() => !!order.find((item) => item.product.id === product.id), [order.length]);
 
   const userRole = useTypedSelector((state) => state.auth.user?.role);
+  const isAuth = !!useTypedSelector((state) => state.auth.user);
 
   return (
     <div className={classes.card__back}>
@@ -40,7 +45,12 @@ const GamesCardBack: FC<IGamesCardBackProps> = ({ product }) => {
       <div className={classes.card__back__bottom}>
         <p>{product.ageRating}</p>
         <div className={classes.buttons_container}>
-          <Button disabled={disabled || isDisabled} text="To basket" type="submit" onClick={onClickAddItem} />
+          <Button
+            disabled={disabled || isDisabled}
+            text="To basket"
+            type="submit"
+            onClick={isAuth ? onClickAddItem : onClickOpenModal}
+          />
           {userRole === Roles.Admin && <CardEditForm text="Edit card" product={product} />}
         </div>
       </div>
